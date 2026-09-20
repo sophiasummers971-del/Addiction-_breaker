@@ -1,0 +1,1732 @@
+[
+  {
+    "ts": 1788221734076,
+    "userId": "pattern-2",
+    "action": "login",
+    "hour": 0,
+    "sessionId": "pattern-2-S2",
+    "gapSec": null
+  },
+  {
+    "ts": 1788221816274.9075,
+    "userId": "pattern-2",
+    "action": "deposit",
+    "hour": 0,
+    "sessionId": "pattern-2-S2",
+    "gapSec": 82,
+    "amount": 196,
+    "paydayPressure": true
+  },
+  {
+    "ts": 1788221896778.4265,
+    "userId": "pattern-2",
+    "action": "bet",
+    "hour": 0,
+    "sessionId": "pattern-2-S2",
+    "gapSec": 81,
+    "stake": 2.55
+  },
+  {
+    "ts": 1788221901389.1213,
+    "userId": "pattern-2",
+    "action": "loss",
+    "hour": 0,
+    "sessionId": "pattern-2-S2",
+    "gapSec": 5
+  },
+  {
+    "ts": 1788221917134.018,
+    "userId": "pattern-2",
+    "action": "bet",
+    "hour": 0,
+    "sessionId": "pattern-2-S2",
+    "gapSec": 16,
+    "stake": 4.31
+  },
+  {
+    "ts": 1788221920393.5408,
+    "userId": "pattern-2",
+    "action": "loss",
+    "hour": 0,
+    "sessionId": "pattern-2-S2",
+    "gapSec": 3
+  },
+  {
+    "ts": 1788221930584.6907,
+    "userId": "pattern-2",
+    "action": "bet",
+    "hour": 0,
+    "sessionId": "pattern-2-S2",
+    "gapSec": 10,
+    "stake": 9.73
+  },
+  {
+    "ts": 1788221936478.478,
+    "userId": "pattern-2",
+    "action": "loss",
+    "hour": 0,
+    "sessionId": "pattern-2-S2",
+    "gapSec": 6
+  },
+  {
+    "ts": 1788221947646.339,
+    "userId": "pattern-2",
+    "action": "bet",
+    "hour": 0,
+    "sessionId": "pattern-2-S2",
+    "gapSec": 11,
+    "stake": 6.09
+  },
+  {
+    "ts": 1788221954503.3127,
+    "userId": "pattern-2",
+    "action": "loss",
+    "hour": 0,
+    "sessionId": "pattern-2-S2",
+    "gapSec": 7
+  },
+  {
+    "ts": 1788221969639.3801,
+    "userId": "pattern-2",
+    "action": "logout",
+    "hour": 0,
+    "sessionId": "pattern-2-S2",
+    "gapSec": 15
+  },
+  {
+    "ts": 1788233120718,
+    "userId": "pattern-3",
+    "action": "login",
+    "hour": 3,
+    "sessionId": "pattern-3-S2",
+    "gapSec": null
+  },
+  {
+    "ts": 1788233135038.554,
+    "userId": "pattern-3",
+    "action": "deposit",
+    "hour": 3,
+    "sessionId": "pattern-3-S2",
+    "gapSec": 14,
+    "amount": 149,
+    "paydayPressure": true
+  },
+  {
+    "ts": 1788233188915.8662,
+    "userId": "pattern-3",
+    "action": "bet",
+    "hour": 3,
+    "sessionId": "pattern-3-S2",
+    "gapSec": 54,
+    "stake": 7
+  },
+  {
+    "ts": 1788233195754.7363,
+    "userId": "pattern-3",
+    "action": "near_miss",
+    "hour": 3,
+    "sessionId": "pattern-3-S2",
+    "gapSec": 7
+  },
+  {
+    "ts": 1788233210988.89,
+    "userId": "pattern-3",
+    "action": "bet",
+    "hour": 3,
+    "sessionId": "pattern-3-S2",
+    "gapSec": 15,
+    "stake": 12.22
+  },
+  {
+    "ts": 1788233218056.221,
+    "userId": "pattern-3",
+    "action": "loss",
+    "hour": 3,
+    "sessionId": "pattern-3-S2",
+    "gapSec": 7
+  },
+  {
+    "ts": 1788233240589.157,
+    "userId": "pattern-3",
+    "action": "bet",
+    "hour": 3,
+    "sessionId": "pattern-3-S2",
+    "gapSec": 23,
+    "stake": 16.92
+  },
+  {
+    "ts": 1788233248354.0989,
+    "userId": "pattern-3",
+    "action": "loss",
+    "hour": 3,
+    "sessionId": "pattern-3-S2",
+    "gapSec": 8
+  },
+  {
+    "ts": 1788233262377.4695,
+    "userId": "pattern-3",
+    "action": "bet",
+    "hour": 3,
+    "sessionId": "pattern-3-S2",
+    "gapSec": 14,
+    "stake": 16.49
+  },
+  {
+    "ts": 1788233268524.7397,
+    "userId": "pattern-3",
+    "action": "loss",
+    "hour": 3,
+    "sessionId": "pattern-3-S2",
+    "gapSec": 6
+  },
+  {
+    "ts": 1788233292364.0989,
+    "userId": "pattern-3",
+    "action": "bet",
+    "hour": 3,
+    "sessionId": "pattern-3-S2",
+    "gapSec": 24,
+    "stake": 21.19
+  },
+  {
+    "ts": 1788233295389.8179,
+    "userId": "pattern-3",
+    "action": "win",
+    "hour": 3,
+    "sessionId": "pattern-3-S2",
+    "gapSec": 3,
+    "payout": 38.94
+  },
+  {
+    "ts": 1788233329704.3496,
+    "userId": "pattern-3",
+    "action": "bet",
+    "hour": 3,
+    "sessionId": "pattern-3-S2",
+    "gapSec": 34,
+    "stake": 4.31
+  },
+  {
+    "ts": 1788233335724.3352,
+    "userId": "pattern-3",
+    "action": "near_miss",
+    "hour": 3,
+    "sessionId": "pattern-3-S2",
+    "gapSec": 6
+  },
+  {
+    "ts": 1788233353874.923,
+    "userId": "pattern-3",
+    "action": "bet",
+    "hour": 3,
+    "sessionId": "pattern-3-S2",
+    "gapSec": 18,
+    "stake": 2.89
+  },
+  {
+    "ts": 1788233360559.443,
+    "userId": "pattern-3",
+    "action": "loss",
+    "hour": 3,
+    "sessionId": "pattern-3-S2",
+    "gapSec": 7
+  },
+  {
+    "ts": 1788233370251.6438,
+    "userId": "pattern-3",
+    "action": "bet",
+    "hour": 3,
+    "sessionId": "pattern-3-S2",
+    "gapSec": 10,
+    "stake": 16.67
+  },
+  {
+    "ts": 1788233375723.3184,
+    "userId": "pattern-3",
+    "action": "win",
+    "hour": 3,
+    "sessionId": "pattern-3-S2",
+    "gapSec": 5,
+    "payout": 21.73
+  },
+  {
+    "ts": 1788233420999.8428,
+    "userId": "pattern-3",
+    "action": "bet",
+    "hour": 3,
+    "sessionId": "pattern-3-S2",
+    "gapSec": 45,
+    "stake": 4.78
+  },
+  {
+    "ts": 1788233426403.5515,
+    "userId": "pattern-3",
+    "action": "win",
+    "hour": 3,
+    "sessionId": "pattern-3-S2",
+    "gapSec": 5,
+    "payout": 18.84
+  },
+  {
+    "ts": 1788233471611.3855,
+    "userId": "pattern-3",
+    "action": "bet",
+    "hour": 3,
+    "sessionId": "pattern-3-S2",
+    "gapSec": 45,
+    "stake": 6.34
+  },
+  {
+    "ts": 1788233476334.0056,
+    "userId": "pattern-3",
+    "action": "win",
+    "hour": 3,
+    "sessionId": "pattern-3-S2",
+    "gapSec": 5,
+    "payout": 9.55
+  },
+  {
+    "ts": 1788233534674.6763,
+    "userId": "pattern-3",
+    "action": "bet",
+    "hour": 3,
+    "sessionId": "pattern-3-S2",
+    "gapSec": 58,
+    "stake": 5.37
+  },
+  {
+    "ts": 1788233540758.6736,
+    "userId": "pattern-3",
+    "action": "loss",
+    "hour": 3,
+    "sessionId": "pattern-3-S2",
+    "gapSec": 6
+  },
+  {
+    "ts": 1788233549488.883,
+    "userId": "pattern-3",
+    "action": "bet",
+    "hour": 3,
+    "sessionId": "pattern-3-S2",
+    "gapSec": 9,
+    "stake": 13.14
+  },
+  {
+    "ts": 1788233554649.9573,
+    "userId": "pattern-3",
+    "action": "win",
+    "hour": 3,
+    "sessionId": "pattern-3-S2",
+    "gapSec": 5,
+    "payout": 41.78
+  },
+  {
+    "ts": 1788233592665.5,
+    "userId": "pattern-3",
+    "action": "logout",
+    "hour": 3,
+    "sessionId": "pattern-3-S2",
+    "gapSec": 38
+  },
+  {
+    "ts": 1788243567620,
+    "userId": "pattern-4",
+    "action": "login",
+    "hour": 6,
+    "sessionId": "pattern-4-S2",
+    "gapSec": null
+  },
+  {
+    "ts": 1788243656606.1946,
+    "userId": "pattern-4",
+    "action": "deposit",
+    "hour": 6,
+    "sessionId": "pattern-4-S2",
+    "gapSec": 89,
+    "amount": 194,
+    "paydayPressure": true
+  },
+  {
+    "ts": 1788243745169.6372,
+    "userId": "pattern-4",
+    "action": "bet",
+    "hour": 6,
+    "sessionId": "pattern-4-S2",
+    "gapSec": 89,
+    "stake": 3.11
+  },
+  {
+    "ts": 1788243748939.8696,
+    "userId": "pattern-4",
+    "action": "loss",
+    "hour": 6,
+    "sessionId": "pattern-4-S2",
+    "gapSec": 4
+  },
+  {
+    "ts": 1788243779614.2366,
+    "userId": "pattern-4",
+    "action": "bet",
+    "hour": 6,
+    "sessionId": "pattern-4-S2",
+    "gapSec": 31,
+    "stake": 5.92
+  },
+  {
+    "ts": 1788243785598.0886,
+    "userId": "pattern-4",
+    "action": "near_miss",
+    "hour": 6,
+    "sessionId": "pattern-4-S2",
+    "gapSec": 6
+  },
+  {
+    "ts": 1788243808809.2373,
+    "userId": "pattern-4",
+    "action": "bet",
+    "hour": 6,
+    "sessionId": "pattern-4-S2",
+    "gapSec": 23,
+    "stake": 4.07
+  },
+  {
+    "ts": 1788243812374.6448,
+    "userId": "pattern-4",
+    "action": "win",
+    "hour": 6,
+    "sessionId": "pattern-4-S2",
+    "gapSec": 4,
+    "payout": 7.64
+  },
+  {
+    "ts": 1788243881902.6826,
+    "userId": "pattern-4",
+    "action": "bet",
+    "hour": 6,
+    "sessionId": "pattern-4-S2",
+    "gapSec": 70,
+    "stake": 6.84
+  },
+  {
+    "ts": 1788243887078.2917,
+    "userId": "pattern-4",
+    "action": "loss",
+    "hour": 6,
+    "sessionId": "pattern-4-S2",
+    "gapSec": 5
+  },
+  {
+    "ts": 1788243898434.3884,
+    "userId": "pattern-4",
+    "action": "bet",
+    "hour": 6,
+    "sessionId": "pattern-4-S2",
+    "gapSec": 11,
+    "stake": 6.56
+  },
+  {
+    "ts": 1788243905194.4565,
+    "userId": "pattern-4",
+    "action": "win",
+    "hour": 6,
+    "sessionId": "pattern-4-S2",
+    "gapSec": 7,
+    "payout": 21.42
+  },
+  {
+    "ts": 1788243949550.7583,
+    "userId": "pattern-4",
+    "action": "bet",
+    "hour": 6,
+    "sessionId": "pattern-4-S2",
+    "gapSec": 44,
+    "stake": 3.61
+  },
+  {
+    "ts": 1788243956646.032,
+    "userId": "pattern-4",
+    "action": "loss",
+    "hour": 6,
+    "sessionId": "pattern-4-S2",
+    "gapSec": 7
+  },
+  {
+    "ts": 1788243982932.7666,
+    "userId": "pattern-4",
+    "action": "bet",
+    "hour": 6,
+    "sessionId": "pattern-4-S2",
+    "gapSec": 26,
+    "stake": 9.04
+  },
+  {
+    "ts": 1788243989122.7234,
+    "userId": "pattern-4",
+    "action": "win",
+    "hour": 6,
+    "sessionId": "pattern-4-S2",
+    "gapSec": 6,
+    "payout": 32.12
+  },
+  {
+    "ts": 1788244060614.575,
+    "userId": "pattern-4",
+    "action": "bet",
+    "hour": 6,
+    "sessionId": "pattern-4-S2",
+    "gapSec": 71,
+    "stake": 8.29
+  },
+  {
+    "ts": 1788244063864.2136,
+    "userId": "pattern-4",
+    "action": "near_miss",
+    "hour": 6,
+    "sessionId": "pattern-4-S2",
+    "gapSec": 3
+  },
+  {
+    "ts": 1788244079053.629,
+    "userId": "pattern-4",
+    "action": "bet",
+    "hour": 6,
+    "sessionId": "pattern-4-S2",
+    "gapSec": 15,
+    "stake": 8.53
+  },
+  {
+    "ts": 1788244085877.997,
+    "userId": "pattern-4",
+    "action": "loss",
+    "hour": 6,
+    "sessionId": "pattern-4-S2",
+    "gapSec": 7
+  },
+  {
+    "ts": 1788244105575.1748,
+    "userId": "pattern-4",
+    "action": "bet",
+    "hour": 6,
+    "sessionId": "pattern-4-S2",
+    "gapSec": 20,
+    "stake": 10.25
+  },
+  {
+    "ts": 1788244110230.018,
+    "userId": "pattern-4",
+    "action": "loss",
+    "hour": 6,
+    "sessionId": "pattern-4-S2",
+    "gapSec": 5
+  },
+  {
+    "ts": 1788244118851.914,
+    "userId": "pattern-4",
+    "action": "bet",
+    "hour": 6,
+    "sessionId": "pattern-4-S2",
+    "gapSec": 9,
+    "stake": 13.65
+  },
+  {
+    "ts": 1788244123014.2654,
+    "userId": "pattern-4",
+    "action": "loss",
+    "hour": 6,
+    "sessionId": "pattern-4-S2",
+    "gapSec": 4
+  },
+  {
+    "ts": 1788244139707.4358,
+    "userId": "pattern-4",
+    "action": "bet",
+    "hour": 6,
+    "sessionId": "pattern-4-S2",
+    "gapSec": 17,
+    "stake": 30.62
+  },
+  {
+    "ts": 1788244142771.398,
+    "userId": "pattern-4",
+    "action": "loss",
+    "hour": 6,
+    "sessionId": "pattern-4-S2",
+    "gapSec": 3
+  },
+  {
+    "ts": 1788244158510.5283,
+    "userId": "pattern-4",
+    "action": "bet",
+    "hour": 6,
+    "sessionId": "pattern-4-S2",
+    "gapSec": 16,
+    "stake": 25.39
+  },
+  {
+    "ts": 1788244166265.2397,
+    "userId": "pattern-4",
+    "action": "win",
+    "hour": 6,
+    "sessionId": "pattern-4-S2",
+    "gapSec": 8,
+    "payout": 61.51
+  },
+  {
+    "ts": 1788244221014.2139,
+    "userId": "pattern-4",
+    "action": "bet",
+    "hour": 6,
+    "sessionId": "pattern-4-S2",
+    "gapSec": 55,
+    "stake": 6.38
+  },
+  {
+    "ts": 1788244225612.5996,
+    "userId": "pattern-4",
+    "action": "loss",
+    "hour": 6,
+    "sessionId": "pattern-4-S2",
+    "gapSec": 5
+  },
+  {
+    "ts": 1788244243967.1472,
+    "userId": "pattern-4",
+    "action": "bet",
+    "hour": 6,
+    "sessionId": "pattern-4-S2",
+    "gapSec": 18,
+    "stake": 7.36
+  },
+  {
+    "ts": 1788244250592.2927,
+    "userId": "pattern-4",
+    "action": "win",
+    "hour": 6,
+    "sessionId": "pattern-4-S2",
+    "gapSec": 7,
+    "payout": 15.97
+  },
+  {
+    "ts": 1788244311451.9756,
+    "userId": "pattern-4",
+    "action": "bet",
+    "hour": 6,
+    "sessionId": "pattern-4-S2",
+    "gapSec": 61,
+    "stake": 3.25
+  },
+  {
+    "ts": 1788244318946.8633,
+    "userId": "pattern-4",
+    "action": "loss",
+    "hour": 6,
+    "sessionId": "pattern-4-S2",
+    "gapSec": 7
+  },
+  {
+    "ts": 1788244337435.9812,
+    "userId": "pattern-4",
+    "action": "bet",
+    "hour": 6,
+    "sessionId": "pattern-4-S2",
+    "gapSec": 18,
+    "stake": 10.57
+  },
+  {
+    "ts": 1788244344339.175,
+    "userId": "pattern-4",
+    "action": "win",
+    "hour": 6,
+    "sessionId": "pattern-4-S2",
+    "gapSec": 7,
+    "payout": 43.1
+  },
+  {
+    "ts": 1788244388657.691,
+    "userId": "pattern-4",
+    "action": "logout",
+    "hour": 6,
+    "sessionId": "pattern-4-S2",
+    "gapSec": 44
+  },
+  {
+    "ts": 1788257877912,
+    "userId": "pattern-2",
+    "action": "login",
+    "hour": 10,
+    "sessionId": "pattern-2-S1",
+    "gapSec": null
+  },
+  {
+    "ts": 1788257977438.4695,
+    "userId": "pattern-2",
+    "action": "deposit",
+    "hour": 10,
+    "sessionId": "pattern-2-S1",
+    "gapSec": 100,
+    "amount": 107,
+    "paydayPressure": true
+  },
+  {
+    "ts": 1788258050946.129,
+    "userId": "pattern-2",
+    "action": "bet",
+    "hour": 10,
+    "sessionId": "pattern-2-S1",
+    "gapSec": 74,
+    "stake": 4.8
+  },
+  {
+    "ts": 1788258056490.1719,
+    "userId": "pattern-2",
+    "action": "loss",
+    "hour": 10,
+    "sessionId": "pattern-2-S1",
+    "gapSec": 6
+  },
+  {
+    "ts": 1788258080390.504,
+    "userId": "pattern-2",
+    "action": "bet",
+    "hour": 10,
+    "sessionId": "pattern-2-S1",
+    "gapSec": 24,
+    "stake": 8.65
+  },
+  {
+    "ts": 1788258086100.4844,
+    "userId": "pattern-2",
+    "action": "win",
+    "hour": 10,
+    "sessionId": "pattern-2-S1",
+    "gapSec": 6,
+    "payout": 18.28
+  },
+  {
+    "ts": 1788258156176.2512,
+    "userId": "pattern-2",
+    "action": "bet",
+    "hour": 10,
+    "sessionId": "pattern-2-S1",
+    "gapSec": 70,
+    "stake": 5.94
+  },
+  {
+    "ts": 1788258160997.5273,
+    "userId": "pattern-2",
+    "action": "loss",
+    "hour": 10,
+    "sessionId": "pattern-2-S1",
+    "gapSec": 5
+  },
+  {
+    "ts": 1788258178371.1877,
+    "userId": "pattern-2",
+    "action": "bet",
+    "hour": 10,
+    "sessionId": "pattern-2-S1",
+    "gapSec": 17,
+    "stake": 4.84
+  },
+  {
+    "ts": 1788258183746.0532,
+    "userId": "pattern-2",
+    "action": "win",
+    "hour": 10,
+    "sessionId": "pattern-2-S1",
+    "gapSec": 5,
+    "payout": 17.55
+  },
+  {
+    "ts": 1788258230004.1926,
+    "userId": "pattern-2",
+    "action": "bet",
+    "hour": 10,
+    "sessionId": "pattern-2-S1",
+    "gapSec": 46,
+    "stake": 9.64
+  },
+  {
+    "ts": 1788258236886.8127,
+    "userId": "pattern-2",
+    "action": "win",
+    "hour": 10,
+    "sessionId": "pattern-2-S1",
+    "gapSec": 7,
+    "payout": 38.09
+  },
+  {
+    "ts": 1788258301184.3923,
+    "userId": "pattern-2",
+    "action": "bet",
+    "hour": 10,
+    "sessionId": "pattern-2-S1",
+    "gapSec": 64,
+    "stake": 8.89
+  },
+  {
+    "ts": 1788258305910.5437,
+    "userId": "pattern-2",
+    "action": "loss",
+    "hour": 10,
+    "sessionId": "pattern-2-S1",
+    "gapSec": 5
+  },
+  {
+    "ts": 1788258329347.1182,
+    "userId": "pattern-2",
+    "action": "bet",
+    "hour": 10,
+    "sessionId": "pattern-2-S1",
+    "gapSec": 23,
+    "stake": 11.6
+  },
+  {
+    "ts": 1788258336635.0784,
+    "userId": "pattern-2",
+    "action": "loss",
+    "hour": 10,
+    "sessionId": "pattern-2-S1",
+    "gapSec": 7
+  },
+  {
+    "ts": 1788258346526.576,
+    "userId": "pattern-2",
+    "action": "bet",
+    "hour": 10,
+    "sessionId": "pattern-2-S1",
+    "gapSec": 10,
+    "stake": 8.92
+  },
+  {
+    "ts": 1788258351225.429,
+    "userId": "pattern-2",
+    "action": "loss",
+    "hour": 10,
+    "sessionId": "pattern-2-S1",
+    "gapSec": 5
+  },
+  {
+    "ts": 1788258376399.7732,
+    "userId": "pattern-2",
+    "action": "bet",
+    "hour": 10,
+    "sessionId": "pattern-2-S1",
+    "gapSec": 25,
+    "stake": 18.81
+  },
+  {
+    "ts": 1788258382397.9617,
+    "userId": "pattern-2",
+    "action": "win",
+    "hour": 10,
+    "sessionId": "pattern-2-S1",
+    "gapSec": 6,
+    "payout": 33.99
+  },
+  {
+    "ts": 1788258412577.5735,
+    "userId": "pattern-2",
+    "action": "bet",
+    "hour": 10,
+    "sessionId": "pattern-2-S1",
+    "gapSec": 30,
+    "stake": 6.76
+  },
+  {
+    "ts": 1788258420204.7742,
+    "userId": "pattern-2",
+    "action": "loss",
+    "hour": 10,
+    "sessionId": "pattern-2-S1",
+    "gapSec": 8
+  },
+  {
+    "ts": 1788258443742.2732,
+    "userId": "pattern-2",
+    "action": "bet",
+    "hour": 10,
+    "sessionId": "pattern-2-S1",
+    "gapSec": 24,
+    "stake": 8.22
+  },
+  {
+    "ts": 1788258450477.455,
+    "userId": "pattern-2",
+    "action": "win",
+    "hour": 10,
+    "sessionId": "pattern-2-S1",
+    "gapSec": 7,
+    "payout": 33.7
+  },
+  {
+    "ts": 1788258517593.7,
+    "userId": "pattern-2",
+    "action": "bet",
+    "hour": 10,
+    "sessionId": "pattern-2-S1",
+    "gapSec": 67,
+    "stake": 2.12
+  },
+  {
+    "ts": 1788258524072.4849,
+    "userId": "pattern-2",
+    "action": "loss",
+    "hour": 10,
+    "sessionId": "pattern-2-S1",
+    "gapSec": 6
+  },
+  {
+    "ts": 1788258533279.144,
+    "userId": "pattern-2",
+    "action": "bet",
+    "hour": 10,
+    "sessionId": "pattern-2-S1",
+    "gapSec": 9,
+    "stake": 12.05
+  },
+  {
+    "ts": 1788258536875.0833,
+    "userId": "pattern-2",
+    "action": "loss",
+    "hour": 10,
+    "sessionId": "pattern-2-S1",
+    "gapSec": 4
+  },
+  {
+    "ts": 1788258553855.4087,
+    "userId": "pattern-2",
+    "action": "bet",
+    "hour": 10,
+    "sessionId": "pattern-2-S1",
+    "gapSec": 17,
+    "stake": 8.03
+  },
+  {
+    "ts": 1788258560967.575,
+    "userId": "pattern-2",
+    "action": "win",
+    "hour": 10,
+    "sessionId": "pattern-2-S1",
+    "gapSec": 7,
+    "payout": 32.29
+  },
+  {
+    "ts": 1788258621249.2202,
+    "userId": "pattern-2",
+    "action": "bet",
+    "hour": 10,
+    "sessionId": "pattern-2-S1",
+    "gapSec": 60,
+    "stake": 9.97
+  },
+  {
+    "ts": 1788258626500.766,
+    "userId": "pattern-2",
+    "action": "near_miss",
+    "hour": 10,
+    "sessionId": "pattern-2-S1",
+    "gapSec": 5
+  },
+  {
+    "ts": 1788258646408.4126,
+    "userId": "pattern-2",
+    "action": "bet",
+    "hour": 10,
+    "sessionId": "pattern-2-S1",
+    "gapSec": 20,
+    "stake": 4.23
+  },
+  {
+    "ts": 1788258652277.408,
+    "userId": "pattern-2",
+    "action": "loss",
+    "hour": 10,
+    "sessionId": "pattern-2-S1",
+    "gapSec": 6
+  },
+  {
+    "ts": 1788258685380.0518,
+    "userId": "pattern-2",
+    "action": "logout",
+    "hour": 10,
+    "sessionId": "pattern-2-S1",
+    "gapSec": 33
+  },
+  {
+    "ts": 1788264253914,
+    "userId": "pattern-6",
+    "action": "login",
+    "hour": 12,
+    "sessionId": "pattern-6-S2",
+    "gapSec": null
+  },
+  {
+    "ts": 1788264317042.4788,
+    "userId": "pattern-6",
+    "action": "deposit",
+    "hour": 12,
+    "sessionId": "pattern-6-S2",
+    "gapSec": 63,
+    "amount": 150,
+    "paydayPressure": true
+  },
+  {
+    "ts": 1788264354260.6562,
+    "userId": "pattern-6",
+    "action": "bet",
+    "hour": 12,
+    "sessionId": "pattern-6-S2",
+    "gapSec": 37,
+    "stake": 6.17
+  },
+  {
+    "ts": 1788264357492.0916,
+    "userId": "pattern-6",
+    "action": "loss",
+    "hour": 12,
+    "sessionId": "pattern-6-S2",
+    "gapSec": 3
+  },
+  {
+    "ts": 1788264374326.2712,
+    "userId": "pattern-6",
+    "action": "bet",
+    "hour": 12,
+    "sessionId": "pattern-6-S2",
+    "gapSec": 17,
+    "stake": 4.04
+  },
+  {
+    "ts": 1788264378036.8838,
+    "userId": "pattern-6",
+    "action": "win",
+    "hour": 12,
+    "sessionId": "pattern-6-S2",
+    "gapSec": 4,
+    "payout": 13.69
+  },
+  {
+    "ts": 1788264447693.59,
+    "userId": "pattern-6",
+    "action": "bet",
+    "hour": 12,
+    "sessionId": "pattern-6-S2",
+    "gapSec": 70,
+    "stake": 5.81
+  },
+  {
+    "ts": 1788264453733.7,
+    "userId": "pattern-6",
+    "action": "win",
+    "hour": 12,
+    "sessionId": "pattern-6-S2",
+    "gapSec": 6,
+    "payout": 24.34
+  },
+  {
+    "ts": 1788264507975.3928,
+    "userId": "pattern-6",
+    "action": "bet",
+    "hour": 12,
+    "sessionId": "pattern-6-S2",
+    "gapSec": 54,
+    "stake": 9.44
+  },
+  {
+    "ts": 1788264515044.4058,
+    "userId": "pattern-6",
+    "action": "loss",
+    "hour": 12,
+    "sessionId": "pattern-6-S2",
+    "gapSec": 7
+  },
+  {
+    "ts": 1788264529791.5244,
+    "userId": "pattern-6",
+    "action": "bet",
+    "hour": 12,
+    "sessionId": "pattern-6-S2",
+    "gapSec": 15,
+    "stake": 9.95
+  },
+  {
+    "ts": 1788264533270.1877,
+    "userId": "pattern-6",
+    "action": "loss",
+    "hour": 12,
+    "sessionId": "pattern-6-S2",
+    "gapSec": 3
+  },
+  {
+    "ts": 1788264557002.4846,
+    "userId": "pattern-6",
+    "action": "bet",
+    "hour": 12,
+    "sessionId": "pattern-6-S2",
+    "gapSec": 24,
+    "stake": 12.72
+  },
+  {
+    "ts": 1788264562576.6665,
+    "userId": "pattern-6",
+    "action": "near_miss",
+    "hour": 12,
+    "sessionId": "pattern-6-S2",
+    "gapSec": 6
+  },
+  {
+    "ts": 1788264582755.9463,
+    "userId": "pattern-6",
+    "action": "bet",
+    "hour": 12,
+    "sessionId": "pattern-6-S2",
+    "gapSec": 20,
+    "stake": 19.97
+  },
+  {
+    "ts": 1788264589735.0662,
+    "userId": "pattern-6",
+    "action": "loss",
+    "hour": 12,
+    "sessionId": "pattern-6-S2",
+    "gapSec": 7
+  },
+  {
+    "ts": 1788264615149.61,
+    "userId": "pattern-6",
+    "action": "bet",
+    "hour": 12,
+    "sessionId": "pattern-6-S2",
+    "gapSec": 25,
+    "stake": 20.16
+  },
+  {
+    "ts": 1788264618969.9739,
+    "userId": "pattern-6",
+    "action": "loss",
+    "hour": 12,
+    "sessionId": "pattern-6-S2",
+    "gapSec": 4
+  },
+  {
+    "ts": 1788264631596.772,
+    "userId": "pattern-6",
+    "action": "bet",
+    "hour": 12,
+    "sessionId": "pattern-6-S2",
+    "gapSec": 13,
+    "stake": 39.98
+  },
+  {
+    "ts": 1788264635247.6543,
+    "userId": "pattern-6",
+    "action": "win",
+    "hour": 12,
+    "sessionId": "pattern-6-S2",
+    "gapSec": 4,
+    "payout": 71.06
+  },
+  {
+    "ts": 1788264682728.9255,
+    "userId": "pattern-6",
+    "action": "bet",
+    "hour": 12,
+    "sessionId": "pattern-6-S2",
+    "gapSec": 47,
+    "stake": 2.26
+  },
+  {
+    "ts": 1788264689096.5642,
+    "userId": "pattern-6",
+    "action": "win",
+    "hour": 12,
+    "sessionId": "pattern-6-S2",
+    "gapSec": 6,
+    "payout": 9.23
+  },
+  {
+    "ts": 1788264759054.3467,
+    "userId": "pattern-6",
+    "action": "bet",
+    "hour": 12,
+    "sessionId": "pattern-6-S2",
+    "gapSec": 70,
+    "stake": 2.2
+  },
+  {
+    "ts": 1788264766062.8691,
+    "userId": "pattern-6",
+    "action": "near_miss",
+    "hour": 12,
+    "sessionId": "pattern-6-S2",
+    "gapSec": 7
+  },
+  {
+    "ts": 1788264779880.417,
+    "userId": "pattern-6",
+    "action": "bet",
+    "hour": 12,
+    "sessionId": "pattern-6-S2",
+    "gapSec": 14,
+    "stake": 2.71
+  },
+  {
+    "ts": 1788264787100.4045,
+    "userId": "pattern-6",
+    "action": "loss",
+    "hour": 12,
+    "sessionId": "pattern-6-S2",
+    "gapSec": 7
+  },
+  {
+    "ts": 1788264795979.8274,
+    "userId": "pattern-6",
+    "action": "bet",
+    "hour": 12,
+    "sessionId": "pattern-6-S2",
+    "gapSec": 9,
+    "stake": 7.2
+  },
+  {
+    "ts": 1788264801358.908,
+    "userId": "pattern-6",
+    "action": "win",
+    "hour": 12,
+    "sessionId": "pattern-6-S2",
+    "gapSec": 5,
+    "payout": 8.95
+  },
+  {
+    "ts": 1788264837280.5645,
+    "userId": "pattern-6",
+    "action": "bet",
+    "hour": 12,
+    "sessionId": "pattern-6-S2",
+    "gapSec": 36,
+    "stake": 6.44
+  },
+  {
+    "ts": 1788264841767.1687,
+    "userId": "pattern-6",
+    "action": "loss",
+    "hour": 12,
+    "sessionId": "pattern-6-S2",
+    "gapSec": 4
+  },
+  {
+    "ts": 1788264857448.06,
+    "userId": "pattern-6",
+    "action": "bet",
+    "hour": 12,
+    "sessionId": "pattern-6-S2",
+    "gapSec": 16,
+    "stake": 12.89
+  },
+  {
+    "ts": 1788264863228.9082,
+    "userId": "pattern-6",
+    "action": "loss",
+    "hour": 12,
+    "sessionId": "pattern-6-S2",
+    "gapSec": 6
+  },
+  {
+    "ts": 1788264878231.9897,
+    "userId": "pattern-6",
+    "action": "bet",
+    "hour": 12,
+    "sessionId": "pattern-6-S2",
+    "gapSec": 15,
+    "stake": 11.77
+  },
+  {
+    "ts": 1788264884017.057,
+    "userId": "pattern-6",
+    "action": "loss",
+    "hour": 12,
+    "sessionId": "pattern-6-S2",
+    "gapSec": 6
+  },
+  {
+    "ts": 1788264902952.057,
+    "userId": "pattern-6",
+    "action": "logout",
+    "hour": 12,
+    "sessionId": "pattern-6-S2",
+    "gapSec": 19
+  },
+  {
+    "ts": 1788268949453,
+    "userId": "pattern-1",
+    "action": "login",
+    "hour": 13,
+    "sessionId": "pattern-1-S1",
+    "gapSec": null
+  },
+  {
+    "ts": 1788269007052.859,
+    "userId": "pattern-1",
+    "action": "deposit",
+    "hour": 13,
+    "sessionId": "pattern-1-S1",
+    "gapSec": 58,
+    "amount": 104,
+    "paydayPressure": true
+  },
+  {
+    "ts": 1788269042059.5696,
+    "userId": "pattern-1",
+    "action": "bet",
+    "hour": 13,
+    "sessionId": "pattern-1-S1",
+    "gapSec": 35,
+    "stake": 8.59
+  },
+  {
+    "ts": 1788269049051.6414,
+    "userId": "pattern-1",
+    "action": "loss",
+    "hour": 13,
+    "sessionId": "pattern-1-S1",
+    "gapSec": 7
+  },
+  {
+    "ts": 1788269079370.6992,
+    "userId": "pattern-1",
+    "action": "bet",
+    "hour": 13,
+    "sessionId": "pattern-1-S1",
+    "gapSec": 30,
+    "stake": 9.61
+  },
+  {
+    "ts": 1788269084764.6707,
+    "userId": "pattern-1",
+    "action": "loss",
+    "hour": 13,
+    "sessionId": "pattern-1-S1",
+    "gapSec": 5
+  },
+  {
+    "ts": 1788269100995.1323,
+    "userId": "pattern-1",
+    "action": "bet",
+    "hour": 13,
+    "sessionId": "pattern-1-S1",
+    "gapSec": 16,
+    "stake": 11.64
+  },
+  {
+    "ts": 1788269107424.589,
+    "userId": "pattern-1",
+    "action": "loss",
+    "hour": 13,
+    "sessionId": "pattern-1-S1",
+    "gapSec": 6
+  },
+  {
+    "ts": 1788269132973.212,
+    "userId": "pattern-1",
+    "action": "bet",
+    "hour": 13,
+    "sessionId": "pattern-1-S1",
+    "gapSec": 26,
+    "stake": 4.94
+  },
+  {
+    "ts": 1788269139065.8982,
+    "userId": "pattern-1",
+    "action": "loss",
+    "hour": 13,
+    "sessionId": "pattern-1-S1",
+    "gapSec": 6
+  },
+  {
+    "ts": 1788269162602.539,
+    "userId": "pattern-1",
+    "action": "bet",
+    "hour": 13,
+    "sessionId": "pattern-1-S1",
+    "gapSec": 24,
+    "stake": 25.1
+  },
+  {
+    "ts": 1788269168771.0518,
+    "userId": "pattern-1",
+    "action": "loss",
+    "hour": 13,
+    "sessionId": "pattern-1-S1",
+    "gapSec": 6
+  },
+  {
+    "ts": 1788269184630.2825,
+    "userId": "pattern-1",
+    "action": "bet",
+    "hour": 13,
+    "sessionId": "pattern-1-S1",
+    "gapSec": 16,
+    "stake": 39.86
+  },
+  {
+    "ts": 1788269190027.798,
+    "userId": "pattern-1",
+    "action": "loss",
+    "hour": 13,
+    "sessionId": "pattern-1-S1",
+    "gapSec": 5
+  },
+  {
+    "ts": 1788269203158.953,
+    "userId": "pattern-1",
+    "action": "bet",
+    "hour": 13,
+    "sessionId": "pattern-1-S1",
+    "gapSec": 13,
+    "stake": 19.44
+  },
+  {
+    "ts": 1788269207293.4756,
+    "userId": "pattern-1",
+    "action": "loss",
+    "hour": 13,
+    "sessionId": "pattern-1-S1",
+    "gapSec": 4
+  },
+  {
+    "ts": 1788269228233.5493,
+    "userId": "pattern-1",
+    "action": "bet",
+    "hour": 13,
+    "sessionId": "pattern-1-S1",
+    "gapSec": 21,
+    "stake": 64.89
+  },
+  {
+    "ts": 1788269231444.0176,
+    "userId": "pattern-1",
+    "action": "loss",
+    "hour": 13,
+    "sessionId": "pattern-1-S1",
+    "gapSec": 3
+  },
+  {
+    "ts": 1788269251326.1155,
+    "userId": "pattern-1",
+    "action": "bet",
+    "hour": 13,
+    "sessionId": "pattern-1-S1",
+    "gapSec": 20,
+    "stake": 106.29
+  },
+  {
+    "ts": 1788269255775.6006,
+    "userId": "pattern-1",
+    "action": "loss",
+    "hour": 13,
+    "sessionId": "pattern-1-S1",
+    "gapSec": 4
+  },
+  {
+    "ts": 1788269275330.699,
+    "userId": "pattern-1",
+    "action": "bet",
+    "hour": 13,
+    "sessionId": "pattern-1-S1",
+    "gapSec": 20,
+    "stake": 119.2
+  },
+  {
+    "ts": 1788269279703.7332,
+    "userId": "pattern-1",
+    "action": "loss",
+    "hour": 13,
+    "sessionId": "pattern-1-S1",
+    "gapSec": 4
+  },
+  {
+    "ts": 1788269297744.1338,
+    "userId": "pattern-1",
+    "action": "bet",
+    "hour": 13,
+    "sessionId": "pattern-1-S1",
+    "gapSec": 18,
+    "stake": 78.82
+  },
+  {
+    "ts": 1788269302338.0833,
+    "userId": "pattern-1",
+    "action": "win",
+    "hour": 13,
+    "sessionId": "pattern-1-S1",
+    "gapSec": 5,
+    "payout": 321.21
+  },
+  {
+    "ts": 1788269348259.195,
+    "userId": "pattern-1",
+    "action": "bet",
+    "hour": 13,
+    "sessionId": "pattern-1-S1",
+    "gapSec": 46,
+    "stake": 6.13
+  },
+  {
+    "ts": 1788269353339.7598,
+    "userId": "pattern-1",
+    "action": "loss",
+    "hour": 13,
+    "sessionId": "pattern-1-S1",
+    "gapSec": 5
+  },
+  {
+    "ts": 1788269363553.0342,
+    "userId": "pattern-1",
+    "action": "bet",
+    "hour": 13,
+    "sessionId": "pattern-1-S1",
+    "gapSec": 10,
+    "stake": 6.46
+  },
+  {
+    "ts": 1788269371483.593,
+    "userId": "pattern-1",
+    "action": "near_miss",
+    "hour": 13,
+    "sessionId": "pattern-1-S1",
+    "gapSec": 8
+  },
+  {
+    "ts": 1788269381331.068,
+    "userId": "pattern-1",
+    "action": "bet",
+    "hour": 13,
+    "sessionId": "pattern-1-S1",
+    "gapSec": 10,
+    "stake": 8.74
+  },
+  {
+    "ts": 1788269386058.9104,
+    "userId": "pattern-1",
+    "action": "win",
+    "hour": 13,
+    "sessionId": "pattern-1-S1",
+    "gapSec": 5,
+    "payout": 25
+  },
+  {
+    "ts": 1788269420913.9932,
+    "userId": "pattern-1",
+    "action": "bet",
+    "hour": 13,
+    "sessionId": "pattern-1-S1",
+    "gapSec": 35,
+    "stake": 5.79
+  },
+  {
+    "ts": 1788269424951.5251,
+    "userId": "pattern-1",
+    "action": "loss",
+    "hour": 13,
+    "sessionId": "pattern-1-S1",
+    "gapSec": 4
+  },
+  {
+    "ts": 1788269442543.2783,
+    "userId": "pattern-1",
+    "action": "bet",
+    "hour": 13,
+    "sessionId": "pattern-1-S1",
+    "gapSec": 18,
+    "stake": 9.34
+  },
+  {
+    "ts": 1788269448780.8328,
+    "userId": "pattern-1",
+    "action": "loss",
+    "hour": 13,
+    "sessionId": "pattern-1-S1",
+    "gapSec": 6
+  },
+  {
+    "ts": 1788269456043.855,
+    "userId": "pattern-1",
+    "action": "bet",
+    "hour": 13,
+    "sessionId": "pattern-1-S1",
+    "gapSec": 7,
+    "stake": 5.3
+  },
+  {
+    "ts": 1788269463702.5798,
+    "userId": "pattern-1",
+    "action": "loss",
+    "hour": 13,
+    "sessionId": "pattern-1-S1",
+    "gapSec": 8
+  },
+  {
+    "ts": 1788269475648.3643,
+    "userId": "pattern-1",
+    "action": "bet",
+    "hour": 13,
+    "sessionId": "pattern-1-S1",
+    "gapSec": 12,
+    "stake": 22.04
+  },
+  {
+    "ts": 1788269481462.2317,
+    "userId": "pattern-1",
+    "action": "win",
+    "hour": 13,
+    "sessionId": "pattern-1-S1",
+    "gapSec": 6,
+    "payout": 78.26
+  },
+  {
+    "ts": 1788269502265.9397,
+    "userId": "pattern-1",
+    "action": "bet",
+    "hour": 13,
+    "sessionId": "pattern-1-S1",
+    "gapSec": 21,
+    "stake": 3.37
+  },
+  {
+    "ts": 1788269507890.6035,
+    "userId": "pattern-1",
+    "action": "near_miss",
+    "hour": 13,
+    "sessionId": "pattern-1-S1",
+    "gapSec": 6
+  },
+  {
+    "ts": 1788269514839.6335,
+    "userId": "pattern-1",
+    "action": "bet",
+    "hour": 13,
+    "sessionId": "pattern-1-S1",
+    "gapSec": 7,
+    "stake": 7.81
+  },
+  {
+    "ts": 1788269519632.2517,
+    "userId": "pattern-1",
+    "action": "win",
+    "hour": 13,
+    "sessionId": "pattern-1-S1",
+    "gapSec": 5,
+    "payout": 26.99
+  },
+  {
+    "ts": 1788269571893.1926,
+    "userId": "pattern-1",
+    "action": "bet",
+    "hour": 13,
+    "sessionId": "pattern-1-S1",
+    "gapSec": 52,
+    "stake": 7.59
+  },
+  {
+    "ts": 1788269576079.7085,
+    "userId": "pattern-1",
+    "action": "loss",
+    "hour": 13,
+    "sessionId": "pattern-1-S1",
+    "gapSec": 4
+  },
+  {
+    "ts": 1788269587709.231,
+    "userId": "pattern-1",
+    "action": "bet",
+    "hour": 13,
+    "sessionId": "pattern-1-S1",
+    "gapSec": 12,
+    "stake": 4.95
+  },
+  {
+    "ts": 1788269592871.018,
+    "userId": "pattern-1",
+    "action": "loss",
+    "hour": 13,
+    "sessionId": "pattern-1-S1",
+    "gapSec": 5
+  },
+  {
+    "ts": 1788269626801.3784,
+    "userId": "pattern-1",
+    "action": "logout",
+    "hour": 13,
+    "sessionId": "pattern-1-S1",
+    "gapSec": 34
+  },
+  {
+    "ts": 1788275013545,
+    "userId": "pattern-5",
+    "action": "login",
+    "hour": 15,
+    "sessionId": "pattern-5-S2",
+    "gapSec": null
+  },
+  {
+    "ts": 1788275050135.0674,
+    "userId": "pattern-5",
+    "action": "deposit",
+    "hour": 15,
+    "sessionId": "pattern-5-S2",
+    "gapSec": 37,
+    "amount": 63,
+    "paydayPressure": true
+  },
+  {
+    "ts": 1788275095674.1013,
+    "userId": "pattern-5",
+    "action": "bet",
+    "hour": 15,
+    "sessionId": "pattern-5-S2",
+    "gapSec": 46,
+    "stake": 5.28
+  },
+  {
+    "ts": 1788275098834.2117,
+    "userId": "pattern-5",
+    "action": "near_miss",
+    "hour": 15,
+    "sessionId": "pattern-5-S2",
+    "gapSec": 3
+  },
+  {
+    "ts": 1788275117622.8071,
+    "userId": "pattern-5",
+    "action": "bet",
+    "hour": 15,
+    "sessionId": "pattern-5-S2",
+    "gapSec": 19,
+    "stake": 9.9
+  },
+  {
+    "ts": 1788275124226.761,
+    "userId": "pattern-5",
+    "action": "loss",
+    "hour": 15,
+    "sessionId": "pattern-5-S2",
+    "gapSec": 7
+  },
+  {
+    "ts": 1788275146594.862,
+    "userId": "pattern-5",
+    "action": "bet",
+    "hour": 15,
+    "sessionId": "pattern-5-S2",
+    "gapSec": 22,
+    "stake": 6.43
+  },
+  {
+    "ts": 1788275154465.64,
+    "userId": "pattern-5",
+    "action": "loss",
+    "hour": 15,
+    "sessionId": "pattern-5-S2",
+    "gapSec": 8
+  }
+]

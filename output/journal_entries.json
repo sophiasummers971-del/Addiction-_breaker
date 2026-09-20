@@ -1,0 +1,823 @@
+[
+  {
+    "date": "2026-07-22",
+    "urge": 1,
+    "loneliness": 1,
+    "social": 6,
+    "sleep": 9,
+    "financialStress": 4,
+    "played": false,
+    "spent": 0,
+    "tags": [],
+    "note": ""
+  },
+  {
+    "date": "2026-07-23",
+    "urge": 3,
+    "loneliness": 3,
+    "social": 6,
+    "sleep": 4,
+    "financialStress": 2,
+    "played": false,
+    "spent": 0,
+    "tags": [],
+    "note": ""
+  },
+  {
+    "date": "2026-07-24",
+    "urge": 2,
+    "loneliness": 3,
+    "social": 6,
+    "sleep": 7,
+    "financialStress": 4,
+    "played": false,
+    "spent": 0,
+    "tags": [],
+    "note": ""
+  },
+  {
+    "date": "2026-07-25",
+    "urge": 3,
+    "loneliness": 3,
+    "social": 6,
+    "sleep": 6,
+    "financialStress": 4,
+    "played": false,
+    "spent": 0,
+    "tags": [],
+    "note": ""
+  },
+  {
+    "date": "2026-07-26",
+    "urge": 3,
+    "loneliness": 2,
+    "social": 6,
+    "sleep": 8,
+    "financialStress": 2,
+    "played": false,
+    "spent": 0,
+    "tags": [],
+    "note": ""
+  },
+  {
+    "date": "2026-07-27",
+    "urge": 2,
+    "loneliness": 2,
+    "social": 8,
+    "sleep": 5,
+    "financialStress": 6,
+    "played": false,
+    "spent": 0,
+    "tags": [
+      "money"
+    ],
+    "note": ""
+  },
+  {
+    "date": "2026-07-28",
+    "urge": 4,
+    "loneliness": 5,
+    "social": 7,
+    "sleep": 7,
+    "financialStress": 7,
+    "played": false,
+    "spent": 0,
+    "tags": [
+      "payday",
+      "money"
+    ],
+    "note": ""
+  },
+  {
+    "date": "2026-07-29",
+    "urge": 4,
+    "loneliness": 4,
+    "social": 4,
+    "sleep": 5,
+    "financialStress": 10,
+    "played": false,
+    "spent": 0,
+    "tags": [
+      "payday",
+      "money"
+    ],
+    "note": ""
+  },
+  {
+    "date": "2026-07-30",
+    "urge": 3,
+    "loneliness": 5,
+    "social": 4,
+    "sleep": 8,
+    "financialStress": 9,
+    "played": false,
+    "spent": 0,
+    "tags": [
+      "payday",
+      "money"
+    ],
+    "note": ""
+  },
+  {
+    "date": "2026-07-31",
+    "urge": 5,
+    "loneliness": 4,
+    "social": 4,
+    "sleep": 6,
+    "financialStress": 9,
+    "played": false,
+    "spent": 0,
+    "tags": [
+      "payday",
+      "money"
+    ],
+    "note": ""
+  },
+  {
+    "date": "2026-08-01",
+    "urge": 4,
+    "loneliness": 5,
+    "social": 6,
+    "sleep": 9,
+    "financialStress": 8,
+    "played": false,
+    "spent": 0,
+    "tags": [
+      "payday",
+      "money"
+    ],
+    "note": ""
+  },
+  {
+    "date": "2026-08-02",
+    "urge": 3,
+    "loneliness": 5,
+    "social": 6,
+    "sleep": 5,
+    "financialStress": 8,
+    "played": false,
+    "spent": 0,
+    "tags": [
+      "payday",
+      "money"
+    ],
+    "note": ""
+  },
+  {
+    "date": "2026-08-03",
+    "urge": 5,
+    "loneliness": 6,
+    "social": 4,
+    "sleep": 7,
+    "financialStress": 7,
+    "played": false,
+    "spent": 0,
+    "tags": [
+      "payday",
+      "lonely",
+      "money"
+    ],
+    "note": ""
+  },
+  {
+    "date": "2026-08-04",
+    "urge": 4,
+    "loneliness": 4,
+    "social": 5,
+    "sleep": 7,
+    "financialStress": 4,
+    "played": false,
+    "spent": 0,
+    "tags": [],
+    "note": ""
+  },
+  {
+    "date": "2026-08-05",
+    "urge": 3,
+    "loneliness": 4,
+    "social": 5,
+    "sleep": 9,
+    "financialStress": 5,
+    "played": false,
+    "spent": 0,
+    "tags": [],
+    "note": ""
+  },
+  {
+    "date": "2026-08-06",
+    "urge": 4,
+    "loneliness": 5,
+    "social": 7,
+    "sleep": 9,
+    "financialStress": 3,
+    "played": false,
+    "spent": 0,
+    "tags": [],
+    "note": ""
+  },
+  {
+    "date": "2026-08-07",
+    "urge": 4,
+    "loneliness": 3,
+    "social": 7,
+    "sleep": 8,
+    "financialStress": 3,
+    "played": false,
+    "spent": 0,
+    "tags": [],
+    "note": ""
+  },
+  {
+    "date": "2026-08-08",
+    "urge": 3,
+    "loneliness": 3,
+    "social": 5,
+    "sleep": 6,
+    "financialStress": 5,
+    "played": false,
+    "spent": 0,
+    "tags": [],
+    "note": ""
+  },
+  {
+    "date": "2026-08-09",
+    "urge": 4,
+    "loneliness": 4,
+    "social": 7,
+    "sleep": 5,
+    "financialStress": 5,
+    "played": false,
+    "spent": 0,
+    "tags": [],
+    "note": ""
+  },
+  {
+    "date": "2026-08-10",
+    "urge": 4,
+    "loneliness": 5,
+    "social": 4,
+    "sleep": 7,
+    "financialStress": 3,
+    "played": false,
+    "spent": 0,
+    "tags": [],
+    "note": ""
+  },
+  {
+    "date": "2026-08-11",
+    "urge": 5,
+    "loneliness": 4,
+    "social": 4,
+    "sleep": 8,
+    "financialStress": 4,
+    "played": false,
+    "spent": 0,
+    "tags": [],
+    "note": ""
+  },
+  {
+    "date": "2026-08-12",
+    "urge": 3,
+    "loneliness": 5,
+    "social": 6,
+    "sleep": 7,
+    "financialStress": 5,
+    "played": false,
+    "spent": 0,
+    "tags": [],
+    "note": ""
+  },
+  {
+    "date": "2026-08-13",
+    "urge": 3,
+    "loneliness": 5,
+    "social": 4,
+    "sleep": 8,
+    "financialStress": 4,
+    "played": false,
+    "spent": 0,
+    "tags": [],
+    "note": ""
+  },
+  {
+    "date": "2026-08-14",
+    "urge": 4,
+    "loneliness": 5,
+    "social": 4,
+    "sleep": 9,
+    "financialStress": 6,
+    "played": false,
+    "spent": 0,
+    "tags": [
+      "money"
+    ],
+    "note": ""
+  },
+  {
+    "date": "2026-08-15",
+    "urge": 5,
+    "loneliness": 4,
+    "social": 4,
+    "sleep": 9,
+    "financialStress": 5,
+    "played": false,
+    "spent": 0,
+    "tags": [],
+    "note": ""
+  },
+  {
+    "date": "2026-08-16",
+    "urge": 4,
+    "loneliness": 4,
+    "social": 4,
+    "sleep": 9,
+    "financialStress": 3,
+    "played": false,
+    "spent": 0,
+    "tags": [],
+    "note": ""
+  },
+  {
+    "date": "2026-08-17",
+    "urge": 4,
+    "loneliness": 6,
+    "social": 4,
+    "sleep": 7,
+    "financialStress": 5,
+    "played": false,
+    "spent": 0,
+    "tags": [
+      "lonely"
+    ],
+    "note": ""
+  },
+  {
+    "date": "2026-08-18",
+    "urge": 5,
+    "loneliness": 5,
+    "social": 6,
+    "sleep": 5,
+    "financialStress": 2,
+    "played": false,
+    "spent": 0,
+    "tags": [],
+    "note": ""
+  },
+  {
+    "date": "2026-08-19",
+    "urge": 4,
+    "loneliness": 4,
+    "social": 4,
+    "sleep": 9,
+    "financialStress": 4,
+    "played": false,
+    "spent": 0,
+    "tags": [],
+    "note": ""
+  },
+  {
+    "date": "2026-08-20",
+    "urge": 4,
+    "loneliness": 5,
+    "social": 4,
+    "sleep": 7,
+    "financialStress": 4,
+    "played": false,
+    "spent": 0,
+    "tags": [],
+    "note": ""
+  },
+  {
+    "date": "2026-08-21",
+    "urge": 5,
+    "loneliness": 6,
+    "social": 6,
+    "sleep": 5,
+    "financialStress": 4,
+    "played": false,
+    "spent": 0,
+    "tags": [
+      "lonely"
+    ],
+    "note": ""
+  },
+  {
+    "date": "2026-08-22",
+    "urge": 4,
+    "loneliness": 6,
+    "social": 3,
+    "sleep": 9,
+    "financialStress": 2,
+    "played": false,
+    "spent": 0,
+    "tags": [
+      "lonely"
+    ],
+    "note": ""
+  },
+  {
+    "date": "2026-08-23",
+    "urge": 5,
+    "loneliness": 6,
+    "social": 5,
+    "sleep": 6,
+    "financialStress": 5,
+    "played": false,
+    "spent": 0,
+    "tags": [
+      "lonely"
+    ],
+    "note": ""
+  },
+  {
+    "date": "2026-08-24",
+    "urge": 5,
+    "loneliness": 6,
+    "social": 3,
+    "sleep": 7,
+    "financialStress": 3,
+    "played": false,
+    "spent": 0,
+    "tags": [
+      "lonely"
+    ],
+    "note": ""
+  },
+  {
+    "date": "2026-08-25",
+    "urge": 6,
+    "loneliness": 5,
+    "social": 3,
+    "sleep": 7,
+    "financialStress": 4,
+    "played": false,
+    "spent": 0,
+    "tags": [],
+    "note": "Payday hit and the pressure lit up immediately. I moved the money to savings and locked the card. Small win. Real win."
+  },
+  {
+    "date": "2026-08-26",
+    "urge": 5,
+    "loneliness": 6,
+    "social": 5,
+    "sleep": 8,
+    "financialStress": 6,
+    "played": false,
+    "spent": 0,
+    "tags": [
+      "lonely",
+      "money"
+    ],
+    "note": "Better than last week. Urge there but smaller. Went for a walk instead."
+  },
+  {
+    "date": "2026-08-27",
+    "urge": 6,
+    "loneliness": 6,
+    "social": 3,
+    "sleep": 7,
+    "financialStress": 2,
+    "played": false,
+    "spent": 0,
+    "tags": [
+      "lonely"
+    ],
+    "note": "Payday hit and the pressure lit up immediately. I moved the money to savings and locked the card. Small win. Real win."
+  },
+  {
+    "date": "2026-08-28",
+    "urge": 9,
+    "loneliness": 9,
+    "social": 4,
+    "sleep": 5,
+    "financialStress": 10,
+    "played": false,
+    "spent": 0,
+    "tags": [
+      "payday",
+      "lonely",
+      "money"
+    ],
+    "note": "Lonely as hell. Almost opened the site. Instead wrote three lines here and went to bed. Tomorrow-me says thank you."
+  },
+  {
+    "date": "2026-08-29",
+    "urge": 8,
+    "loneliness": 8,
+    "social": 2,
+    "sleep": 6,
+    "financialStress": 7,
+    "played": false,
+    "spent": 0,
+    "tags": [
+      "payday",
+      "lonely",
+      "money"
+    ],
+    "note": "Money is tight and the urge is loud but I am not feeding it tonight. I ate, I showered, I texted my sister. The night passed before."
+  },
+  {
+    "date": "2026-08-30",
+    "urge": 10,
+    "loneliness": 9,
+    "social": 2,
+    "sleep": 4,
+    "financialStress": 8,
+    "played": false,
+    "spent": 0,
+    "tags": [
+      "payday",
+      "lonely",
+      "money"
+    ],
+    "note": "Money is tight and the urge is loud but I am not feeding it tonight. I ate, I showered, I texted my sister. The night passed before."
+  },
+  {
+    "date": "2026-08-31",
+    "urge": 9,
+    "loneliness": 9,
+    "social": 2,
+    "sleep": 6,
+    "financialStress": 8,
+    "played": false,
+    "spent": 0,
+    "tags": [
+      "payday",
+      "lonely",
+      "money"
+    ],
+    "note": "Third hard night this week. Held all three. That is not luck, that is me."
+  },
+  {
+    "date": "2026-09-01",
+    "urge": 10,
+    "loneliness": 9,
+    "social": 4,
+    "sleep": 5,
+    "financialStress": 7,
+    "played": false,
+    "spent": 0,
+    "tags": [
+      "payday",
+      "lonely",
+      "money"
+    ],
+    "note": "Third hard night this week. Held all three. That is not luck, that is me."
+  },
+  {
+    "date": "2026-09-02",
+    "urge": 9,
+    "loneliness": 9,
+    "social": 2,
+    "sleep": 7,
+    "financialStress": 7,
+    "played": true,
+    "spent": 221,
+    "tags": [
+      "payday",
+      "lonely",
+      "money"
+    ],
+    "note": "Relapsed tonight. Started as \"just to feel something.\" Did not. Deeper now. Writing this so tomorrow is not a surprise."
+  },
+  {
+    "date": "2026-09-03",
+    "urge": 9,
+    "loneliness": 9,
+    "social": 1,
+    "sleep": 8,
+    "financialStress": 10,
+    "played": true,
+    "spent": 122,
+    "tags": [
+      "payday",
+      "lonely",
+      "money"
+    ],
+    "note": "Relapsed tonight. Started as \"just to feel something.\" Did not. Deeper now. Writing this so tomorrow is not a surprise."
+  },
+  {
+    "date": "2026-09-04",
+    "urge": 9,
+    "loneliness": 8,
+    "social": 2,
+    "sleep": 5,
+    "financialStress": 5,
+    "played": false,
+    "spent": 0,
+    "tags": [
+      "lonely"
+    ],
+    "note": "Money is tight and the urge is loud but I am not feeding it tonight. I ate, I showered, I texted my sister. The night passed before."
+  },
+  {
+    "date": "2026-09-05",
+    "urge": 8,
+    "loneliness": 8,
+    "social": 4,
+    "sleep": 8,
+    "financialStress": 4,
+    "played": false,
+    "spent": 0,
+    "tags": [
+      "lonely"
+    ],
+    "note": "Wanted the noise gone, not the money. Named it. It got quieter. Not gone — quieter. Enough."
+  },
+  {
+    "date": "2026-09-06",
+    "urge": 8,
+    "loneliness": 8,
+    "social": 2,
+    "sleep": 5,
+    "financialStress": 4,
+    "played": false,
+    "spent": 0,
+    "tags": [
+      "lonely"
+    ],
+    "note": "Lonely as hell. Almost opened the site. Instead wrote three lines here and went to bed. Tomorrow-me says thank you."
+  },
+  {
+    "date": "2026-09-07",
+    "urge": 6,
+    "loneliness": 7,
+    "social": 2,
+    "sleep": 6,
+    "financialStress": 5,
+    "played": false,
+    "spent": 0,
+    "tags": [
+      "lonely"
+    ],
+    "note": "Wanted the noise gone, not the money. Named it. It got quieter. Not gone — quieter. Enough."
+  },
+  {
+    "date": "2026-09-08",
+    "urge": 8,
+    "loneliness": 7,
+    "social": 2,
+    "sleep": 5,
+    "financialStress": 5,
+    "played": false,
+    "spent": 0,
+    "tags": [
+      "lonely"
+    ],
+    "note": "Wanted the noise gone, not the money. Named it. It got quieter. Not gone — quieter. Enough."
+  },
+  {
+    "date": "2026-09-09",
+    "urge": 9,
+    "loneliness": 8,
+    "social": 2,
+    "sleep": 4,
+    "financialStress": 3,
+    "played": false,
+    "spent": 0,
+    "tags": [
+      "lonely"
+    ],
+    "note": "Payday hit and the pressure lit up immediately. I moved the money to savings and locked the card. Small win. Real win."
+  },
+  {
+    "date": "2026-09-10",
+    "urge": 8,
+    "loneliness": 7,
+    "social": 2,
+    "sleep": 8,
+    "financialStress": 2,
+    "played": false,
+    "spent": 0,
+    "tags": [
+      "lonely"
+    ],
+    "note": "Wanted the noise gone, not the money. Named it. It got quieter. Not gone — quieter. Enough."
+  },
+  {
+    "date": "2026-09-11",
+    "urge": 8,
+    "loneliness": 7,
+    "social": 2,
+    "sleep": 5,
+    "financialStress": 5,
+    "played": false,
+    "spent": 0,
+    "tags": [
+      "lonely"
+    ],
+    "note": "Lonely as hell. Almost opened the site. Instead wrote three lines here and went to bed. Tomorrow-me says thank you."
+  },
+  {
+    "date": "2026-09-12",
+    "urge": 8,
+    "loneliness": 8,
+    "social": 4,
+    "sleep": 6,
+    "financialStress": 5,
+    "played": false,
+    "spent": 0,
+    "tags": [
+      "lonely"
+    ],
+    "note": "Payday hit and the pressure lit up immediately. I moved the money to savings and locked the card. Small win. Real win."
+  },
+  {
+    "date": "2026-09-13",
+    "urge": 10,
+    "loneliness": 8,
+    "social": 2,
+    "sleep": 6,
+    "financialStress": 5,
+    "played": false,
+    "spent": 0,
+    "tags": [
+      "lonely"
+    ],
+    "note": "Money is tight and the urge is loud but I am not feeding it tonight. I ate, I showered, I texted my sister. The night passed before."
+  },
+  {
+    "date": "2026-09-14",
+    "urge": 9,
+    "loneliness": 8,
+    "social": 2,
+    "sleep": 5,
+    "financialStress": 4,
+    "played": false,
+    "spent": 0,
+    "tags": [
+      "lonely"
+    ],
+    "note": "Payday hit and the pressure lit up immediately. I moved the money to savings and locked the card. Small win. Real win."
+  },
+  {
+    "date": "2026-09-15",
+    "urge": 9,
+    "loneliness": 9,
+    "social": 1,
+    "sleep": 6,
+    "financialStress": 3,
+    "played": false,
+    "spent": 0,
+    "tags": [
+      "lonely"
+    ],
+    "note": "Lonely as hell. Almost opened the site. Instead wrote three lines here and went to bed. Tomorrow-me says thank you."
+  },
+  {
+    "date": "2026-09-16",
+    "urge": 10,
+    "loneliness": 9,
+    "social": 1,
+    "sleep": 8,
+    "financialStress": 5,
+    "played": false,
+    "spent": 0,
+    "tags": [
+      "lonely"
+    ],
+    "note": "Money is tight and the urge is loud but I am not feeding it tonight. I ate, I showered, I texted my sister. The night passed before."
+  },
+  {
+    "date": "2026-09-17",
+    "urge": 10,
+    "loneliness": 9,
+    "social": 1,
+    "sleep": 5,
+    "financialStress": 3,
+    "played": false,
+    "spent": 0,
+    "tags": [
+      "lonely"
+    ],
+    "note": "Third hard night this week. Held all three. That is not luck, that is me."
+  },
+  {
+    "date": "2026-09-18",
+    "urge": 9,
+    "loneliness": 8,
+    "social": 1,
+    "sleep": 6,
+    "financialStress": 3,
+    "played": false,
+    "spent": 0,
+    "tags": [
+      "lonely"
+    ],
+    "note": "Lonely as hell. Almost opened the site. Instead wrote three lines here and went to bed. Tomorrow-me says thank you."
+  },
+  {
+    "date": "2026-09-19",
+    "urge": 10,
+    "loneliness": 8,
+    "social": 1,
+    "sleep": 5,
+    "financialStress": 2,
+    "played": false,
+    "spent": 0,
+    "tags": [
+      "lonely"
+    ],
+    "note": "Payday hit and the pressure lit up immediately. I moved the money to savings and locked the card. Small win. Real win."
+  }
+]

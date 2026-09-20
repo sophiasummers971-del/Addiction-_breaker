@@ -1,0 +1,76 @@
+{
+  "lift": {
+    "pLossPair": 0.6963823650760183,
+    "pLossFirst": 0.6990602306706536,
+    "lift": 0.9961693349483401
+  },
+  "sample": {
+    "ctx": "global",
+    "pair": "loss>bet",
+    "currentAction": "bet",
+    "predictions": [
+      {
+        "action": "loss",
+        "p": 0.6963823650760183,
+        "p2": 0.6952347083926032,
+        "p1": 0.6990602306706536
+      },
+      {
+        "action": "win",
+        "p": 0.1853607654508079,
+        "p2": 0.18598862019914653,
+        "p1": 0.18389577103801794
+      },
+      {
+        "action": "near_miss",
+        "p": 0.11518349382004138,
+        "p2": 0.11557610241820768,
+        "p1": 0.11426740709098676
+      }
+    ],
+    "support": {
+      "pair": 1402,
+      "firstOrder": 2337
+    },
+    "backedOff": false,
+    "confidence": 100,
+    "confidenceLabel": "high"
+  },
+  "sparse": {
+    "ctx": "global",
+    "pair": "withdraw>login",
+    "currentAction": "login",
+    "predictions": [
+      {
+        "action": "deposit",
+        "p": 0.3452127659574469,
+        "p2": 0.125,
+        "p1": 0.8590425531914894
+      },
+      {
+        "action": "bet",
+        "p": 0.125,
+        "p2": 0.125,
+        "p1": 0.125
+      },
+      {
+        "action": "login",
+        "p": 0.08829787234042552,
+        "p2": 0.125,
+        "p1": 0.0026595744680851063
+      }
+    ],
+    "support": {
+      "pair": 0,
+      "firstOrder": 184
+    },
+    "backedOff": true,
+    "confidence": 0,
+    "confidenceLabel": "low (thin data — treat as a hint)"
+  },
+  "heldOut": {
+    "n": 1081,
+    "acc1": 81.6836262719704,
+    "acc2": 81.6836262719704
+  }
+}

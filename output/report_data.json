@@ -1,0 +1,1279 @@
+{
+  "generatedAt": "2026-09-20T21:33:51.489Z",
+  "cohort": [
+    {
+      "id": "casual-1",
+      "archetype": "casual"
+    },
+    {
+      "id": "casual-2",
+      "archetype": "casual"
+    },
+    {
+      "id": "casual-3",
+      "archetype": "casual"
+    },
+    {
+      "id": "casual-4",
+      "archetype": "casual"
+    },
+    {
+      "id": "casual-5",
+      "archetype": "casual"
+    },
+    {
+      "id": "casual-6",
+      "archetype": "casual"
+    },
+    {
+      "id": "pattern-1",
+      "archetype": "addicted-pattern"
+    },
+    {
+      "id": "pattern-2",
+      "archetype": "addicted-pattern"
+    },
+    {
+      "id": "pattern-3",
+      "archetype": "addicted-pattern"
+    },
+    {
+      "id": "pattern-4",
+      "archetype": "addicted-pattern"
+    },
+    {
+      "id": "pattern-5",
+      "archetype": "addicted-pattern"
+    },
+    {
+      "id": "pattern-6",
+      "archetype": "addicted-pattern"
+    }
+  ],
+  "predictions": [
+    {
+      "userId": "casual-1",
+      "context": "bet_after_loss",
+      "topNext": [
+        {
+          "action": "loss",
+          "p": 0.6974892835272505,
+          "n": 1139
+        },
+        {
+          "action": "win",
+          "p": 0.18309859154929578,
+          "n": 299
+        },
+        {
+          "action": "near_miss",
+          "p": 0.11696264543784446,
+          "n": 191
+        }
+      ],
+      "secondOrder": {
+        "pair": "loss>bet",
+        "topNext": [
+          {
+            "action": "loss",
+            "p": 0.6954914186604056,
+            "p2": 0.6952347083926032,
+            "p1": 0.696090409285278
+          },
+          {
+            "action": "win",
+            "p": 0.18507902253280512,
+            "p2": 0.18598862019914653,
+            "p1": 0.18295662797800855
+          },
+          {
+            "action": "near_miss",
+            "p": 0.11599795709286756,
+            "p2": 0.11557610241820768,
+            "p1": 0.11698228466707392
+          }
+        ],
+        "confidence": 100,
+        "confidenceLabel": "high",
+        "backedOff": false,
+        "pLoss": 0.6954914186604056
+      },
+      "interpretation": "After a loss, the most likely next event is another bet followed by another loss (P(next = loss after re-bet) = 69.7% vs 70.6% in neutral contexts). Second-order (remembering the loss that preceded the re-bet) sharpens P(next = loss) to 69.5% [confidence 100, high]. The game's RTP does not change after losses — the \"due for a win\" feeling is engineered."
+    },
+    {
+      "userId": "casual-2",
+      "context": "bet_after_loss",
+      "topNext": [
+        {
+          "action": "loss",
+          "p": 0.6974892835272505,
+          "n": 1139
+        },
+        {
+          "action": "win",
+          "p": 0.18309859154929578,
+          "n": 299
+        },
+        {
+          "action": "near_miss",
+          "p": 0.11696264543784446,
+          "n": 191
+        }
+      ],
+      "secondOrder": {
+        "pair": "loss>bet",
+        "topNext": [
+          {
+            "action": "loss",
+            "p": 0.6954914186604056,
+            "p2": 0.6952347083926032,
+            "p1": 0.696090409285278
+          },
+          {
+            "action": "win",
+            "p": 0.18507902253280512,
+            "p2": 0.18598862019914653,
+            "p1": 0.18295662797800855
+          },
+          {
+            "action": "near_miss",
+            "p": 0.11599795709286756,
+            "p2": 0.11557610241820768,
+            "p1": 0.11698228466707392
+          }
+        ],
+        "confidence": 100,
+        "confidenceLabel": "high",
+        "backedOff": false,
+        "pLoss": 0.6954914186604056
+      },
+      "interpretation": "After a loss, the most likely next event is another bet followed by another loss (P(next = loss after re-bet) = 69.7% vs 70.6% in neutral contexts). Second-order (remembering the loss that preceded the re-bet) sharpens P(next = loss) to 69.5% [confidence 100, high]. The game's RTP does not change after losses — the \"due for a win\" feeling is engineered."
+    },
+    {
+      "userId": "casual-3",
+      "context": "bet_after_loss",
+      "topNext": [
+        {
+          "action": "loss",
+          "p": 0.6974892835272505,
+          "n": 1139
+        },
+        {
+          "action": "win",
+          "p": 0.18309859154929578,
+          "n": 299
+        },
+        {
+          "action": "near_miss",
+          "p": 0.11696264543784446,
+          "n": 191
+        }
+      ],
+      "secondOrder": {
+        "pair": "loss>bet",
+        "topNext": [
+          {
+            "action": "loss",
+            "p": 0.6954914186604056,
+            "p2": 0.6952347083926032,
+            "p1": 0.696090409285278
+          },
+          {
+            "action": "win",
+            "p": 0.18507902253280512,
+            "p2": 0.18598862019914653,
+            "p1": 0.18295662797800855
+          },
+          {
+            "action": "near_miss",
+            "p": 0.11599795709286756,
+            "p2": 0.11557610241820768,
+            "p1": 0.11698228466707392
+          }
+        ],
+        "confidence": 100,
+        "confidenceLabel": "high",
+        "backedOff": false,
+        "pLoss": 0.6954914186604056
+      },
+      "interpretation": "After a loss, the most likely next event is another bet followed by another loss (P(next = loss after re-bet) = 69.7% vs 70.6% in neutral contexts). Second-order (remembering the loss that preceded the re-bet) sharpens P(next = loss) to 69.5% [confidence 100, high]. The game's RTP does not change after losses — the \"due for a win\" feeling is engineered."
+    },
+    {
+      "userId": "casual-4",
+      "context": "bet_after_loss",
+      "topNext": [
+        {
+          "action": "loss",
+          "p": 0.6974892835272505,
+          "n": 1139
+        },
+        {
+          "action": "win",
+          "p": 0.18309859154929578,
+          "n": 299
+        },
+        {
+          "action": "near_miss",
+          "p": 0.11696264543784446,
+          "n": 191
+        }
+      ],
+      "secondOrder": {
+        "pair": "loss>bet",
+        "topNext": [
+          {
+            "action": "loss",
+            "p": 0.6954914186604056,
+            "p2": 0.6952347083926032,
+            "p1": 0.696090409285278
+          },
+          {
+            "action": "win",
+            "p": 0.18507902253280512,
+            "p2": 0.18598862019914653,
+            "p1": 0.18295662797800855
+          },
+          {
+            "action": "near_miss",
+            "p": 0.11599795709286756,
+            "p2": 0.11557610241820768,
+            "p1": 0.11698228466707392
+          }
+        ],
+        "confidence": 100,
+        "confidenceLabel": "high",
+        "backedOff": false,
+        "pLoss": 0.6954914186604056
+      },
+      "interpretation": "After a loss, the most likely next event is another bet followed by another loss (P(next = loss after re-bet) = 69.7% vs 70.6% in neutral contexts). Second-order (remembering the loss that preceded the re-bet) sharpens P(next = loss) to 69.5% [confidence 100, high]. The game's RTP does not change after losses — the \"due for a win\" feeling is engineered."
+    },
+    {
+      "userId": "casual-5",
+      "context": "bet_after_loss",
+      "topNext": [
+        {
+          "action": "loss",
+          "p": 0.6974892835272505,
+          "n": 1139
+        },
+        {
+          "action": "win",
+          "p": 0.18309859154929578,
+          "n": 299
+        },
+        {
+          "action": "near_miss",
+          "p": 0.11696264543784446,
+          "n": 191
+        }
+      ],
+      "secondOrder": {
+        "pair": "loss>bet",
+        "topNext": [
+          {
+            "action": "loss",
+            "p": 0.6954914186604056,
+            "p2": 0.6952347083926032,
+            "p1": 0.696090409285278
+          },
+          {
+            "action": "win",
+            "p": 0.18507902253280512,
+            "p2": 0.18598862019914653,
+            "p1": 0.18295662797800855
+          },
+          {
+            "action": "near_miss",
+            "p": 0.11599795709286756,
+            "p2": 0.11557610241820768,
+            "p1": 0.11698228466707392
+          }
+        ],
+        "confidence": 100,
+        "confidenceLabel": "high",
+        "backedOff": false,
+        "pLoss": 0.6954914186604056
+      },
+      "interpretation": "After a loss, the most likely next event is another bet followed by another loss (P(next = loss after re-bet) = 69.7% vs 70.6% in neutral contexts). Second-order (remembering the loss that preceded the re-bet) sharpens P(next = loss) to 69.5% [confidence 100, high]. The game's RTP does not change after losses — the \"due for a win\" feeling is engineered."
+    },
+    {
+      "userId": "casual-6",
+      "context": "bet_after_loss",
+      "topNext": [
+        {
+          "action": "loss",
+          "p": 0.6974892835272505,
+          "n": 1139
+        },
+        {
+          "action": "win",
+          "p": 0.18309859154929578,
+          "n": 299
+        },
+        {
+          "action": "near_miss",
+          "p": 0.11696264543784446,
+          "n": 191
+        }
+      ],
+      "secondOrder": {
+        "pair": "loss>bet",
+        "topNext": [
+          {
+            "action": "loss",
+            "p": 0.6954914186604056,
+            "p2": 0.6952347083926032,
+            "p1": 0.696090409285278
+          },
+          {
+            "action": "win",
+            "p": 0.18507902253280512,
+            "p2": 0.18598862019914653,
+            "p1": 0.18295662797800855
+          },
+          {
+            "action": "near_miss",
+            "p": 0.11599795709286756,
+            "p2": 0.11557610241820768,
+            "p1": 0.11698228466707392
+          }
+        ],
+        "confidence": 100,
+        "confidenceLabel": "high",
+        "backedOff": false,
+        "pLoss": 0.6954914186604056
+      },
+      "interpretation": "After a loss, the most likely next event is another bet followed by another loss (P(next = loss after re-bet) = 69.7% vs 70.6% in neutral contexts). Second-order (remembering the loss that preceded the re-bet) sharpens P(next = loss) to 69.5% [confidence 100, high]. The game's RTP does not change after losses — the \"due for a win\" feeling is engineered."
+    },
+    {
+      "userId": "pattern-1",
+      "context": "bet_after_loss",
+      "topNext": [
+        {
+          "action": "loss",
+          "p": 0.6974892835272505,
+          "n": 1139
+        },
+        {
+          "action": "win",
+          "p": 0.18309859154929578,
+          "n": 299
+        },
+        {
+          "action": "near_miss",
+          "p": 0.11696264543784446,
+          "n": 191
+        }
+      ],
+      "secondOrder": {
+        "pair": "loss>bet",
+        "topNext": [
+          {
+            "action": "loss",
+            "p": 0.6954914186604056,
+            "p2": 0.6952347083926032,
+            "p1": 0.696090409285278
+          },
+          {
+            "action": "win",
+            "p": 0.18507902253280512,
+            "p2": 0.18598862019914653,
+            "p1": 0.18295662797800855
+          },
+          {
+            "action": "near_miss",
+            "p": 0.11599795709286756,
+            "p2": 0.11557610241820768,
+            "p1": 0.11698228466707392
+          }
+        ],
+        "confidence": 100,
+        "confidenceLabel": "high",
+        "backedOff": false,
+        "pLoss": 0.6954914186604056
+      },
+      "interpretation": "After a loss, the most likely next event is another bet followed by another loss (P(next = loss after re-bet) = 69.7% vs 70.6% in neutral contexts). Second-order (remembering the loss that preceded the re-bet) sharpens P(next = loss) to 69.5% [confidence 100, high]. The game's RTP does not change after losses — the \"due for a win\" feeling is engineered."
+    },
+    {
+      "userId": "pattern-2",
+      "context": "bet_after_loss",
+      "topNext": [
+        {
+          "action": "loss",
+          "p": 0.6974892835272505,
+          "n": 1139
+        },
+        {
+          "action": "win",
+          "p": 0.18309859154929578,
+          "n": 299
+        },
+        {
+          "action": "near_miss",
+          "p": 0.11696264543784446,
+          "n": 191
+        }
+      ],
+      "secondOrder": {
+        "pair": "loss>bet",
+        "topNext": [
+          {
+            "action": "loss",
+            "p": 0.6954914186604056,
+            "p2": 0.6952347083926032,
+            "p1": 0.696090409285278
+          },
+          {
+            "action": "win",
+            "p": 0.18507902253280512,
+            "p2": 0.18598862019914653,
+            "p1": 0.18295662797800855
+          },
+          {
+            "action": "near_miss",
+            "p": 0.11599795709286756,
+            "p2": 0.11557610241820768,
+            "p1": 0.11698228466707392
+          }
+        ],
+        "confidence": 100,
+        "confidenceLabel": "high",
+        "backedOff": false,
+        "pLoss": 0.6954914186604056
+      },
+      "interpretation": "After a loss, the most likely next event is another bet followed by another loss (P(next = loss after re-bet) = 69.7% vs 70.6% in neutral contexts). Second-order (remembering the loss that preceded the re-bet) sharpens P(next = loss) to 69.5% [confidence 100, high]. The game's RTP does not change after losses — the \"due for a win\" feeling is engineered."
+    },
+    {
+      "userId": "pattern-3",
+      "context": "bet_after_loss",
+      "topNext": [
+        {
+          "action": "loss",
+          "p": 0.6974892835272505,
+          "n": 1139
+        },
+        {
+          "action": "win",
+          "p": 0.18309859154929578,
+          "n": 299
+        },
+        {
+          "action": "near_miss",
+          "p": 0.11696264543784446,
+          "n": 191
+        }
+      ],
+      "secondOrder": {
+        "pair": "loss>bet",
+        "topNext": [
+          {
+            "action": "loss",
+            "p": 0.6954914186604056,
+            "p2": 0.6952347083926032,
+            "p1": 0.696090409285278
+          },
+          {
+            "action": "win",
+            "p": 0.18507902253280512,
+            "p2": 0.18598862019914653,
+            "p1": 0.18295662797800855
+          },
+          {
+            "action": "near_miss",
+            "p": 0.11599795709286756,
+            "p2": 0.11557610241820768,
+            "p1": 0.11698228466707392
+          }
+        ],
+        "confidence": 100,
+        "confidenceLabel": "high",
+        "backedOff": false,
+        "pLoss": 0.6954914186604056
+      },
+      "interpretation": "After a loss, the most likely next event is another bet followed by another loss (P(next = loss after re-bet) = 69.7% vs 70.6% in neutral contexts). Second-order (remembering the loss that preceded the re-bet) sharpens P(next = loss) to 69.5% [confidence 100, high]. The game's RTP does not change after losses — the \"due for a win\" feeling is engineered."
+    },
+    {
+      "userId": "pattern-4",
+      "context": "bet_after_loss",
+      "topNext": [
+        {
+          "action": "loss",
+          "p": 0.6974892835272505,
+          "n": 1139
+        },
+        {
+          "action": "win",
+          "p": 0.18309859154929578,
+          "n": 299
+        },
+        {
+          "action": "near_miss",
+          "p": 0.11696264543784446,
+          "n": 191
+        }
+      ],
+      "secondOrder": {
+        "pair": "loss>bet",
+        "topNext": [
+          {
+            "action": "loss",
+            "p": 0.6954914186604056,
+            "p2": 0.6952347083926032,
+            "p1": 0.696090409285278
+          },
+          {
+            "action": "win",
+            "p": 0.18507902253280512,
+            "p2": 0.18598862019914653,
+            "p1": 0.18295662797800855
+          },
+          {
+            "action": "near_miss",
+            "p": 0.11599795709286756,
+            "p2": 0.11557610241820768,
+            "p1": 0.11698228466707392
+          }
+        ],
+        "confidence": 100,
+        "confidenceLabel": "high",
+        "backedOff": false,
+        "pLoss": 0.6954914186604056
+      },
+      "interpretation": "After a loss, the most likely next event is another bet followed by another loss (P(next = loss after re-bet) = 69.7% vs 70.6% in neutral contexts). Second-order (remembering the loss that preceded the re-bet) sharpens P(next = loss) to 69.5% [confidence 100, high]. The game's RTP does not change after losses — the \"due for a win\" feeling is engineered."
+    },
+    {
+      "userId": "pattern-5",
+      "context": "bet_after_loss",
+      "topNext": [
+        {
+          "action": "loss",
+          "p": 0.6974892835272505,
+          "n": 1139
+        },
+        {
+          "action": "win",
+          "p": 0.18309859154929578,
+          "n": 299
+        },
+        {
+          "action": "near_miss",
+          "p": 0.11696264543784446,
+          "n": 191
+        }
+      ],
+      "secondOrder": {
+        "pair": "loss>bet",
+        "topNext": [
+          {
+            "action": "loss",
+            "p": 0.6954914186604056,
+            "p2": 0.6952347083926032,
+            "p1": 0.696090409285278
+          },
+          {
+            "action": "win",
+            "p": 0.18507902253280512,
+            "p2": 0.18598862019914653,
+            "p1": 0.18295662797800855
+          },
+          {
+            "action": "near_miss",
+            "p": 0.11599795709286756,
+            "p2": 0.11557610241820768,
+            "p1": 0.11698228466707392
+          }
+        ],
+        "confidence": 100,
+        "confidenceLabel": "high",
+        "backedOff": false,
+        "pLoss": 0.6954914186604056
+      },
+      "interpretation": "After a loss, the most likely next event is another bet followed by another loss (P(next = loss after re-bet) = 69.7% vs 70.6% in neutral contexts). Second-order (remembering the loss that preceded the re-bet) sharpens P(next = loss) to 69.5% [confidence 100, high]. The game's RTP does not change after losses — the \"due for a win\" feeling is engineered."
+    },
+    {
+      "userId": "pattern-6",
+      "context": "bet_after_loss",
+      "topNext": [
+        {
+          "action": "loss",
+          "p": 0.6974892835272505,
+          "n": 1139
+        },
+        {
+          "action": "win",
+          "p": 0.18309859154929578,
+          "n": 299
+        },
+        {
+          "action": "near_miss",
+          "p": 0.11696264543784446,
+          "n": 191
+        }
+      ],
+      "secondOrder": {
+        "pair": "loss>bet",
+        "topNext": [
+          {
+            "action": "loss",
+            "p": 0.6954914186604056,
+            "p2": 0.6952347083926032,
+            "p1": 0.696090409285278
+          },
+          {
+            "action": "win",
+            "p": 0.18507902253280512,
+            "p2": 0.18598862019914653,
+            "p1": 0.18295662797800855
+          },
+          {
+            "action": "near_miss",
+            "p": 0.11599795709286756,
+            "p2": 0.11557610241820768,
+            "p1": 0.11698228466707392
+          }
+        ],
+        "confidence": 100,
+        "confidenceLabel": "high",
+        "backedOff": false,
+        "pLoss": 0.6954914186604056
+      },
+      "interpretation": "After a loss, the most likely next event is another bet followed by another loss (P(next = loss after re-bet) = 69.7% vs 70.6% in neutral contexts). Second-order (remembering the loss that preceded the re-bet) sharpens P(next = loss) to 69.5% [confidence 100, high]. The game's RTP does not change after losses — the \"due for a win\" feeling is engineered."
+    }
+  ],
+  "profiles": [
+    {
+      "userId": "casual-1",
+      "sessions": 16,
+      "totalBets": 58,
+      "totalStaked": 566.72,
+      "totalReturned": 218.81,
+      "actualRTP": 38.6,
+      "lossChase": {
+        "pReBetAfterLoss30s": 0,
+        "pReBetAfterWin30s": 0
+      },
+      "nearMissContinuation": {
+        "pContinueAfterNearMiss": 0.8333333333333334,
+        "pContinueAfterLoss": 0.7692307692307693
+      },
+      "avgStakeByConsecutiveLosses": {
+        "0": 6.768518518518516,
+        "1": 12.386129032258065
+      },
+      "sessionAccelerationRatio": 0.9268095394779858,
+      "nightBetShare": 0,
+      "avgSessionMinutes": 7.046079899342855,
+      "archetype": "casual",
+      "hookScore": 4,
+      "recoveryMath": {
+        "netLoss": 347.91,
+        "experiencedRTP": 38.6,
+        "lossPerDollarChased": 0.614,
+        "costPer1000Chased": 614,
+        "holeAfterChasingSameAgain": 561.53,
+        "betsToDoubleHole": 58
+      },
+      "pressure": {
+        "deposits": 14,
+        "depositByDayOfMonth": {
+          "3": 1,
+          "5": 1,
+          "6": 1,
+          "7": 1,
+          "8": 1,
+          "9": 1,
+          "10": 1,
+          "11": 1,
+          "16": 1,
+          "19": 1,
+          "22": 1,
+          "24": 1,
+          "28": 1,
+          "29": 1
+        },
+        "paydayDepositShare": 0.21428571428571427
+      },
+      "mirror": "THE MIRROR — casual-1\n\nYou put in $567. You got back $219.\nThe difference — $348 — is not \"money you're down.\"\nIt is money the game took. That is what it is built to do.\n\nWHY YOU STARTED\nYour play was spread across the month — the pressure pattern here is chronic, not cyclical.\n\nTHE \"GET IT BACK\" TRAP — IN ARITHMETIC\nThe game returned 38.6% of what you fed it — not the advertised number, YOUR number.\nThat means every $1,000 you wager trying to recover your $348 costs you ~$614 more.\nChase it with the same amount again and the hole does not close — it grows to ~$562.\nAt your average stake, roughly 58 more bets doubles the hole. The math has one direction.\nThe feeling that you are \"due\" is not a premonition. It is a feature, engineered and A/B-tested.\n\nWHAT THE MACHINE LEARNED ABOUT YOU\nAfter a loss, you re-bet within 30 seconds 0% of the time. After a win: 0%.\nThat gap is not your personality. It is the design working. Losses are engineered to feel like near-escapes,\nand the next bet is placed before your thinking mind comes back online.\nYour average stake grew from $7 to $12 after a single loss.\nThe platform watches that reflex in real time and prices it in.\n\nTHE ONLY MOVE THE MATH CANNOT BEAT\nThe $348 is gone. Not \"temporarily down.\" Gone.\nEvery exit other than stopping has a negative price tag attached to it.\nStopping is not giving up the recovery. Stopping IS the recovery.\n\nIf this is money you needed: that is a debt problem now, and debt problems have\nreal solutions (counseling, restructuring, support lines) — none of which spin."
+    },
+    {
+      "userId": "casual-2",
+      "sessions": 20,
+      "totalBets": 79,
+      "totalStaked": 664.97,
+      "totalReturned": 299.98,
+      "actualRTP": 45.1,
+      "lossChase": {
+        "pReBetAfterLoss30s": 0,
+        "pReBetAfterWin30s": 0
+      },
+      "nearMissContinuation": {
+        "pContinueAfterNearMiss": 0.8888888888888888,
+        "pContinueAfterLoss": 0.7931034482758621
+      },
+      "avgStakeByConsecutiveLosses": {
+        "0": 5.6238709677419365,
+        "1": 10.221458333333334
+      },
+      "sessionAccelerationRatio": 1.4169180092357745,
+      "nightBetShare": 0,
+      "avgSessionMinutes": 7.882458309122721,
+      "archetype": "casual",
+      "hookScore": 8,
+      "recoveryMath": {
+        "netLoss": 364.99,
+        "experiencedRTP": 45.1,
+        "lossPerDollarChased": 0.549,
+        "costPer1000Chased": 549,
+        "holeAfterChasingSameAgain": 565.37,
+        "betsToDoubleHole": 79
+      },
+      "pressure": {
+        "deposits": 19,
+        "depositByDayOfMonth": {
+          "3": 1,
+          "7": 1,
+          "8": 1,
+          "9": 1,
+          "10": 1,
+          "11": 1,
+          "12": 1,
+          "15": 1,
+          "17": 1,
+          "18": 1,
+          "19": 1,
+          "20": 1,
+          "23": 1,
+          "24": 1,
+          "25": 1,
+          "27": 1,
+          "28": 1,
+          "29": 1,
+          "30": 1
+        },
+        "paydayDepositShare": 0.21052631578947367
+      },
+      "mirror": "THE MIRROR — casual-2\n\nYou put in $665. You got back $300.\nThe difference — $365 — is not \"money you're down.\"\nIt is money the game took. That is what it is built to do.\n\nWHY YOU STARTED\nYour play was spread across the month — the pressure pattern here is chronic, not cyclical.\n\nTHE \"GET IT BACK\" TRAP — IN ARITHMETIC\nThe game returned 45.1% of what you fed it — not the advertised number, YOUR number.\nThat means every $1,000 you wager trying to recover your $365 costs you ~$549 more.\nChase it with the same amount again and the hole does not close — it grows to ~$565.\nAt your average stake, roughly 79 more bets doubles the hole. The math has one direction.\nThe feeling that you are \"due\" is not a premonition. It is a feature, engineered and A/B-tested.\n\nWHAT THE MACHINE LEARNED ABOUT YOU\nAfter a loss, you re-bet within 30 seconds 0% of the time. After a win: 0%.\nThat gap is not your personality. It is the design working. Losses are engineered to feel like near-escapes,\nand the next bet is placed before your thinking mind comes back online.\nYour average stake grew from $6 to $10 after a single loss.\nThe platform watches that reflex in real time and prices it in.\n\nTHE ONLY MOVE THE MATH CANNOT BEAT\nThe $365 is gone. Not \"temporarily down.\" Gone.\nEvery exit other than stopping has a negative price tag attached to it.\nStopping is not giving up the recovery. Stopping IS the recovery.\n\nIf this is money you needed: that is a debt problem now, and debt problems have\nreal solutions (counseling, restructuring, support lines) — none of which spin."
+    },
+    {
+      "userId": "casual-3",
+      "sessions": 19,
+      "totalBets": 54,
+      "totalStaked": 435.58,
+      "totalReturned": 204.83,
+      "actualRTP": 47,
+      "lossChase": {
+        "pReBetAfterLoss30s": 0,
+        "pReBetAfterWin30s": 0
+      },
+      "nearMissContinuation": {
+        "pContinueAfterNearMiss": 0.625,
+        "pContinueAfterLoss": 0.7837837837837838
+      },
+      "avgStakeByConsecutiveLosses": {
+        "0": 6.473333333333333,
+        "1": 9.340666666666664
+      },
+      "sessionAccelerationRatio": 1,
+      "nightBetShare": 0,
+      "avgSessionMinutes": 5.721038062165912,
+      "archetype": "casual",
+      "hookScore": 0,
+      "recoveryMath": {
+        "netLoss": 230.75,
+        "experiencedRTP": 47,
+        "lossPerDollarChased": 0.53,
+        "costPer1000Chased": 530,
+        "holeAfterChasingSameAgain": 353.05,
+        "betsToDoubleHole": 54
+      },
+      "pressure": {
+        "deposits": 15,
+        "depositByDayOfMonth": {
+          "3": 1,
+          "4": 1,
+          "5": 1,
+          "7": 1,
+          "8": 1,
+          "9": 1,
+          "11": 1,
+          "13": 1,
+          "16": 1,
+          "17": 1,
+          "18": 1,
+          "19": 1,
+          "23": 1,
+          "26": 1,
+          "30": 1
+        },
+        "paydayDepositShare": 0.13333333333333333
+      },
+      "mirror": "THE MIRROR — casual-3\n\nYou put in $436. You got back $205.\nThe difference — $231 — is not \"money you're down.\"\nIt is money the game took. That is what it is built to do.\n\nWHY YOU STARTED\nYour play was spread across the month — the pressure pattern here is chronic, not cyclical.\n\nTHE \"GET IT BACK\" TRAP — IN ARITHMETIC\nThe game returned 47% of what you fed it — not the advertised number, YOUR number.\nThat means every $1,000 you wager trying to recover your $231 costs you ~$530 more.\nChase it with the same amount again and the hole does not close — it grows to ~$353.\nAt your average stake, roughly 54 more bets doubles the hole. The math has one direction.\nThe feeling that you are \"due\" is not a premonition. It is a feature, engineered and A/B-tested.\n\nWHAT THE MACHINE LEARNED ABOUT YOU\nAfter a loss, you re-bet within 30 seconds 0% of the time. After a win: 0%.\nThat gap is not your personality. It is the design working. Losses are engineered to feel like near-escapes,\nand the next bet is placed before your thinking mind comes back online.\nYour average stake grew from $6 to $9 after a single loss.\nThe platform watches that reflex in real time and prices it in.\n\nTHE ONLY MOVE THE MATH CANNOT BEAT\nThe $231 is gone. Not \"temporarily down.\" Gone.\nEvery exit other than stopping has a negative price tag attached to it.\nStopping is not giving up the recovery. Stopping IS the recovery.\n\nIf this is money you needed: that is a debt problem now, and debt problems have\nreal solutions (counseling, restructuring, support lines) — none of which spin."
+    },
+    {
+      "userId": "casual-4",
+      "sessions": 23,
+      "totalBets": 81,
+      "totalStaked": 896.76,
+      "totalReturned": 240.84,
+      "actualRTP": 26.9,
+      "lossChase": {
+        "pReBetAfterLoss30s": 0,
+        "pReBetAfterWin30s": 0
+      },
+      "nearMissContinuation": {
+        "pContinueAfterNearMiss": 0.8888888888888888,
+        "pContinueAfterLoss": 0.7377049180327869
+      },
+      "avgStakeByConsecutiveLosses": {
+        "0": 5.7558064516129015,
+        "1": 14.366600000000004
+      },
+      "sessionAccelerationRatio": 0.8964277439786738,
+      "nightBetShare": 0,
+      "avgSessionMinutes": 7.108240437117866,
+      "archetype": "casual",
+      "hookScore": 6,
+      "recoveryMath": {
+        "netLoss": 655.92,
+        "experiencedRTP": 26.9,
+        "lossPerDollarChased": 0.731,
+        "costPer1000Chased": 731,
+        "holeAfterChasingSameAgain": 1135.4,
+        "betsToDoubleHole": 81
+      },
+      "pressure": {
+        "deposits": 18,
+        "depositByDayOfMonth": {
+          "2": 1,
+          "3": 1,
+          "4": 1,
+          "6": 1,
+          "7": 1,
+          "8": 1,
+          "12": 1,
+          "13": 1,
+          "14": 1,
+          "17": 1,
+          "20": 1,
+          "21": 1,
+          "22": 1,
+          "25": 1,
+          "26": 1,
+          "27": 1,
+          "28": 1,
+          "30": 1
+        },
+        "paydayDepositShare": 0.2222222222222222
+      },
+      "mirror": "THE MIRROR — casual-4\n\nYou put in $897. You got back $241.\nThe difference — $656 — is not \"money you're down.\"\nIt is money the game took. That is what it is built to do.\n\nWHY YOU STARTED\nYour play was spread across the month — the pressure pattern here is chronic, not cyclical.\n\nTHE \"GET IT BACK\" TRAP — IN ARITHMETIC\nThe game returned 26.9% of what you fed it — not the advertised number, YOUR number.\nThat means every $1,000 you wager trying to recover your $656 costs you ~$731 more.\nChase it with the same amount again and the hole does not close — it grows to ~$1,135.\nAt your average stake, roughly 81 more bets doubles the hole. The math has one direction.\nThe feeling that you are \"due\" is not a premonition. It is a feature, engineered and A/B-tested.\n\nWHAT THE MACHINE LEARNED ABOUT YOU\nAfter a loss, you re-bet within 30 seconds 0% of the time. After a win: 0%.\nThat gap is not your personality. It is the design working. Losses are engineered to feel like near-escapes,\nand the next bet is placed before your thinking mind comes back online.\nYour average stake grew from $6 to $14 after a single loss.\nThe platform watches that reflex in real time and prices it in.\n\nTHE ONLY MOVE THE MATH CANNOT BEAT\nThe $656 is gone. Not \"temporarily down.\" Gone.\nEvery exit other than stopping has a negative price tag attached to it.\nStopping is not giving up the recovery. Stopping IS the recovery.\n\nIf this is money you needed: that is a debt problem now, and debt problems have\nreal solutions (counseling, restructuring, support lines) — none of which spin."
+    },
+    {
+      "userId": "casual-5",
+      "sessions": 13,
+      "totalBets": 54,
+      "totalStaked": 498.54,
+      "totalReturned": 170.31,
+      "actualRTP": 34.2,
+      "lossChase": {
+        "pReBetAfterLoss30s": 0,
+        "pReBetAfterWin30s": 0
+      },
+      "nearMissContinuation": {
+        "pContinueAfterNearMiss": 0.8888888888888888,
+        "pContinueAfterLoss": 0.8484848484848485
+      },
+      "avgStakeByConsecutiveLosses": {
+        "0": 5.074999999999999,
+        "1": 11.677647058823526
+      },
+      "sessionAccelerationRatio": 1.2034097640661807,
+      "nightBetShare": 0,
+      "avgSessionMinutes": 8.390462842422876,
+      "archetype": "casual",
+      "hookScore": 7,
+      "recoveryMath": {
+        "netLoss": 328.23,
+        "experiencedRTP": 34.2,
+        "lossPerDollarChased": 0.658,
+        "costPer1000Chased": 658,
+        "holeAfterChasingSameAgain": 544.21,
+        "betsToDoubleHole": 54
+      },
+      "pressure": {
+        "deposits": 10,
+        "depositByDayOfMonth": {
+          "8": 1,
+          "10": 1,
+          "11": 1,
+          "12": 1,
+          "14": 1,
+          "18": 1,
+          "19": 1,
+          "20": 1,
+          "27": 1,
+          "29": 1
+        },
+        "paydayDepositShare": 0.1
+      },
+      "mirror": "THE MIRROR — casual-5\n\nYou put in $499. You got back $170.\nThe difference — $328 — is not \"money you're down.\"\nIt is money the game took. That is what it is built to do.\n\nWHY YOU STARTED\nYour play was spread across the month — the pressure pattern here is chronic, not cyclical.\n\nTHE \"GET IT BACK\" TRAP — IN ARITHMETIC\nThe game returned 34.2% of what you fed it — not the advertised number, YOUR number.\nThat means every $1,000 you wager trying to recover your $328 costs you ~$658 more.\nChase it with the same amount again and the hole does not close — it grows to ~$544.\nAt your average stake, roughly 54 more bets doubles the hole. The math has one direction.\nThe feeling that you are \"due\" is not a premonition. It is a feature, engineered and A/B-tested.\n\nWHAT THE MACHINE LEARNED ABOUT YOU\nAfter a loss, you re-bet within 30 seconds 0% of the time. After a win: 0%.\nThat gap is not your personality. It is the design working. Losses are engineered to feel like near-escapes,\nand the next bet is placed before your thinking mind comes back online.\nYour average stake grew from $5 to $12 after a single loss.\nThe platform watches that reflex in real time and prices it in.\n\nTHE ONLY MOVE THE MATH CANNOT BEAT\nThe $328 is gone. Not \"temporarily down.\" Gone.\nEvery exit other than stopping has a negative price tag attached to it.\nStopping is not giving up the recovery. Stopping IS the recovery.\n\nIf this is money you needed: that is a debt problem now, and debt problems have\nreal solutions (counseling, restructuring, support lines) — none of which spin."
+    },
+    {
+      "userId": "casual-6",
+      "sessions": 18,
+      "totalBets": 84,
+      "totalStaked": 991.14,
+      "totalReturned": 376.43,
+      "actualRTP": 38,
+      "lossChase": {
+        "pReBetAfterLoss30s": 0,
+        "pReBetAfterWin30s": 0
+      },
+      "nearMissContinuation": {
+        "pContinueAfterNearMiss": 0.8,
+        "pContinueAfterLoss": 0.9019607843137255
+      },
+      "avgStakeByConsecutiveLosses": {
+        "0": 5.804375,
+        "1": 15.488461538461538
+      },
+      "sessionAccelerationRatio": 1.006343302243845,
+      "nightBetShare": 0,
+      "avgSessionMinutes": 8.847990953685619,
+      "archetype": "casual",
+      "hookScore": 3,
+      "recoveryMath": {
+        "netLoss": 614.71,
+        "experiencedRTP": 38,
+        "lossPerDollarChased": 0.62,
+        "costPer1000Chased": 620,
+        "holeAfterChasingSameAgain": 995.83,
+        "betsToDoubleHole": 84
+      },
+      "pressure": {
+        "deposits": 15,
+        "depositByDayOfMonth": {
+          "2": 1,
+          "5": 1,
+          "6": 1,
+          "9": 1,
+          "10": 1,
+          "13": 1,
+          "17": 1,
+          "18": 1,
+          "19": 1,
+          "20": 1,
+          "23": 1,
+          "24": 1,
+          "27": 1,
+          "29": 1,
+          "30": 1
+        },
+        "paydayDepositShare": 0.2
+      },
+      "mirror": "THE MIRROR — casual-6\n\nYou put in $991. You got back $376.\nThe difference — $615 — is not \"money you're down.\"\nIt is money the game took. That is what it is built to do.\n\nWHY YOU STARTED\nYour play was spread across the month — the pressure pattern here is chronic, not cyclical.\n\nTHE \"GET IT BACK\" TRAP — IN ARITHMETIC\nThe game returned 38% of what you fed it — not the advertised number, YOUR number.\nThat means every $1,000 you wager trying to recover your $615 costs you ~$620 more.\nChase it with the same amount again and the hole does not close — it grows to ~$996.\nAt your average stake, roughly 84 more bets doubles the hole. The math has one direction.\nThe feeling that you are \"due\" is not a premonition. It is a feature, engineered and A/B-tested.\n\nWHAT THE MACHINE LEARNED ABOUT YOU\nAfter a loss, you re-bet within 30 seconds 0% of the time. After a win: 0%.\nThat gap is not your personality. It is the design working. Losses are engineered to feel like near-escapes,\nand the next bet is placed before your thinking mind comes back online.\nYour average stake grew from $6 to $15 after a single loss.\nThe platform watches that reflex in real time and prices it in.\n\nTHE ONLY MOVE THE MATH CANNOT BEAT\nThe $615 is gone. Not \"temporarily down.\" Gone.\nEvery exit other than stopping has a negative price tag attached to it.\nStopping is not giving up the recovery. Stopping IS the recovery.\n\nIf this is money you needed: that is a debt problem now, and debt problems have\nreal solutions (counseling, restructuring, support lines) — none of which spin."
+    },
+    {
+      "userId": "pattern-1",
+      "sessions": 16,
+      "totalBets": 234,
+      "totalStaked": 4832.9,
+      "totalReturned": 2977.45,
+      "actualRTP": 61.6,
+      "lossChase": {
+        "pReBetAfterLoss30s": 0.9226190476190477,
+        "pReBetAfterWin30s": 0.18421052631578946
+      },
+      "nearMissContinuation": {
+        "pContinueAfterNearMiss": 0.9642857142857143,
+        "pContinueAfterLoss": 0.9226190476190477
+      },
+      "avgStakeByConsecutiveLosses": {
+        "0": 6.431153846153846,
+        "1": 24.71692307692308
+      },
+      "sessionAccelerationRatio": 2.2310048537321268,
+      "nightBetShare": 0.41452991452991456,
+      "avgSessionMinutes": 8.279136578114827,
+      "archetype": "addicted-pattern",
+      "hookScore": 47,
+      "recoveryMath": {
+        "netLoss": 1855.45,
+        "experiencedRTP": 61.6,
+        "lossPerDollarChased": 0.384,
+        "costPer1000Chased": 384,
+        "holeAfterChasingSameAgain": 2567.94,
+        "betsToDoubleHole": 234
+      },
+      "pressure": {
+        "deposits": 14,
+        "depositByDayOfMonth": {
+          "1": 2,
+          "2": 1,
+          "3": 2,
+          "9": 1,
+          "11": 1,
+          "15": 1,
+          "21": 1,
+          "28": 1,
+          "29": 2,
+          "30": 2
+        },
+        "paydayDepositShare": 0.7142857142857143
+      },
+      "mirror": "THE MIRROR — pattern-1\n\nYou put in $4,833. You got back $2,977.\nThe difference — $1,855 — is not \"money you're down.\"\nIt is money the game took. That is what it is built to do.\n\nWHY YOU STARTED\n71% of your deposits landed in the pressure window — the 3 days after payday, or the broke days right before it.\nThat is not a coincidence and it is not a character flaw. It is a schedule.\nThe platform times its prompts to the exact moment pressure peaks and money briefly exists —\nor has just run out. You were not playing a game. You were being sold a way out,\nat the price of the way out itself.\n\nTHE \"GET IT BACK\" TRAP — IN ARITHMETIC\nThe game returned 61.6% of what you fed it — not the advertised number, YOUR number.\nThat means every $1,000 you wager trying to recover your $1,855 costs you ~$384 more.\nChase it with the same amount again and the hole does not close — it grows to ~$2,568.\nAt your average stake, roughly 234 more bets doubles the hole. The math has one direction.\nThe feeling that you are \"due\" is not a premonition. It is a feature, engineered and A/B-tested.\n\nWHAT THE MACHINE LEARNED ABOUT YOU\nAfter a loss, you re-bet within 30 seconds 92% of the time. After a win: 18%.\nThat gap is not your personality. It is the design working. Losses are engineered to feel like near-escapes,\nand the next bet is placed before your thinking mind comes back online.\nYour average stake grew from $6 to $25 after a single loss.\nThe platform watches that reflex in real time and prices it in.\n41% of your bets happened between 22:00 and 06:00 — the hours when judgment is lowest and limits are quietest.\n\nTHE ONLY MOVE THE MATH CANNOT BEAT\nThe $1,855 is gone. Not \"temporarily down.\" Gone.\nEvery exit other than stopping has a negative price tag attached to it.\nStopping is not giving up the recovery. Stopping IS the recovery.\n\nIf this is money you needed: that is a debt problem now, and debt problems have\nreal solutions (counseling, restructuring, support lines) — none of which spin."
+    },
+    {
+      "userId": "pattern-2",
+      "sessions": 15,
+      "totalBets": 313,
+      "totalStaked": 9866.61,
+      "totalReturned": 4803.63,
+      "actualRTP": 48.7,
+      "lossChase": {
+        "pReBetAfterLoss30s": 0.9521739130434783,
+        "pReBetAfterWin30s": 0.3018867924528302
+      },
+      "nearMissContinuation": {
+        "pContinueAfterNearMiss": 1,
+        "pContinueAfterLoss": 0.9521739130434783
+      },
+      "avgStakeByConsecutiveLosses": {
+        "0": 6.621406249999997,
+        "1": 37.92305220883533
+      },
+      "sessionAccelerationRatio": 1.8813795853269537,
+      "nightBetShare": 0.6549520766773163,
+      "avgSessionMinutes": 11.110380078938805,
+      "archetype": "addicted-pattern",
+      "hookScore": 49,
+      "recoveryMath": {
+        "netLoss": 5062.98,
+        "experiencedRTP": 48.7,
+        "lossPerDollarChased": 0.513,
+        "costPer1000Chased": 513,
+        "holeAfterChasingSameAgain": 7660.29,
+        "betsToDoubleHole": 313
+      },
+      "pressure": {
+        "deposits": 15,
+        "depositByDayOfMonth": {
+          "1": 2,
+          "2": 1,
+          "3": 2,
+          "12": 1,
+          "17": 1,
+          "19": 1,
+          "24": 1,
+          "28": 2,
+          "29": 2,
+          "30": 2
+        },
+        "paydayDepositShare": 0.7333333333333333
+      },
+      "mirror": "THE MIRROR — pattern-2\n\nYou put in $9,867. You got back $4,804.\nThe difference — $5,063 — is not \"money you're down.\"\nIt is money the game took. That is what it is built to do.\n\nWHY YOU STARTED\n73% of your deposits landed in the pressure window — the 3 days after payday, or the broke days right before it.\nThat is not a coincidence and it is not a character flaw. It is a schedule.\nThe platform times its prompts to the exact moment pressure peaks and money briefly exists —\nor has just run out. You were not playing a game. You were being sold a way out,\nat the price of the way out itself.\n\nTHE \"GET IT BACK\" TRAP — IN ARITHMETIC\nThe game returned 48.7% of what you fed it — not the advertised number, YOUR number.\nThat means every $1,000 you wager trying to recover your $5,063 costs you ~$513 more.\nChase it with the same amount again and the hole does not close — it grows to ~$7,660.\nAt your average stake, roughly 313 more bets doubles the hole. The math has one direction.\nThe feeling that you are \"due\" is not a premonition. It is a feature, engineered and A/B-tested.\n\nWHAT THE MACHINE LEARNED ABOUT YOU\nAfter a loss, you re-bet within 30 seconds 95% of the time. After a win: 30%.\nThat gap is not your personality. It is the design working. Losses are engineered to feel like near-escapes,\nand the next bet is placed before your thinking mind comes back online.\nYour average stake grew from $7 to $38 after a single loss.\nThe platform watches that reflex in real time and prices it in.\n65% of your bets happened between 22:00 and 06:00 — the hours when judgment is lowest and limits are quietest.\n\nTHE ONLY MOVE THE MATH CANNOT BEAT\nThe $5,063 is gone. Not \"temporarily down.\" Gone.\nEvery exit other than stopping has a negative price tag attached to it.\nStopping is not giving up the recovery. Stopping IS the recovery.\n\nIf this is money you needed: that is a debt problem now, and debt problems have\nreal solutions (counseling, restructuring, support lines) — none of which spin."
+    },
+    {
+      "userId": "pattern-3",
+      "sessions": 17,
+      "totalBets": 413,
+      "totalStaked": 71991.36,
+      "totalReturned": 10085.41,
+      "actualRTP": 14,
+      "lossChase": {
+        "pReBetAfterLoss30s": 0.9568106312292359,
+        "pReBetAfterWin30s": 0.2714285714285714
+      },
+      "nearMissContinuation": {
+        "pContinueAfterNearMiss": 0.9761904761904762,
+        "pContinueAfterLoss": 0.9568106312292359
+      },
+      "avgStakeByConsecutiveLosses": {
+        "0": 6.368214285714285,
+        "1": 217.19279635258366
+      },
+      "sessionAccelerationRatio": 2.2091407522860695,
+      "nightBetShare": 0.5932203389830508,
+      "avgSessionMinutes": 11.873642669318702,
+      "archetype": "addicted-pattern",
+      "hookScore": 51,
+      "recoveryMath": {
+        "netLoss": 61905.95,
+        "experiencedRTP": 14,
+        "lossPerDollarChased": 0.86,
+        "costPer1000Chased": 860,
+        "holeAfterChasingSameAgain": 115145.07,
+        "betsToDoubleHole": 413
+      },
+      "pressure": {
+        "deposits": 15,
+        "depositByDayOfMonth": {
+          "1": 2,
+          "2": 2,
+          "3": 2,
+          "9": 1,
+          "20": 1,
+          "24": 1,
+          "25": 1,
+          "28": 2,
+          "29": 2,
+          "30": 1
+        },
+        "paydayDepositShare": 0.7333333333333333
+      },
+      "mirror": "THE MIRROR — pattern-3\n\nYou put in $71,991. You got back $10,085.\nThe difference — $61,906 — is not \"money you're down.\"\nIt is money the game took. That is what it is built to do.\n\nWHY YOU STARTED\n73% of your deposits landed in the pressure window — the 3 days after payday, or the broke days right before it.\nThat is not a coincidence and it is not a character flaw. It is a schedule.\nThe platform times its prompts to the exact moment pressure peaks and money briefly exists —\nor has just run out. You were not playing a game. You were being sold a way out,\nat the price of the way out itself.\n\nTHE \"GET IT BACK\" TRAP — IN ARITHMETIC\nThe game returned 14% of what you fed it — not the advertised number, YOUR number.\nThat means every $1,000 you wager trying to recover your $61,906 costs you ~$860 more.\nChase it with the same amount again and the hole does not close — it grows to ~$115,145.\nAt your average stake, roughly 413 more bets doubles the hole. The math has one direction.\nThe feeling that you are \"due\" is not a premonition. It is a feature, engineered and A/B-tested.\n\nWHAT THE MACHINE LEARNED ABOUT YOU\nAfter a loss, you re-bet within 30 seconds 96% of the time. After a win: 27%.\nThat gap is not your personality. It is the design working. Losses are engineered to feel like near-escapes,\nand the next bet is placed before your thinking mind comes back online.\nYour average stake grew from $6 to $217 after a single loss.\nThe platform watches that reflex in real time and prices it in.\n59% of your bets happened between 22:00 and 06:00 — the hours when judgment is lowest and limits are quietest.\n\nTHE ONLY MOVE THE MATH CANNOT BEAT\nThe $61,906 is gone. Not \"temporarily down.\" Gone.\nEvery exit other than stopping has a negative price tag attached to it.\nStopping is not giving up the recovery. Stopping IS the recovery.\n\nIf this is money you needed: that is a debt problem now, and debt problems have\nreal solutions (counseling, restructuring, support lines) — none of which spin."
+    },
+    {
+      "userId": "pattern-4",
+      "sessions": 16,
+      "totalBets": 388,
+      "totalStaked": 47069.65,
+      "totalReturned": 6260.92,
+      "actualRTP": 13.3,
+      "lossChase": {
+        "pReBetAfterLoss30s": 0.959409594095941,
+        "pReBetAfterWin30s": 0.1728395061728395
+      },
+      "nearMissContinuation": {
+        "pContinueAfterNearMiss": 0.9166666666666666,
+        "pContinueAfterLoss": 0.9630996309963099
+      },
+      "avgStakeByConsecutiveLosses": {
+        "0": 6.375744680851065,
+        "1": 158.0623469387756
+      },
+      "sessionAccelerationRatio": 2.4564752595282084,
+      "nightBetShare": 0.3324742268041237,
+      "avgSessionMinutes": 12.74538082962036,
+      "archetype": "addicted-pattern",
+      "hookScore": 46,
+      "recoveryMath": {
+        "netLoss": 40808.73,
+        "experiencedRTP": 13.3,
+        "lossPerDollarChased": 0.867,
+        "costPer1000Chased": 867,
+        "holeAfterChasingSameAgain": 76189.9,
+        "betsToDoubleHole": 388
+      },
+      "pressure": {
+        "deposits": 14,
+        "depositByDayOfMonth": {
+          "1": 2,
+          "2": 2,
+          "3": 2,
+          "5": 1,
+          "10": 1,
+          "14": 1,
+          "17": 1,
+          "28": 1,
+          "29": 1,
+          "30": 2
+        },
+        "paydayDepositShare": 0.7142857142857143
+      },
+      "mirror": "THE MIRROR — pattern-4\n\nYou put in $47,070. You got back $6,261.\nThe difference — $40,809 — is not \"money you're down.\"\nIt is money the game took. That is what it is built to do.\n\nWHY YOU STARTED\n71% of your deposits landed in the pressure window — the 3 days after payday, or the broke days right before it.\nThat is not a coincidence and it is not a character flaw. It is a schedule.\nThe platform times its prompts to the exact moment pressure peaks and money briefly exists —\nor has just run out. You were not playing a game. You were being sold a way out,\nat the price of the way out itself.\n\nTHE \"GET IT BACK\" TRAP — IN ARITHMETIC\nThe game returned 13.3% of what you fed it — not the advertised number, YOUR number.\nThat means every $1,000 you wager trying to recover your $40,809 costs you ~$867 more.\nChase it with the same amount again and the hole does not close — it grows to ~$76,190.\nAt your average stake, roughly 388 more bets doubles the hole. The math has one direction.\nThe feeling that you are \"due\" is not a premonition. It is a feature, engineered and A/B-tested.\n\nWHAT THE MACHINE LEARNED ABOUT YOU\nAfter a loss, you re-bet within 30 seconds 96% of the time. After a win: 17%.\nThat gap is not your personality. It is the design working. Losses are engineered to feel like near-escapes,\nand the next bet is placed before your thinking mind comes back online.\nYour average stake grew from $6 to $158 after a single loss.\nThe platform watches that reflex in real time and prices it in.\n33% of your bets happened between 22:00 and 06:00 — the hours when judgment is lowest and limits are quietest.\n\nTHE ONLY MOVE THE MATH CANNOT BEAT\nThe $40,809 is gone. Not \"temporarily down.\" Gone.\nEvery exit other than stopping has a negative price tag attached to it.\nStopping is not giving up the recovery. Stopping IS the recovery.\n\nIf this is money you needed: that is a debt problem now, and debt problems have\nreal solutions (counseling, restructuring, support lines) — none of which spin."
+    },
+    {
+      "userId": "pattern-5",
+      "sessions": 17,
+      "totalBets": 333,
+      "totalStaked": 26132.77,
+      "totalReturned": 6963.67,
+      "actualRTP": 26.6,
+      "lossChase": {
+        "pReBetAfterLoss30s": 0.9495798319327731,
+        "pReBetAfterWin30s": 0.2857142857142857
+      },
+      "nearMissContinuation": {
+        "pContinueAfterNearMiss": 0.9743589743589743,
+        "pContinueAfterLoss": 0.9495798319327731
+      },
+      "avgStakeByConsecutiveLosses": {
+        "0": 5.604347826086956,
+        "1": 97.52299242424245
+      },
+      "sessionAccelerationRatio": 2.623544627027599,
+      "nightBetShare": 0.33633633633633636,
+      "avgSessionMinutes": 10.208855494600183,
+      "archetype": "addicted-pattern",
+      "hookScore": 46,
+      "recoveryMath": {
+        "netLoss": 19169.1,
+        "experiencedRTP": 26.6,
+        "lossPerDollarChased": 0.734,
+        "costPer1000Chased": 734,
+        "holeAfterChasingSameAgain": 33239.22,
+        "betsToDoubleHole": 333
+      },
+      "pressure": {
+        "deposits": 15,
+        "depositByDayOfMonth": {
+          "1": 2,
+          "2": 1,
+          "3": 2,
+          "6": 1,
+          "7": 1,
+          "10": 1,
+          "18": 1,
+          "27": 1,
+          "28": 1,
+          "29": 2,
+          "30": 2
+        },
+        "paydayDepositShare": 0.6666666666666666
+      },
+      "mirror": "THE MIRROR — pattern-5\n\nYou put in $26,133. You got back $6,964.\nThe difference — $19,169 — is not \"money you're down.\"\nIt is money the game took. That is what it is built to do.\n\nWHY YOU STARTED\n67% of your deposits landed in the pressure window — the 3 days after payday, or the broke days right before it.\nThat is not a coincidence and it is not a character flaw. It is a schedule.\nThe platform times its prompts to the exact moment pressure peaks and money briefly exists —\nor has just run out. You were not playing a game. You were being sold a way out,\nat the price of the way out itself.\n\nTHE \"GET IT BACK\" TRAP — IN ARITHMETIC\nThe game returned 26.6% of what you fed it — not the advertised number, YOUR number.\nThat means every $1,000 you wager trying to recover your $19,169 costs you ~$734 more.\nChase it with the same amount again and the hole does not close — it grows to ~$33,239.\nAt your average stake, roughly 333 more bets doubles the hole. The math has one direction.\nThe feeling that you are \"due\" is not a premonition. It is a feature, engineered and A/B-tested.\n\nWHAT THE MACHINE LEARNED ABOUT YOU\nAfter a loss, you re-bet within 30 seconds 95% of the time. After a win: 29%.\nThat gap is not your personality. It is the design working. Losses are engineered to feel like near-escapes,\nand the next bet is placed before your thinking mind comes back online.\nYour average stake grew from $6 to $98 after a single loss.\nThe platform watches that reflex in real time and prices it in.\n34% of your bets happened between 22:00 and 06:00 — the hours when judgment is lowest and limits are quietest.\n\nTHE ONLY MOVE THE MATH CANNOT BEAT\nThe $19,169 is gone. Not \"temporarily down.\" Gone.\nEvery exit other than stopping has a negative price tag attached to it.\nStopping is not giving up the recovery. Stopping IS the recovery.\n\nIf this is money you needed: that is a debt problem now, and debt problems have\nreal solutions (counseling, restructuring, support lines) — none of which spin."
+    },
+    {
+      "userId": "pattern-6",
+      "sessions": 18,
+      "totalBets": 315,
+      "totalStaked": 21614.15,
+      "totalReturned": 22385.41,
+      "actualRTP": 103.6,
+      "lossChase": {
+        "pReBetAfterLoss30s": 0.9512195121951219,
+        "pReBetAfterWin30s": 0.23880597014925373
+      },
+      "nearMissContinuation": {
+        "pContinueAfterNearMiss": 0.9534883720930233,
+        "pContinueAfterLoss": 0.9512195121951219
+      },
+      "avgStakeByConsecutiveLosses": {
+        "0": 5.969999999999999,
+        "1": 89.58694915254232
+      },
+      "sessionAccelerationRatio": 2.029917868263733,
+      "nightBetShare": 0.4158730158730159,
+      "avgSessionMinutes": 10.079483344410084,
+      "archetype": "addicted-pattern",
+      "hookScore": 45,
+      "recoveryMath": {
+        "netLoss": 0,
+        "experiencedRTP": 103.6,
+        "lossPerDollarChased": -0.036,
+        "costPer1000Chased": -36,
+        "holeAfterChasingSameAgain": 0,
+        "betsToDoubleHole": null
+      },
+      "pressure": {
+        "deposits": 18,
+        "depositByDayOfMonth": {
+          "1": 2,
+          "2": 2,
+          "3": 2,
+          "9": 1,
+          "11": 1,
+          "13": 1,
+          "18": 1,
+          "23": 1,
+          "25": 1,
+          "28": 2,
+          "29": 2,
+          "30": 2
+        },
+        "paydayDepositShare": 0.6666666666666666
+      },
+      "mirror": "THE MIRROR — pattern-6\n\nYou put in $21,614. You got back $22,385.\nYou are ahead right now. Read that again: RIGHT NOW.\nThe game returned >100% to you by variance, not by design. Its structure\nguarantees the return drifts below 100% the longer you play. Your current win\nis not proof the system can be beaten — it is bait the math has not reclaimed yet.\n\nWHY YOU STARTED\n67% of your deposits landed in the pressure window — the 3 days after payday, or the broke days right before it.\nThat is not a coincidence and it is not a character flaw. It is a schedule.\nThe platform times its prompts to the exact moment pressure peaks and money briefly exists —\nor has just run out. You were not playing a game. You were being sold a way out,\nat the price of the way out itself.\n\nTHE \"GET IT BACK\" TRAP — IN ARITHMETIC\nThere is nothing to \"get back\" — which is exactly when the trap resets.\nThe house edge has not changed. Keep feeding it and your cushion is the next hole's seed money.\nThe feeling that you are \"due\" is not a premonition. It is a feature, engineered and A/B-tested.\n\nWHAT THE MACHINE LEARNED ABOUT YOU\nAfter a loss, you re-bet within 30 seconds 95% of the time. After a win: 24%.\nThat gap is not your personality. It is the design working. Losses are engineered to feel like near-escapes,\nand the next bet is placed before your thinking mind comes back online.\nYour average stake grew from $6 to $90 after a single loss.\nThe platform watches that reflex in real time and prices it in.\n42% of your bets happened between 22:00 and 06:00 — the hours when judgment is lowest and limits are quietest.\n\nTHE ONLY MOVE THE MATH CANNOT BEAT\nYou are holding winnings the game is structurally designed to take back.\nEvery further spin has a negative price tag attached to it.\nWalking away ahead is the one outcome the house cannot recover from. Take it.\n\nIf this is money you needed: that is a debt problem now, and debt problems have\nreal solutions (counseling, restructuring, support lines) — none of which spin."
+    }
+  ]
+}
