@@ -36,7 +36,8 @@ carries the counts behind it.
 | 📊 **Behaviour engine** | `src/model.js` | Interpretable Markov next-action predictor + Hook Score + five truth-exposing metrics |
 | 💸 **Truth engine** | `src/truth.js` | Financial-pressure entry model, the **Recovery Math** that dismantles "I have to win it back", and per-user mirror narratives |
 | 📔 **Journal engine** | `src/journal.js` | Daily logging, pre-relapse signature detection, isolation-creep tracking, and **Echoes** — your own past words handed back at peak urge |
-| 🔬 **Prediction upgrade** | `src/markov2.js` | Second-order (pair-aware) Markov with **backoff + Laplace smoothing + honest confidence labels** |
+| 🔬 **Prediction upgrade** | `src/markov2.js` | Second-order (pair-aware) Markov with Laplace smoothing + honest confidence labels |
+| 🎚️ **Variable-order gate** | `src/backoff.js` | Confidence-gated backoff: trust the pair only when it has support, else fall to a lower order — and report which order was used |
 
 ---
 
@@ -140,12 +141,14 @@ Addiction-_breaker/
 │   ├── simulate.js     # synthetic event-log generator (archetypes, pressure windows,
 │   │                   #   loss-chasing, near-miss effect, streak-persistence knob)
 │   ├── model.js        # 1st-order Markov + Hook Score + behavioural metrics
-│   ├── markov2.js      # 2nd-order Markov w/ backoff, Laplace smoothing, confidence
+│   ├── markov2.js      # 2nd-order Markov w/ Laplace smoothing, confidence
+│   ├── backoff.js      # variable-order gate: pair only above a support threshold
 │   ├── truth.js        # recovery math, pressure timeline, mirror narratives
 │   └── journal.js      # risk signature, isolation creep, Echoes, nightly prompts
 ├── scripts/
 │   ├── run.js                  # main pipeline
 │   ├── markov2_demo.js         # 1st vs 2nd order on memoryless data
+│   ├── backoff_demo.js         # gated vs fixed-lambda vs baseline
 │   ├── streak_demo.js          # 1st vs 2nd order with injected dependency
 │   ├── sweep.js                # dependency-strength sweep
 │   ├── journal_demo.js         # journal demo (60-day arc)
@@ -221,9 +224,10 @@ target is the machinery, never the human caught in it.
 - [x] Recovery Math ("get it back" dismantled in arithmetic)
 - [x] Per-user mirror narratives (no sugar-coating)
 - [x] Daily journal: pre-relapse signature + isolation creep + Echoes
-- [x] Second-order Markov with backoff, smoothing, confidence labelling
+- [x] Second-order Markov with smoothing + confidence labelling
+- [x] Variable-order (confidence-gated) backoff — beats fixed-λ in both regimes
+- [ ] Data-driven `minSupport` selection by validation (currently a constant)
 - [x] Dependency-strength sweep (payoff curve)
-- [ ] Higher-order / variable-order backoff with per-order confidence
 - [ ] Real-data adapters (CSV / common analytics exports)
 - [ ] Web front-end: upload your history, get your mirror rendered live
 - [ ] Region-aware support-line routing

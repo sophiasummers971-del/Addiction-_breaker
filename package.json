@@ -1,7 +1,7 @@
 {
   "name": "addiction-breaker",
   "version": "0.3.0",
-  "description": "An interpretable behavioural engine that exposes gambling-algorithm mechanics to the people they are run on — next-action prediction, financial-pressure modelling, recovery math, and a daily journal with memory.",
+  "description": "An interpretable behavioural engine that exposes gambling-algorithm mechanics to the people they are run on \u2014 next-action prediction, financial-pressure modelling, recovery math, and a daily journal with memory.",
   "keywords": [
     "responsible-gambling",
     "addiction",
@@ -25,6 +25,7 @@
     "journal:chart": "python3 scripts/make_journal_chart.py",
     "sweep": "node scripts/sweep.js",
     "sweep:chart": "python3 scripts/make_sweep_chart.py",
-    "all": "npm run run && npm run charts && npm run demo:markov2 && npm run demo:streak && npm run demo:journal && npm run journal:chart && npm run sweep && npm run sweep:chart"
+    "all": "npm run run && npm run charts && npm run demo:markov2 && npm run demo:streak && npm run demo:journal && npm run journal:chart && npm run demo:backoff && npm run sweep && npm run sweep:chart",
+    "demo:backoff": "node scripts/backoff_demo.js"
   }
 }
