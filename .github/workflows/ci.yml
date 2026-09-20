@@ -1,0 +1,56 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  engine:
+    name: Engine (Node ${{ matrix.node }})
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        node: ["18", "20", "22"]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node }}
+      - name: Main pipeline (cohort, Hook Score, mirror narratives)
+        run: node scripts/run.js
+      - name: First vs second order on memoryless data
+        run: node scripts/markov2_demo.js
+      - name: First vs second order with injected dependency
+        run: node scripts/streak_demo.js
+      - name: Journal + isolation creep
+        run: node scripts/journal_demo.js
+      - name: Dependency-strength sweep
+        run: node scripts/sweep.js
+
+  charts:
+    name: Charts (Python)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install chart dependencies
+        run: pip install -r requirements.txt
+      - name: Render all charts
+        run: |
+          node scripts/run.js
+          node scripts/journal_demo.js
+          node scripts/sweep.js
+          python3 scripts/make_report.py
+          python3 scripts/make_journal_chart.py
+          python3 scripts/make_sweep_chart.py
+      - name: Upload rendered artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: charts
+          path: output/*.png
