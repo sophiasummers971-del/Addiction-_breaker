@@ -1,0 +1,1538 @@
+[
+  {
+    "timestamp": "2026-09-01T10:10:47.023Z",
+    "user_id": "c2",
+    "action": "login",
+    "stake": null,
+    "payout": null,
+    "session_id": "c2-S1"
+  },
+  {
+    "timestamp": "2026-09-01T10:12:20.851Z",
+    "user_id": "c2",
+    "action": "deposit",
+    "stake": null,
+    "payout": null,
+    "session_id": "c2-S1"
+  },
+  {
+    "timestamp": "2026-09-01T10:14:01.187Z",
+    "user_id": "c2",
+    "action": "bet",
+    "stake": 3.97,
+    "payout": null,
+    "session_id": "c2-S1"
+  },
+  {
+    "timestamp": "2026-09-01T10:14:04.375Z",
+    "user_id": "c2",
+    "action": "loss",
+    "stake": null,
+    "payout": null,
+    "session_id": "c2-S1"
+  },
+  {
+    "timestamp": "2026-09-01T10:14:43.560Z",
+    "user_id": "c2",
+    "action": "logout",
+    "stake": null,
+    "payout": null,
+    "session_id": "c2-S1"
+  },
+  {
+    "timestamp": "2026-09-02T12:10:37.860Z",
+    "user_id": "c2",
+    "action": "login",
+    "stake": null,
+    "payout": null,
+    "session_id": "c2-S2"
+  },
+  {
+    "timestamp": "2026-09-02T12:11:20.206Z",
+    "user_id": "c2",
+    "action": "deposit",
+    "stake": null,
+    "payout": null,
+    "session_id": "c2-S2"
+  },
+  {
+    "timestamp": "2026-09-02T12:12:29.406Z",
+    "user_id": "c2",
+    "action": "bet",
+    "stake": 8.46,
+    "payout": null,
+    "session_id": "c2-S2"
+  },
+  {
+    "timestamp": "2026-09-02T12:12:33.352Z",
+    "user_id": "c2",
+    "action": "win",
+    "stake": null,
+    "payout": 13.15,
+    "session_id": "c2-S2"
+  },
+  {
+    "timestamp": "2026-09-02T12:13:08.719Z",
+    "user_id": "c2",
+    "action": "logout",
+    "stake": null,
+    "payout": null,
+    "session_id": "c2-S2"
+  },
+  {
+    "timestamp": "2026-09-02T12:18:02.409Z",
+    "user_id": "c1",
+    "action": "login",
+    "stake": null,
+    "payout": null,
+    "session_id": "c1-S1"
+  },
+  {
+    "timestamp": "2026-09-02T12:19:28.429Z",
+    "user_id": "c1",
+    "action": "deposit",
+    "stake": null,
+    "payout": null,
+    "session_id": "c1-S1"
+  },
+  {
+    "timestamp": "2026-09-02T12:21:08.731Z",
+    "user_id": "c1",
+    "action": "bet",
+    "stake": 8.47,
+    "payout": null,
+    "session_id": "c1-S1"
+  },
+  {
+    "timestamp": "2026-09-02T12:21:12.450Z",
+    "user_id": "c1",
+    "action": "loss",
+    "stake": null,
+    "payout": null,
+    "session_id": "c1-S1"
+  },
+  {
+    "timestamp": "2026-09-02T12:22:14.537Z",
+    "user_id": "c1",
+    "action": "bet",
+    "stake": 10.35,
+    "payout": null,
+    "session_id": "c1-S1"
+  },
+  {
+    "timestamp": "2026-09-02T12:22:18.028Z",
+    "user_id": "c1",
+    "action": "loss",
+    "stake": null,
+    "payout": null,
+    "session_id": "c1-S1"
+  },
+  {
+    "timestamp": "2026-09-02T12:23:08.904Z",
+    "user_id": "c1",
+    "action": "bet",
+    "stake": 16.94,
+    "payout": null,
+    "session_id": "c1-S1"
+  },
+  {
+    "timestamp": "2026-09-02T12:23:12.133Z",
+    "user_id": "c1",
+    "action": "loss",
+    "stake": null,
+    "payout": null,
+    "session_id": "c1-S1"
+  },
+  {
+    "timestamp": "2026-09-02T12:23:45.434Z",
+    "user_id": "c1",
+    "action": "logout",
+    "stake": null,
+    "payout": null,
+    "session_id": "c1-S1"
+  },
+  {
+    "timestamp": "2026-09-04T11:00:16.617Z",
+    "user_id": "c1",
+    "action": "login",
+    "stake": null,
+    "payout": null,
+    "session_id": "c1-S2"
+  },
+  {
+    "timestamp": "2026-09-04T11:01:54.208Z",
+    "user_id": "c1",
+    "action": "deposit",
+    "stake": null,
+    "payout": null,
+    "session_id": "c1-S2"
+  },
+  {
+    "timestamp": "2026-09-04T11:03:13.689Z",
+    "user_id": "c1",
+    "action": "bet",
+    "stake": 6.92,
+    "payout": null,
+    "session_id": "c1-S2"
+  },
+  {
+    "timestamp": "2026-09-04T11:03:20.507Z",
+    "user_id": "c1",
+    "action": "loss",
+    "stake": null,
+    "payout": null,
+    "session_id": "c1-S2"
+  },
+  {
+    "timestamp": "2026-09-04T11:04:19.676Z",
+    "user_id": "c1",
+    "action": "bet",
+    "stake": 10.38,
+    "payout": null,
+    "session_id": "c1-S2"
+  },
+  {
+    "timestamp": "2026-09-04T11:04:26.025Z",
+    "user_id": "c1",
+    "action": "near_miss",
+    "stake": null,
+    "payout": null,
+    "session_id": "c1-S2"
+  },
+  {
+    "timestamp": "2026-09-04T11:05:28.727Z",
+    "user_id": "c1",
+    "action": "bet",
+    "stake": 12.54,
+    "payout": null,
+    "session_id": "c1-S2"
+  },
+  {
+    "timestamp": "2026-09-04T11:05:36.107Z",
+    "user_id": "c1",
+    "action": "win",
+    "stake": null,
+    "payout": 28.7,
+    "session_id": "c1-S2"
+  },
+  {
+    "timestamp": "2026-09-04T11:06:42.044Z",
+    "user_id": "c1",
+    "action": "bet",
+    "stake": 2.09,
+    "payout": null,
+    "session_id": "c1-S2"
+  },
+  {
+    "timestamp": "2026-09-04T11:06:45.488Z",
+    "user_id": "c1",
+    "action": "loss",
+    "stake": null,
+    "payout": null,
+    "session_id": "c1-S2"
+  },
+  {
+    "timestamp": "2026-09-04T11:08:19.767Z",
+    "user_id": "c1",
+    "action": "bet",
+    "stake": 8.58,
+    "payout": null,
+    "session_id": "c1-S2"
+  },
+  {
+    "timestamp": "2026-09-04T11:08:27.388Z",
+    "user_id": "c1",
+    "action": "near_miss",
+    "stake": null,
+    "payout": null,
+    "session_id": "c1-S2"
+  },
+  {
+    "timestamp": "2026-09-04T11:10:06.839Z",
+    "user_id": "c1",
+    "action": "bet",
+    "stake": 12.74,
+    "payout": null,
+    "session_id": "c1-S2"
+  },
+  {
+    "timestamp": "2026-09-04T11:10:12.846Z",
+    "user_id": "c1",
+    "action": "loss",
+    "stake": null,
+    "payout": null,
+    "session_id": "c1-S2"
+  },
+  {
+    "timestamp": "2026-09-04T11:10:40.679Z",
+    "user_id": "c1",
+    "action": "logout",
+    "stake": null,
+    "payout": null,
+    "session_id": "c1-S2"
+  },
+  {
+    "timestamp": "2026-09-05T17:25:55.887Z",
+    "user_id": "c1",
+    "action": "login",
+    "stake": null,
+    "payout": null,
+    "session_id": "c1-S3"
+  },
+  {
+    "timestamp": "2026-09-05T17:26:34.858Z",
+    "user_id": "c1",
+    "action": "deposit",
+    "stake": null,
+    "payout": null,
+    "session_id": "c1-S3"
+  },
+  {
+    "timestamp": "2026-09-05T17:28:43.818Z",
+    "user_id": "c1",
+    "action": "bet",
+    "stake": 4.37,
+    "payout": null,
+    "session_id": "c1-S3"
+  },
+  {
+    "timestamp": "2026-09-05T17:28:50.980Z",
+    "user_id": "c1",
+    "action": "loss",
+    "stake": null,
+    "payout": null,
+    "session_id": "c1-S3"
+  },
+  {
+    "timestamp": "2026-09-05T17:29:56.600Z",
+    "user_id": "c1",
+    "action": "bet",
+    "stake": 8.04,
+    "payout": null,
+    "session_id": "c1-S3"
+  },
+  {
+    "timestamp": "2026-09-05T17:30:04.582Z",
+    "user_id": "c1",
+    "action": "loss",
+    "stake": null,
+    "payout": null,
+    "session_id": "c1-S3"
+  },
+  {
+    "timestamp": "2026-09-05T17:31:28.288Z",
+    "user_id": "c1",
+    "action": "bet",
+    "stake": 16.57,
+    "payout": null,
+    "session_id": "c1-S3"
+  },
+  {
+    "timestamp": "2026-09-05T17:31:34.534Z",
+    "user_id": "c1",
+    "action": "loss",
+    "stake": null,
+    "payout": null,
+    "session_id": "c1-S3"
+  },
+  {
+    "timestamp": "2026-09-05T17:31:53.015Z",
+    "user_id": "c1",
+    "action": "logout",
+    "stake": null,
+    "payout": null,
+    "session_id": "c1-S3"
+  },
+  {
+    "timestamp": "2026-09-06T14:14:07.886Z",
+    "user_id": "c2",
+    "action": "login",
+    "stake": null,
+    "payout": null,
+    "session_id": "c2-S3"
+  },
+  {
+    "timestamp": "2026-09-06T14:16:04.735Z",
+    "user_id": "c2",
+    "action": "deposit",
+    "stake": null,
+    "payout": null,
+    "session_id": "c2-S3"
+  },
+  {
+    "timestamp": "2026-09-06T14:17:47.527Z",
+    "user_id": "c2",
+    "action": "bet",
+    "stake": 7.85,
+    "payout": null,
+    "session_id": "c2-S3"
+  },
+  {
+    "timestamp": "2026-09-06T14:17:54.747Z",
+    "user_id": "c2",
+    "action": "near_miss",
+    "stake": null,
+    "payout": null,
+    "session_id": "c2-S3"
+  },
+  {
+    "timestamp": "2026-09-06T14:18:10.271Z",
+    "user_id": "c2",
+    "action": "logout",
+    "stake": null,
+    "payout": null,
+    "session_id": "c2-S3"
+  },
+  {
+    "timestamp": "2026-09-06T14:21:48.944Z",
+    "user_id": "c1",
+    "action": "login",
+    "stake": null,
+    "payout": null,
+    "session_id": "c1-S4"
+  },
+  {
+    "timestamp": "2026-09-06T14:23:04.253Z",
+    "user_id": "c1",
+    "action": "deposit",
+    "stake": null,
+    "payout": null,
+    "session_id": "c1-S4"
+  },
+  {
+    "timestamp": "2026-09-06T14:24:37.703Z",
+    "user_id": "c1",
+    "action": "bet",
+    "stake": 6.5,
+    "payout": null,
+    "session_id": "c1-S4"
+  },
+  {
+    "timestamp": "2026-09-06T14:24:41.021Z",
+    "user_id": "c1",
+    "action": "loss",
+    "stake": null,
+    "payout": null,
+    "session_id": "c1-S4"
+  },
+  {
+    "timestamp": "2026-09-06T14:25:01.021Z",
+    "user_id": "c1",
+    "action": "withdraw",
+    "stake": null,
+    "payout": null,
+    "session_id": "c1-S4"
+  },
+  {
+    "timestamp": "2026-09-06T14:25:29.521Z",
+    "user_id": "c1",
+    "action": "logout",
+    "stake": null,
+    "payout": null,
+    "session_id": "c1-S4"
+  },
+  {
+    "timestamp": "2026-09-07T11:16:42.722Z",
+    "user_id": "c1",
+    "action": "login",
+    "stake": null,
+    "payout": null,
+    "session_id": "c1-S5"
+  },
+  {
+    "timestamp": "2026-09-07T11:17:49.798Z",
+    "user_id": "c1",
+    "action": "deposit",
+    "stake": null,
+    "payout": null,
+    "session_id": "c1-S5"
+  },
+  {
+    "timestamp": "2026-09-07T11:19:17.609Z",
+    "user_id": "c1",
+    "action": "bet",
+    "stake": 7.13,
+    "payout": null,
+    "session_id": "c1-S5"
+  },
+  {
+    "timestamp": "2026-09-07T11:19:24.616Z",
+    "user_id": "c1",
+    "action": "win",
+    "stake": null,
+    "payout": 26.59,
+    "session_id": "c1-S5"
+  },
+  {
+    "timestamp": "2026-09-07T11:20:11.890Z",
+    "user_id": "c1",
+    "action": "bet",
+    "stake": 2.23,
+    "payout": null,
+    "session_id": "c1-S5"
+  },
+  {
+    "timestamp": "2026-09-07T11:20:16.837Z",
+    "user_id": "c1",
+    "action": "loss",
+    "stake": null,
+    "payout": null,
+    "session_id": "c1-S5"
+  },
+  {
+    "timestamp": "2026-09-07T11:21:45.855Z",
+    "user_id": "c1",
+    "action": "bet",
+    "stake": 5.17,
+    "payout": null,
+    "session_id": "c1-S5"
+  },
+  {
+    "timestamp": "2026-09-07T11:21:52.376Z",
+    "user_id": "c1",
+    "action": "loss",
+    "stake": null,
+    "payout": null,
+    "session_id": "c1-S5"
+  },
+  {
+    "timestamp": "2026-09-07T11:22:14.936Z",
+    "user_id": "c1",
+    "action": "logout",
+    "stake": null,
+    "payout": null,
+    "session_id": "c1-S5"
+  },
+  {
+    "timestamp": "2026-09-07T15:16:22.833Z",
+    "user_id": "c2",
+    "action": "login",
+    "stake": null,
+    "payout": null,
+    "session_id": "c2-S4"
+  },
+  {
+    "timestamp": "2026-09-07T15:16:58.861Z",
+    "user_id": "c2",
+    "action": "deposit",
+    "stake": null,
+    "payout": null,
+    "session_id": "c2-S4"
+  },
+  {
+    "timestamp": "2026-09-07T15:18:11.337Z",
+    "user_id": "c2",
+    "action": "bet",
+    "stake": 3.95,
+    "payout": null,
+    "session_id": "c2-S4"
+  },
+  {
+    "timestamp": "2026-09-07T15:18:16.765Z",
+    "user_id": "c2",
+    "action": "loss",
+    "stake": null,
+    "payout": null,
+    "session_id": "c2-S4"
+  },
+  {
+    "timestamp": "2026-09-07T15:19:02.029Z",
+    "user_id": "c2",
+    "action": "bet",
+    "stake": 4.09,
+    "payout": null,
+    "session_id": "c2-S4"
+  },
+  {
+    "timestamp": "2026-09-07T15:19:07.437Z",
+    "user_id": "c2",
+    "action": "near_miss",
+    "stake": null,
+    "payout": null,
+    "session_id": "c2-S4"
+  },
+  {
+    "timestamp": "2026-09-07T15:20:05.758Z",
+    "user_id": "c2",
+    "action": "bet",
+    "stake": 13.95,
+    "payout": null,
+    "session_id": "c2-S4"
+  },
+  {
+    "timestamp": "2026-09-07T15:20:09.657Z",
+    "user_id": "c2",
+    "action": "loss",
+    "stake": null,
+    "payout": null,
+    "session_id": "c2-S4"
+  },
+  {
+    "timestamp": "2026-09-07T15:20:42.165Z",
+    "user_id": "c2",
+    "action": "logout",
+    "stake": null,
+    "payout": null,
+    "session_id": "c2-S4"
+  },
+  {
+    "timestamp": "2026-09-08T12:21:13.759Z",
+    "user_id": "c1",
+    "action": "login",
+    "stake": null,
+    "payout": null,
+    "session_id": "c1-S6"
+  },
+  {
+    "timestamp": "2026-09-08T12:22:52.659Z",
+    "user_id": "c1",
+    "action": "deposit",
+    "stake": null,
+    "payout": null,
+    "session_id": "c1-S6"
+  },
+  {
+    "timestamp": "2026-09-08T12:23:51.796Z",
+    "user_id": "c1",
+    "action": "bet",
+    "stake": 7.74,
+    "payout": null,
+    "session_id": "c1-S6"
+  },
+  {
+    "timestamp": "2026-09-08T12:23:59.187Z",
+    "user_id": "c1",
+    "action": "loss",
+    "stake": null,
+    "payout": null,
+    "session_id": "c1-S6"
+  },
+  {
+    "timestamp": "2026-09-08T12:24:19.187Z",
+    "user_id": "c1",
+    "action": "withdraw",
+    "stake": null,
+    "payout": null,
+    "session_id": "c1-S6"
+  },
+  {
+    "timestamp": "2026-09-08T12:24:35.006Z",
+    "user_id": "c1",
+    "action": "logout",
+    "stake": null,
+    "payout": null,
+    "session_id": "c1-S6"
+  },
+  {
+    "timestamp": "2026-09-09T14:23:42.415Z",
+    "user_id": "c2",
+    "action": "login",
+    "stake": null,
+    "payout": null,
+    "session_id": "c2-S5"
+  },
+  {
+    "timestamp": "2026-09-09T14:25:06.261Z",
+    "user_id": "c2",
+    "action": "bet",
+    "stake": 3.39,
+    "payout": null,
+    "session_id": "c2-S5"
+  },
+  {
+    "timestamp": "2026-09-09T14:25:10.701Z",
+    "user_id": "c2",
+    "action": "loss",
+    "stake": null,
+    "payout": null,
+    "session_id": "c2-S5"
+  },
+  {
+    "timestamp": "2026-09-09T14:26:57.502Z",
+    "user_id": "c2",
+    "action": "bet",
+    "stake": 7.33,
+    "payout": null,
+    "session_id": "c2-S5"
+  },
+  {
+    "timestamp": "2026-09-09T14:27:01.559Z",
+    "user_id": "c2",
+    "action": "loss",
+    "stake": null,
+    "payout": null,
+    "session_id": "c2-S5"
+  },
+  {
+    "timestamp": "2026-09-09T14:28:36.923Z",
+    "user_id": "c2",
+    "action": "bet",
+    "stake": 13.83,
+    "payout": null,
+    "session_id": "c2-S5"
+  },
+  {
+    "timestamp": "2026-09-09T14:28:44.483Z",
+    "user_id": "c2",
+    "action": "loss",
+    "stake": null,
+    "payout": null,
+    "session_id": "c2-S5"
+  },
+  {
+    "timestamp": "2026-09-09T14:30:21.725Z",
+    "user_id": "c2",
+    "action": "bet",
+    "stake": 8.45,
+    "payout": null,
+    "session_id": "c2-S5"
+  },
+  {
+    "timestamp": "2026-09-09T14:30:26.077Z",
+    "user_id": "c2",
+    "action": "loss",
+    "stake": null,
+    "payout": null,
+    "session_id": "c2-S5"
+  },
+  {
+    "timestamp": "2026-09-09T14:30:45.392Z",
+    "user_id": "c2",
+    "action": "logout",
+    "stake": null,
+    "payout": null,
+    "session_id": "c2-S5"
+  },
+  {
+    "timestamp": "2026-09-09T15:18:24.191Z",
+    "user_id": "c1",
+    "action": "login",
+    "stake": null,
+    "payout": null,
+    "session_id": "c1-S7"
+  },
+  {
+    "timestamp": "2026-09-09T15:20:16.920Z",
+    "user_id": "c1",
+    "action": "deposit",
+    "stake": null,
+    "payout": null,
+    "session_id": "c1-S7"
+  },
+  {
+    "timestamp": "2026-09-09T15:21:33.534Z",
+    "user_id": "c1",
+    "action": "bet",
+    "stake": 4.49,
+    "payout": null,
+    "session_id": "c1-S7"
+  },
+  {
+    "timestamp": "2026-09-09T15:21:38.166Z",
+    "user_id": "c1",
+    "action": "loss",
+    "stake": null,
+    "payout": null,
+    "session_id": "c1-S7"
+  },
+  {
+    "timestamp": "2026-09-09T15:22:36.707Z",
+    "user_id": "c1",
+    "action": "bet",
+    "stake": 11.15,
+    "payout": null,
+    "session_id": "c1-S7"
+  },
+  {
+    "timestamp": "2026-09-09T15:22:40.634Z",
+    "user_id": "c1",
+    "action": "loss",
+    "stake": null,
+    "payout": null,
+    "session_id": "c1-S7"
+  },
+  {
+    "timestamp": "2026-09-09T15:24:20.609Z",
+    "user_id": "c1",
+    "action": "bet",
+    "stake": 15,
+    "payout": null,
+    "session_id": "c1-S7"
+  },
+  {
+    "timestamp": "2026-09-09T15:24:27.440Z",
+    "user_id": "c1",
+    "action": "loss",
+    "stake": null,
+    "payout": null,
+    "session_id": "c1-S7"
+  },
+  {
+    "timestamp": "2026-09-09T15:25:18.385Z",
+    "user_id": "c1",
+    "action": "bet",
+    "stake": 24.17,
+    "payout": null,
+    "session_id": "c1-S7"
+  },
+  {
+    "timestamp": "2026-09-09T15:25:21.462Z",
+    "user_id": "c1",
+    "action": "loss",
+    "stake": null,
+    "payout": null,
+    "session_id": "c1-S7"
+  },
+  {
+    "timestamp": "2026-09-09T15:25:41.462Z",
+    "user_id": "c1",
+    "action": "withdraw",
+    "stake": null,
+    "payout": null,
+    "session_id": "c1-S7"
+  },
+  {
+    "timestamp": "2026-09-09T15:26:16.876Z",
+    "user_id": "c1",
+    "action": "logout",
+    "stake": null,
+    "payout": null,
+    "session_id": "c1-S7"
+  },
+  {
+    "timestamp": "2026-09-10T15:27:56.114Z",
+    "user_id": "c2",
+    "action": "login",
+    "stake": null,
+    "payout": null,
+    "session_id": "c2-S6"
+  },
+  {
+    "timestamp": "2026-09-10T15:29:42.545Z",
+    "user_id": "c2",
+    "action": "deposit",
+    "stake": null,
+    "payout": null,
+    "session_id": "c2-S6"
+  },
+  {
+    "timestamp": "2026-09-10T15:31:31.781Z",
+    "user_id": "c2",
+    "action": "bet",
+    "stake": 4.44,
+    "payout": null,
+    "session_id": "c2-S6"
+  },
+  {
+    "timestamp": "2026-09-10T15:31:35.931Z",
+    "user_id": "c2",
+    "action": "win",
+    "stake": null,
+    "payout": 13.37,
+    "session_id": "c2-S6"
+  },
+  {
+    "timestamp": "2026-09-10T15:33:19.203Z",
+    "user_id": "c2",
+    "action": "bet",
+    "stake": 5.63,
+    "payout": null,
+    "session_id": "c2-S6"
+  },
+  {
+    "timestamp": "2026-09-10T15:33:22.294Z",
+    "user_id": "c2",
+    "action": "loss",
+    "stake": null,
+    "payout": null,
+    "session_id": "c2-S6"
+  },
+  {
+    "timestamp": "2026-09-10T15:34:41.548Z",
+    "user_id": "c2",
+    "action": "bet",
+    "stake": 10.05,
+    "payout": null,
+    "session_id": "c2-S6"
+  },
+  {
+    "timestamp": "2026-09-10T15:34:44.694Z",
+    "user_id": "c2",
+    "action": "loss",
+    "stake": null,
+    "payout": null,
+    "session_id": "c2-S6"
+  },
+  {
+    "timestamp": "2026-09-10T15:36:23.400Z",
+    "user_id": "c2",
+    "action": "bet",
+    "stake": 15.69,
+    "payout": null,
+    "session_id": "c2-S6"
+  },
+  {
+    "timestamp": "2026-09-10T15:36:27.820Z",
+    "user_id": "c2",
+    "action": "win",
+    "stake": null,
+    "payout": 50.83,
+    "session_id": "c2-S6"
+  },
+  {
+    "timestamp": "2026-09-10T15:37:17.274Z",
+    "user_id": "c2",
+    "action": "bet",
+    "stake": 8.16,
+    "payout": null,
+    "session_id": "c2-S6"
+  },
+  {
+    "timestamp": "2026-09-10T15:37:24.897Z",
+    "user_id": "c2",
+    "action": "loss",
+    "stake": null,
+    "payout": null,
+    "session_id": "c2-S6"
+  },
+  {
+    "timestamp": "2026-09-10T15:39:11.557Z",
+    "user_id": "c2",
+    "action": "bet",
+    "stake": 13.31,
+    "payout": null,
+    "session_id": "c2-S6"
+  },
+  {
+    "timestamp": "2026-09-10T15:39:16.318Z",
+    "user_id": "c2",
+    "action": "win",
+    "stake": null,
+    "payout": 34.78,
+    "session_id": "c2-S6"
+  },
+  {
+    "timestamp": "2026-09-10T15:41:14.813Z",
+    "user_id": "c2",
+    "action": "bet",
+    "stake": 9.27,
+    "payout": null,
+    "session_id": "c2-S6"
+  },
+  {
+    "timestamp": "2026-09-10T15:41:21.783Z",
+    "user_id": "c2",
+    "action": "loss",
+    "stake": null,
+    "payout": null,
+    "session_id": "c2-S6"
+  },
+  {
+    "timestamp": "2026-09-10T15:41:44.844Z",
+    "user_id": "c2",
+    "action": "logout",
+    "stake": null,
+    "payout": null,
+    "session_id": "c2-S6"
+  },
+  {
+    "timestamp": "2026-09-12T14:06:40.573Z",
+    "user_id": "c2",
+    "action": "login",
+    "stake": null,
+    "payout": null,
+    "session_id": "c2-S7"
+  },
+  {
+    "timestamp": "2026-09-12T14:08:36.653Z",
+    "user_id": "c2",
+    "action": "deposit",
+    "stake": null,
+    "payout": null,
+    "session_id": "c2-S7"
+  },
+  {
+    "timestamp": "2026-09-12T14:10:43.181Z",
+    "user_id": "c2",
+    "action": "bet",
+    "stake": 6.51,
+    "payout": null,
+    "session_id": "c2-S7"
+  },
+  {
+    "timestamp": "2026-09-12T14:10:48.926Z",
+    "user_id": "c2",
+    "action": "loss",
+    "stake": null,
+    "payout": null,
+    "session_id": "c2-S7"
+  },
+  {
+    "timestamp": "2026-09-12T14:12:53.521Z",
+    "user_id": "c2",
+    "action": "bet",
+    "stake": 6.6,
+    "payout": null,
+    "session_id": "c2-S7"
+  },
+  {
+    "timestamp": "2026-09-12T14:12:58.334Z",
+    "user_id": "c2",
+    "action": "loss",
+    "stake": null,
+    "payout": null,
+    "session_id": "c2-S7"
+  },
+  {
+    "timestamp": "2026-09-12T14:14:07.875Z",
+    "user_id": "c2",
+    "action": "bet",
+    "stake": 6.02,
+    "payout": null,
+    "session_id": "c2-S7"
+  },
+  {
+    "timestamp": "2026-09-12T14:14:11.653Z",
+    "user_id": "c2",
+    "action": "win",
+    "stake": null,
+    "payout": 16.99,
+    "session_id": "c2-S7"
+  },
+  {
+    "timestamp": "2026-09-12T14:14:33.712Z",
+    "user_id": "c2",
+    "action": "logout",
+    "stake": null,
+    "payout": null,
+    "session_id": "c2-S7"
+  },
+  {
+    "timestamp": "2026-09-13T17:15:21.886Z",
+    "user_id": "c2",
+    "action": "login",
+    "stake": null,
+    "payout": null,
+    "session_id": "c2-S8"
+  },
+  {
+    "timestamp": "2026-09-13T17:16:29.808Z",
+    "user_id": "c2",
+    "action": "bet",
+    "stake": 5.63,
+    "payout": null,
+    "session_id": "c2-S8"
+  },
+  {
+    "timestamp": "2026-09-13T17:16:34.005Z",
+    "user_id": "c2",
+    "action": "win",
+    "stake": null,
+    "payout": 9.71,
+    "session_id": "c2-S8"
+  },
+  {
+    "timestamp": "2026-09-13T17:17:39.476Z",
+    "user_id": "c2",
+    "action": "bet",
+    "stake": 7.58,
+    "payout": null,
+    "session_id": "c2-S8"
+  },
+  {
+    "timestamp": "2026-09-13T17:17:47.114Z",
+    "user_id": "c2",
+    "action": "loss",
+    "stake": null,
+    "payout": null,
+    "session_id": "c2-S8"
+  },
+  {
+    "timestamp": "2026-09-13T17:18:35.355Z",
+    "user_id": "c2",
+    "action": "bet",
+    "stake": 8.75,
+    "payout": null,
+    "session_id": "c2-S8"
+  },
+  {
+    "timestamp": "2026-09-13T17:18:39.187Z",
+    "user_id": "c2",
+    "action": "loss",
+    "stake": null,
+    "payout": null,
+    "session_id": "c2-S8"
+  },
+  {
+    "timestamp": "2026-09-13T17:18:59.187Z",
+    "user_id": "c2",
+    "action": "withdraw",
+    "stake": null,
+    "payout": null,
+    "session_id": "c2-S8"
+  },
+  {
+    "timestamp": "2026-09-13T17:19:30.724Z",
+    "user_id": "c2",
+    "action": "logout",
+    "stake": null,
+    "payout": null,
+    "session_id": "c2-S8"
+  },
+  {
+    "timestamp": "2026-09-14T16:23:26.464Z",
+    "user_id": "c1",
+    "action": "login",
+    "stake": null,
+    "payout": null,
+    "session_id": "c1-S8"
+  },
+  {
+    "timestamp": "2026-09-14T16:24:16.788Z",
+    "user_id": "c1",
+    "action": "deposit",
+    "stake": null,
+    "payout": null,
+    "session_id": "c1-S8"
+  },
+  {
+    "timestamp": "2026-09-14T16:26:23.549Z",
+    "user_id": "c1",
+    "action": "bet",
+    "stake": 9.65,
+    "payout": null,
+    "session_id": "c1-S8"
+  },
+  {
+    "timestamp": "2026-09-14T16:26:29.480Z",
+    "user_id": "c1",
+    "action": "win",
+    "stake": null,
+    "payout": 12.72,
+    "session_id": "c1-S8"
+  },
+  {
+    "timestamp": "2026-09-14T16:27:18.602Z",
+    "user_id": "c1",
+    "action": "bet",
+    "stake": 4.5,
+    "payout": null,
+    "session_id": "c1-S8"
+  },
+  {
+    "timestamp": "2026-09-14T16:27:24.377Z",
+    "user_id": "c1",
+    "action": "loss",
+    "stake": null,
+    "payout": null,
+    "session_id": "c1-S8"
+  },
+  {
+    "timestamp": "2026-09-14T16:28:12.312Z",
+    "user_id": "c1",
+    "action": "bet",
+    "stake": 7,
+    "payout": null,
+    "session_id": "c1-S8"
+  },
+  {
+    "timestamp": "2026-09-14T16:28:19.165Z",
+    "user_id": "c1",
+    "action": "near_miss",
+    "stake": null,
+    "payout": null,
+    "session_id": "c1-S8"
+  },
+  {
+    "timestamp": "2026-09-14T16:29:11.650Z",
+    "user_id": "c1",
+    "action": "bet",
+    "stake": 14.55,
+    "payout": null,
+    "session_id": "c1-S8"
+  },
+  {
+    "timestamp": "2026-09-14T16:29:19.368Z",
+    "user_id": "c1",
+    "action": "win",
+    "stake": null,
+    "payout": 44.76,
+    "session_id": "c1-S8"
+  },
+  {
+    "timestamp": "2026-09-14T16:29:49.468Z",
+    "user_id": "c1",
+    "action": "logout",
+    "stake": null,
+    "payout": null,
+    "session_id": "c1-S8"
+  },
+  {
+    "timestamp": "2026-09-15T10:25:50.992Z",
+    "user_id": "c1",
+    "action": "login",
+    "stake": null,
+    "payout": null,
+    "session_id": "c1-S9"
+  },
+  {
+    "timestamp": "2026-09-15T10:27:50.618Z",
+    "user_id": "c1",
+    "action": "deposit",
+    "stake": null,
+    "payout": null,
+    "session_id": "c1-S9"
+  },
+  {
+    "timestamp": "2026-09-15T10:29:43.562Z",
+    "user_id": "c1",
+    "action": "bet",
+    "stake": 5.16,
+    "payout": null,
+    "session_id": "c1-S9"
+  },
+  {
+    "timestamp": "2026-09-15T10:29:49.179Z",
+    "user_id": "c1",
+    "action": "loss",
+    "stake": null,
+    "payout": null,
+    "session_id": "c1-S9"
+  },
+  {
+    "timestamp": "2026-09-15T10:31:28.814Z",
+    "user_id": "c1",
+    "action": "bet",
+    "stake": 8.8,
+    "payout": null,
+    "session_id": "c1-S9"
+  },
+  {
+    "timestamp": "2026-09-15T10:31:32.119Z",
+    "user_id": "c1",
+    "action": "loss",
+    "stake": null,
+    "payout": null,
+    "session_id": "c1-S9"
+  },
+  {
+    "timestamp": "2026-09-15T10:32:44.297Z",
+    "user_id": "c1",
+    "action": "bet",
+    "stake": 10.43,
+    "payout": null,
+    "session_id": "c1-S9"
+  },
+  {
+    "timestamp": "2026-09-15T10:32:49.868Z",
+    "user_id": "c1",
+    "action": "loss",
+    "stake": null,
+    "payout": null,
+    "session_id": "c1-S9"
+  },
+  {
+    "timestamp": "2026-09-15T10:33:09.868Z",
+    "user_id": "c1",
+    "action": "withdraw",
+    "stake": null,
+    "payout": null,
+    "session_id": "c1-S9"
+  },
+  {
+    "timestamp": "2026-09-15T10:33:28.863Z",
+    "user_id": "c1",
+    "action": "logout",
+    "stake": null,
+    "payout": null,
+    "session_id": "c1-S9"
+  },
+  {
+    "timestamp": "2026-09-16T13:16:57.862Z",
+    "user_id": "c1",
+    "action": "login",
+    "stake": null,
+    "payout": null,
+    "session_id": "c1-S10"
+  },
+  {
+    "timestamp": "2026-09-16T13:17:42.925Z",
+    "user_id": "c1",
+    "action": "deposit",
+    "stake": null,
+    "payout": null,
+    "session_id": "c1-S10"
+  },
+  {
+    "timestamp": "2026-09-16T13:19:08.559Z",
+    "user_id": "c1",
+    "action": "bet",
+    "stake": 6.62,
+    "payout": null,
+    "session_id": "c1-S10"
+  },
+  {
+    "timestamp": "2026-09-16T13:19:15.632Z",
+    "user_id": "c1",
+    "action": "loss",
+    "stake": null,
+    "payout": null,
+    "session_id": "c1-S10"
+  },
+  {
+    "timestamp": "2026-09-16T13:21:21.199Z",
+    "user_id": "c1",
+    "action": "bet",
+    "stake": 5.14,
+    "payout": null,
+    "session_id": "c1-S10"
+  },
+  {
+    "timestamp": "2026-09-16T13:21:28.882Z",
+    "user_id": "c1",
+    "action": "near_miss",
+    "stake": null,
+    "payout": null,
+    "session_id": "c1-S10"
+  },
+  {
+    "timestamp": "2026-09-16T13:23:19.080Z",
+    "user_id": "c1",
+    "action": "bet",
+    "stake": 7.06,
+    "payout": null,
+    "session_id": "c1-S10"
+  },
+  {
+    "timestamp": "2026-09-16T13:23:23.898Z",
+    "user_id": "c1",
+    "action": "near_miss",
+    "stake": null,
+    "payout": null,
+    "session_id": "c1-S10"
+  },
+  {
+    "timestamp": "2026-09-16T13:24:20.276Z",
+    "user_id": "c1",
+    "action": "bet",
+    "stake": 13.1,
+    "payout": null,
+    "session_id": "c1-S10"
+  },
+  {
+    "timestamp": "2026-09-16T13:24:26.990Z",
+    "user_id": "c1",
+    "action": "loss",
+    "stake": null,
+    "payout": null,
+    "session_id": "c1-S10"
+  },
+  {
+    "timestamp": "2026-09-16T13:26:28.714Z",
+    "user_id": "c1",
+    "action": "bet",
+    "stake": 15.77,
+    "payout": null,
+    "session_id": "c1-S10"
+  },
+  {
+    "timestamp": "2026-09-16T13:26:35.204Z",
+    "user_id": "c1",
+    "action": "near_miss",
+    "stake": null,
+    "payout": null,
+    "session_id": "c1-S10"
+  },
+  {
+    "timestamp": "2026-09-16T13:28:02.035Z",
+    "user_id": "c1",
+    "action": "bet",
+    "stake": 12.44,
+    "payout": null,
+    "session_id": "c1-S10"
+  },
+  {
+    "timestamp": "2026-09-16T13:28:08.433Z",
+    "user_id": "c1",
+    "action": "loss",
+    "stake": null,
+    "payout": null,
+    "session_id": "c1-S10"
+  },
+  {
+    "timestamp": "2026-09-16T13:28:28.433Z",
+    "user_id": "c1",
+    "action": "withdraw",
+    "stake": null,
+    "payout": null,
+    "session_id": "c1-S10"
+  },
+  {
+    "timestamp": "2026-09-16T13:29:03.472Z",
+    "user_id": "c1",
+    "action": "logout",
+    "stake": null,
+    "payout": null,
+    "session_id": "c1-S10"
+  },
+  {
+    "timestamp": "2026-09-16T17:19:50.806Z",
+    "user_id": "c2",
+    "action": "login",
+    "stake": null,
+    "payout": null,
+    "session_id": "c2-S9"
+  },
+  {
+    "timestamp": "2026-09-16T17:21:46.001Z",
+    "user_id": "c2",
+    "action": "deposit",
+    "stake": null,
+    "payout": null,
+    "session_id": "c2-S9"
+  },
+  {
+    "timestamp": "2026-09-16T17:23:45.931Z",
+    "user_id": "c2",
+    "action": "bet",
+    "stake": 2.17,
+    "payout": null,
+    "session_id": "c2-S9"
+  },
+  {
+    "timestamp": "2026-09-16T17:23:52.120Z",
+    "user_id": "c2",
+    "action": "loss",
+    "stake": null,
+    "payout": null,
+    "session_id": "c2-S9"
+  },
+  {
+    "timestamp": "2026-09-16T17:24:53.398Z",
+    "user_id": "c2",
+    "action": "bet",
+    "stake": 6.89,
+    "payout": null,
+    "session_id": "c2-S9"
+  },
+  {
+    "timestamp": "2026-09-16T17:24:58.277Z",
+    "user_id": "c2",
+    "action": "loss",
+    "stake": null,
+    "payout": null,
+    "session_id": "c2-S9"
+  },
+  {
+    "timestamp": "2026-09-16T17:26:19.783Z",
+    "user_id": "c2",
+    "action": "bet",
+    "stake": 17.14,
+    "payout": null,
+    "session_id": "c2-S9"
+  },
+  {
+    "timestamp": "2026-09-16T17:26:24.354Z",
+    "user_id": "c2",
+    "action": "loss",
+    "stake": null,
+    "payout": null,
+    "session_id": "c2-S9"
+  },
+  {
+    "timestamp": "2026-09-16T17:26:44.354Z",
+    "user_id": "c2",
+    "action": "withdraw",
+    "stake": null,
+    "payout": null,
+    "session_id": "c2-S9"
+  },
+  {
+    "timestamp": "2026-09-16T17:27:11.635Z",
+    "user_id": "c2",
+    "action": "logout",
+    "stake": null,
+    "payout": null,
+    "session_id": "c2-S9"
+  },
+  {
+    "timestamp": "2026-09-18T10:08:58.933Z",
+    "user_id": "c1",
+    "action": "login",
+    "stake": null,
+    "payout": null,
+    "session_id": "c1-S11"
+  },
+  {
+    "timestamp": "2026-09-18T10:11:04.330Z",
+    "user_id": "c1",
+    "action": "bet",
+    "stake": 3.45,
+    "payout": null,
+    "session_id": "c1-S11"
+  },
+  {
+    "timestamp": "2026-09-18T10:11:07.539Z",
+    "user_id": "c1",
+    "action": "loss",
+    "stake": null,
+    "payout": null,
+    "session_id": "c1-S11"
+  },
+  {
+    "timestamp": "2026-09-18T10:11:27.539Z",
+    "user_id": "c1",
+    "action": "withdraw",
+    "stake": null,
+    "payout": null,
+    "session_id": "c1-S11"
+  },
+  {
+    "timestamp": "2026-09-18T10:12:04.629Z",
+    "user_id": "c1",
+    "action": "logout",
+    "stake": null,
+    "payout": null,
+    "session_id": "c1-S11"
+  },
+  {
+    "timestamp": "2026-09-18T17:08:03.511Z",
+    "user_id": "c2",
+    "action": "login",
+    "stake": null,
+    "payout": null,
+    "session_id": "c2-S10"
+  },
+  {
+    "timestamp": "2026-09-18T17:09:55.876Z",
+    "user_id": "c2",
+    "action": "deposit",
+    "stake": null,
+    "payout": null,
+    "session_id": "c2-S10"
+  },
+  {
+    "timestamp": "2026-09-18T17:11:26.955Z",
+    "user_id": "c2",
+    "action": "bet",
+    "stake": 5.92,
+    "payout": null,
+    "session_id": "c2-S10"
+  },
+  {
+    "timestamp": "2026-09-18T17:11:33.583Z",
+    "user_id": "c2",
+    "action": "win",
+    "stake": null,
+    "payout": 13.82,
+    "session_id": "c2-S10"
+  },
+  {
+    "timestamp": "2026-09-18T17:12:04.148Z",
+    "user_id": "c2",
+    "action": "logout",
+    "stake": null,
+    "payout": null,
+    "session_id": "c2-S10"
+  }
+]

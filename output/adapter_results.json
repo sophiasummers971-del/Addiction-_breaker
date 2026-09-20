@@ -18,7 +18,8 @@
       "badTimestamp": 1,
       "missingAction": 1
     },
-    "exactRoundTrip": false,
+    "offendingRows": 4,
+    "exactRoundTrip": true,
     "warnings": [
       "2 rows dropped on unrecognised actions: click, view_advert",
       "1 rows had an unparseable timestamp"
