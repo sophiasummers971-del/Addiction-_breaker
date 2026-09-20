@@ -225,7 +225,7 @@ back through the adapter, and compared field-by-field against the original.
 | Case | Rows in | Mapped | Round-trip |
 |---|---|---|---|
 | **A** — messy CSV, two timestamp formats, aliased actions, session column kept | 1,207 | 1,207 (100.0%) | ✅ exact on all 1,207 events |
-| **B** — no session column, 4 junk rows injected | 1,211 | 1,207 | ✅ exact on all surviving events |
+| **B** — no session column, 4 junk rows injected | 1,211 | 1,207 | ⚠️ exact-row assertion did not converge — see note |
 
 Case B's 4 dropped rows were reported, not silently swallowed:
 
@@ -246,6 +246,27 @@ had *falsely reported a fidelity failure*:
    actually preserved. Cases A and B need different comparators for this reason.
 2. Blank numeric cells were being coerced to `0` instead of `undefined`, which
    would have injected fake $0 stakes into every stake metric. Now blank → absent.
+
+
+**Correction — Case B status.** Case A is confirmed exact on all 1,207 events
+(including a deliberate sign flip: the harness originally compared full-millisecond
+timestamps against a source that serialises epoch *seconds*, which floors
+milliseconds — that was a **test** defect, not an adapter defect).
+
+Case B's exact-surviving-row assertion **did not converge** and is left reported
+as failing rather than asserted as passing. What *is* verified for Case B:
+
+- mapping: 1,207 of 1,211 rows mapped; all 4 drops accounted for and named
+  (2 unrecognised actions, 1 bad timestamp, 1 blank action);
+- session derivation: 23 sessions reconstructed from time gaps, matching the
+  canonical 23;
+- downstream value preservation: total staked **$5,566.52** canonical vs
+  **$5,566.52** adapted — identical to the cent;
+- Hook Score computed end-to-end on adapted data: **43**.
+
+The residual is confined to the test's key-comparison for the surviving-row set.
+It is recorded here as unresolved rather than quietly downgraded, because an
+assertion that never fails for the right reason is worse than no assertion.
 
 ### 9b. Validation-chosen gate (`selectMinSupport`)
 
