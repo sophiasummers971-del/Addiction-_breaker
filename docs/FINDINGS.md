@@ -80,45 +80,46 @@ unseen pairs return `backedOff: true`, `confidence 0 [low]`.
 
 ## 6. Second-order Markov: with real streak persistence
 
-Injecting a genuine 2nd-order dependency (`streakPersistence = 0.35`) — a loss
-raises the next bet's loss probability:
+Injecting a genuine 2nd-order dependency (`streakPersistence = 0.35`) — a
+loss raises the next bet's loss probability by scaling the non-loss mass down:
 
-**Realized conditionals (ground truth in the data):**
+**Realized outcome-sequence conditionals (ground truth in the data):**
 
 | Conditional | Rate | n |
 |---|---|---|
-| P(loss \| prev outcome = loss) | **85.9%** | 1,997 |
-| P(loss \| prev outcome = win) | 72.7% | 139 |
-| P(loss \| prev outcome = near-miss) | 72.5% | 276 |
-| P(loss) overall | 83.6% | 2,412 |
-| **raised by** | **+13.3 pts** | |
+| P(loss \| prev outcome = loss) | **81.6%** | 1681 |
+| P(loss \| prev outcome = win) | 70.2% | 285 |
+| P(loss \| prev outcome = near-miss) | 67.2% | 183 |
+| P(loss) overall | 78.8% | 2149 |
+| **raised by** | **+11.4 pts** | |
 
 **Per-state predicted P(next = loss):**
 
 | State | 1st-order | 2nd-order | Empirical | n |
 |---|---|---|---|---|
-| `loss>bet` | 82.0% | **84.6%** | 85.9% | 1,933 |
-| `near_miss>bet` | 82.0% | **74.9%** | 72.8% | 272 |
-| `win>bet` | 82.0% | **74.3%** | 72.7% | 132 |
-| **mean \|model − empirical\|** | **7.46 pts** | **1.66 pts** | — | — |
+| `loss>bet` | 77.5% | **80.0%** | 81.5% | 1642 |
+| `near_miss>bet` | 77.5% | **69.2%** | 66.7% | 180 |
+| `win>bet` | 77.5% | **72.6%** | 71.1% | 277 |
+| **mean \|model − empirical\|** | **7.05 pts** | **1.83 pts** | — | — |
 
-The first-order model is stuck at 82.0% for every state — it cannot tell a
-post-loss bet from a post-win bet. The second-order model splits the two worlds
-and lands within **1.66 points** of the empirical truth.
+The first-order model cannot separate these states — it returns the same
+unconditional value for each. The second-order model splits them and lands far
+closer to the empirical truth (mean error 7.05 → 1.83 pts).
 
 **Held-out metrics (same split, same smoothing, order is the only difference):**
 
 | Model | Log-loss ↓ | Brier ↓ | Top-1 ↑ |
 |---|---|---|---|
-| Baseline (unconditional marginal) | 1.2574 | 0.6290 | 47.0% |
-| 1st-order | 0.4761 | 0.2434 | 86.1% |
-| **2nd-order** | **0.4617** | **0.2372** | 86.1% |
-| **Δ (2nd − 1st)** | **−0.0143** | **−0.0062** | **0.0 pts** |
+| Baseline (unconditional marginal) | 1.2106 | 0.6188 | 47.6% |
+| 1st-order | 0.4490 | 0.2288 | 87.1% |
+| **2nd-order** | **0.4460** | **0.2266** | 87.1% |
+| **Δ (2nd − 1st)** | **-0.0030** | **-0.0022** | **+0.0 pts** |
 
-**Honest read:** the gain is real but small — a *sharpened probability*, not a
-new correct label. Top-1 is unchanged because losses dominate the base rate
-(83.6%), so the argmax was already "loss". The upgrade earns its place on
-calibration (log-loss, Brier) and on conditional fidelity, not on accuracy.
+(1048 held-out transitions. Negative Δ on log-loss/Brier = second-order won.)
+
+**Honest read:** the gain here is small — a *sharpened probability*, not a new
+correct label. The decisive picture is the sweep in §7, which shows the sign of
+this Δ flipping as a function of how much real structure the data contains.
 
 ## 7. Dependency-strength sweep
 
