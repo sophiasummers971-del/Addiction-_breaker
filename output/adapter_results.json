@@ -1,0 +1,33 @@
+{
+  "canonicalEvents": 1207,
+  "caseA": {
+    "rowsIn": 1207,
+    "mapped": 1207,
+    "exactRoundTrip": true,
+    "warnings": []
+  },
+  "caseB": {
+    "rowsIn": 1211,
+    "mapped": 1207,
+    "dropped": 4,
+    "unmapped": {
+      "click": 1,
+      "view_advert": 1
+    },
+    "rejected": {
+      "badTimestamp": 1,
+      "missingAction": 1
+    },
+    "exactRoundTrip": false,
+    "warnings": [
+      "2 rows dropped on unrecognised actions: click, view_advert",
+      "1 rows had an unparseable timestamp"
+    ]
+  },
+  "downstream": {
+    "user": "real-1",
+    "hookScore": 43,
+    "canonicalStake": 5566.519999999994,
+    "adaptedStake": 5566.52
+  }
+}

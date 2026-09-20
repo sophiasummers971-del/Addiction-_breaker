@@ -1,0 +1,245 @@
+[
+  {
+    "margin": 0,
+    "persist": 0,
+    "chosen": [
+      null,
+      250,
+      250,
+      500,
+      null,
+      null,
+      250,
+      250,
+      null,
+      250,
+      250,
+      1
+    ],
+    "gateTestLogLoss": 0.5532176460781343,
+    "baselineTestLogLoss": 0.5520876594681231,
+    "delta": 0.00112998661001118,
+    "orderUsed": {
+      "0": 0,
+      "1": 484,
+      "2": 488
+    },
+    "n": 972
+  },
+  {
+    "margin": 0,
+    "persist": 0.2,
+    "chosen": [
+      500,
+      1,
+      1,
+      null,
+      500,
+      500,
+      5,
+      null,
+      250,
+      500,
+      25,
+      1
+    ],
+    "gateTestLogLoss": 0.5496477540502349,
+    "baselineTestLogLoss": 0.5491076157387664,
+    "delta": 0.0005401383114684855,
+    "orderUsed": {
+      "0": 0,
+      "1": 280,
+      "2": 713
+    },
+    "n": 993
+  },
+  {
+    "margin": 0,
+    "persist": 0.5,
+    "chosen": [
+      null,
+      1,
+      25,
+      50,
+      1,
+      1,
+      null,
+      500,
+      1,
+      25,
+      25,
+      5
+    ],
+    "gateTestLogLoss": 0.443390617228164,
+    "baselineTestLogLoss": 0.4459911157715691,
+    "delta": -0.0026004985434051053,
+    "orderUsed": {
+      "0": 0,
+      "1": 239,
+      "2": 761
+    },
+    "n": 1000
+  },
+  {
+    "margin": 0.001,
+    "persist": 0,
+    "chosen": [
+      null,
+      null,
+      250,
+      null,
+      null,
+      null,
+      250,
+      250,
+      null,
+      250,
+      250,
+      1
+    ],
+    "gateTestLogLoss": 0.5535257445073325,
+    "baselineTestLogLoss": 0.5520876594681231,
+    "delta": 0.0014380850392093913,
+    "orderUsed": {
+      "0": 0,
+      "1": 702,
+      "2": 270
+    },
+    "n": 972
+  },
+  {
+    "margin": 0.001,
+    "persist": 0.2,
+    "chosen": [
+      null,
+      1,
+      1,
+      null,
+      null,
+      null,
+      5,
+      null,
+      250,
+      500,
+      25,
+      1
+    ],
+    "gateTestLogLoss": 0.5499832334753412,
+    "baselineTestLogLoss": 0.5491076157387664,
+    "delta": 0.0008756177365747408,
+    "orderUsed": {
+      "0": 0,
+      "1": 529,
+      "2": 464
+    },
+    "n": 993
+  },
+  {
+    "margin": 0.001,
+    "persist": 0.5,
+    "chosen": [
+      null,
+      1,
+      25,
+      50,
+      1,
+      1,
+      null,
+      500,
+      1,
+      25,
+      25,
+      5
+    ],
+    "gateTestLogLoss": 0.443390617228164,
+    "baselineTestLogLoss": 0.4459911157715691,
+    "delta": -0.0026004985434051053,
+    "orderUsed": {
+      "0": 0,
+      "1": 239,
+      "2": 761
+    },
+    "n": 1000
+  },
+  {
+    "margin": 0.005,
+    "persist": 0,
+    "chosen": [
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      250,
+      null
+    ],
+    "gateTestLogLoss": 0.5520988105374586,
+    "baselineTestLogLoss": 0.5520876594681231,
+    "delta": 0.000011151069335468833,
+    "orderUsed": {
+      "0": 0,
+      "1": 951,
+      "2": 21
+    },
+    "n": 972
+  },
+  {
+    "margin": 0.005,
+    "persist": 0.2,
+    "chosen": [
+      null,
+      null,
+      null,
+      null,
+      null,
+      null,
+      5,
+      null,
+      null,
+      null,
+      25,
+      null
+    ],
+    "gateTestLogLoss": 0.5486200502301599,
+    "baselineTestLogLoss": 0.5491076157387664,
+    "delta": -0.0004875655086065134,
+    "orderUsed": {
+      "0": 0,
+      "1": 936,
+      "2": 57
+    },
+    "n": 993
+  },
+  {
+    "margin": 0.005,
+    "persist": 0.5,
+    "chosen": [
+      null,
+      null,
+      null,
+      50,
+      1,
+      1,
+      null,
+      500,
+      1,
+      25,
+      25,
+      5
+    ],
+    "gateTestLogLoss": 0.4447697577988236,
+    "baselineTestLogLoss": 0.4459911157715691,
+    "delta": -0.0012213579727454738,
+    "orderUsed": {
+      "0": 0,
+      "1": 552,
+      "2": 448
+    },
+    "n": 1000
+  }
+]

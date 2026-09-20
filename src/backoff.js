@@ -84,4 +84,52 @@ function predictBackoff(model, ctx, prev, cur, opts = {}) {
   };
 }
 
-module.exports = { trainBackoff, predictBackoff, smoothed, ACTIONS, sum };
+
+/**
+ * Data-driven gate selection.
+ *
+ * A fixed minSupport is a guess. This picks it by VALIDATION: sweep a candidate
+ * list, score each on held-out transitions, keep the one with the best log-loss.
+ *
+ * `Infinity` is a first-class candidate and means "never trust the pair" — so if
+ * the corpus has no second-order structure, validation is free to degenerate the
+ * model all the way back to plain first-order. That is the whole point: the
+ * model should not use a higher order unless the data earns it.
+ */
+const DEFAULT_CANDIDATES = [1, 5, 10, 25, 50, 100, 250, 500, 1000, Infinity];
+
+function logLossOf(model, ctx, valSeq, minSupport, k) {
+  let ll = 0;
+  for (const t of valSeq) {
+    const p = predictBackoff(model, ctx, t.prev, t.cur, { minSupport, k });
+    ll += -Math.log(Math.max(p.dist[t.target], 1e-12));
+  }
+  return valSeq.length ? ll / valSeq.length : Infinity;
+}
+
+/**
+ * @returns {{minSupport:number, logLoss:number, table:Array}}
+ *   minSupport === Infinity means validation chose to never use the pair.
+ */
+function selectMinSupport(model, ctx, valSeq, opts = {}) {
+  const candidates = opts.candidates ?? DEFAULT_CANDIDATES;
+  const k = opts.k ?? 0.5;
+  // `margin`: how much a higher order must BEAT the order-1 baseline by (in
+  // log-loss) before we trust it. Without a margin, validation happily picks a
+  // pair-gate on data that has no pair structure, because tiny validation-set
+  // noise looks like signal. Infinity (never use the pair) is itself a candidate,
+  // so the default floor is already the order-1 model.
+  const margin = opts.margin ?? 0;
+  const table = candidates.map(c => ({ minSupport: c, logLoss: logLossOf(model, ctx, valSeq, c, k) }));
+  const baseline = table.find(t => t.minSupport === Infinity);
+  const best = table.reduce((a, b) => (b.logLoss < a.logLoss ? b : a));
+  const useBest = baseline === undefined || best.minSupport === Infinity
+    || best.logLoss < baseline.logLoss - margin;
+  const chosen = useBest ? best : baseline;
+  return { minSupport: chosen.minSupport, logLoss: chosen.logLoss, margin, usedHigherOrder: chosen.minSupport !== Infinity, table };
+}
+
+/** Convenience: read the candidate list without reaching into the module. */
+const GATE_CANDIDATES = DEFAULT_CANDIDATES;
+
+module.exports = { trainBackoff, predictBackoff, selectMinSupport, smoothed, ACTIONS, sum, GATE_CANDIDATES };

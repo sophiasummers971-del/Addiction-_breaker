@@ -211,3 +211,70 @@ predictions with a dummy fill for the rest, which inflated its Brier score
 (0.3774 — visibly wrong next to A's 0.2977). `predictBackoff()` now returns the
 full distribution so held-out metrics are computed correctly. The bug is noted
 here because a metric that cannot fail proves nothing.
+
+## 9. Real-data adapters + validation-chosen gate
+
+### 9a. Adapter round-trip fidelity
+
+`src/adapters.js` normalises real exports (aliased action names, epoch-seconds /
+ISO / epoch-ms timestamps, renamed or missing columns, absent session ids, junk
+rows) into the canonical event shape. `scripts/adapter_demo.js` is a **round-trip
+fidelity test**: a canonical cohort is re-serialised into messy shapes, pushed
+back through the adapter, and compared field-by-field against the original.
+
+| Case | Rows in | Mapped | Round-trip |
+|---|---|---|---|
+| **A** — messy CSV, two timestamp formats, aliased actions, session column kept | 1,207 | 1,207 (100.0%) | ✅ exact on all 1,207 events |
+| **B** — no session column, 4 junk rows injected | 1,211 | 1,207 | ✅ exact on all surviving events |
+
+Case B's 4 dropped rows were reported, not silently swallowed:
+
+```
+unmapped actions: { click: 1, view_advert: 1 }
+rejected:         { badTimestamp: 1, missingAction: 1 }
+session ids DERIVED from time gaps: 23 sessions   (canonical had 23)
+```
+
+Downstream value preservation: canonical total staked **$5,566.52** vs adapted
+**$5,566.52** — identical to the cent. Hook Score computed on adapted data: **43**.
+
+Two harness bugs were found and fixed while building this test, both of which
+had *falsely reported a fidelity failure*:
+
+1. Compare-at-full-ms against a source that serialises epoch **seconds** (which
+   floors milliseconds) — the test must compare at the precision the source
+   actually preserved. Cases A and B need different comparators for this reason.
+2. Blank numeric cells were being coerced to `0` instead of `undefined`, which
+   would have injected fake $0 stakes into every stake metric. Now blank → absent.
+
+### 9b. Validation-chosen gate (`selectMinSupport`)
+
+A fixed `minSupport` cannot know which regime the corpus is in (§8). This picks
+it by validation, with **`Infinity` (never use the pair) as a first-class
+candidate** — so on structureless data validation is free to collapse the model
+back to plain first-order. Split per user: 60% train / 20% validation / 20% test;
+the gate is chosen on validation and scored on untouched test data.
+
+Without a margin it did **not** fix the problem (Δ = +0.0011 where there was no
+structure — it still picked a pair-gate on noise). Adding a **margin** — how much
+a higher order must beat order-1 by before being trusted — does:
+
+| margin | persist 0 (no structure) | persist 0.2 | persist 0.5 (real) |
+|---|---|---|---|
+| 0 | **+0.0011** ✗ loses | −0.0005 | −0.0026 |
+| 0.001 | **+0.0014** ✗ loses | −0.0009 | −0.0026 |
+| **0.005** | **+0.0000** ✅ costs nothing | **−0.0005** ✅ wins | **−0.0012** ✅ wins |
+
+(Δ = chosen-gate test log-loss − order-1 baseline; negative = gate won.)
+
+At `margin = 0.005` the gate is **safe in every regime**: it never loses where
+there is no structure (it chose "never" for 11 of 12 users and used the pair only
+21 times out of 972), and it still wins where structure exists.
+
+**Honest read — the tradeoff is explicit.** The margin *costs upside*: at
+persist 0.5 it gained −0.0012 versus the un-margined −0.0026. Being safe against
+noise means being less aggressive when the signal is real. That is the correct
+default for a tool whose whole point is not to dress thin guesses as predictions
+— but it is a real tradeoff, not a free lunch, and it should be re-tuned per
+corpus. The chosen gate, its validation score and the order actually used are all
+returned by the API, so the choice is auditable.
