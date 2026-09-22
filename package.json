@@ -31,6 +31,7 @@
     "demo:gate": "node scripts/gate_demo.js",
     "ingest": "node scripts/ingest.js",
     "test": "node test/run_tests.js",
-    "data:sample": "node scripts/make_sample_data.js"
+    "data:sample": "node scripts/make_sample_data.js",
+    "web:start": "node web/app.js"
   }
 }

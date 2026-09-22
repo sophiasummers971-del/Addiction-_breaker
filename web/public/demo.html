@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Algorithm Mirror — Demo View</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #0a0a0a; color: #e0e0e0; padding: 2rem; line-height: 1.6; }
+.container { max-width: 1200px; margin: 0 auto; }
+h1 { font-size: 2rem; margin-bottom: 0.5rem; color: #fff; }
+.tagline { color: #888; margin-bottom: 2rem; }
+.totals { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 1rem; margin: 2rem 0; }
+.stat { background: #111; padding: 1rem; border-radius: 4px; border: 1px solid #222; }
+.stat-label { font-size: 0.85rem; color: #888; text-transform: uppercase; letter-spacing: 0.5px; }
+.stat-value { font-size: 1.75rem; font-weight: 700; color: #fff; margin-top: 0.25rem; }
+table { width: 100%; border-collapse: collapse; margin: 2rem 0; background: #111; border-radius: 8px; overflow: hidden; }
+th, td { padding: 0.75rem 1rem; text-align: left; border-bottom: 1px solid #222; }
+th { background: #1a1a1a; font-weight: 600; color: #aaa; text-transform: uppercase; font-size: 0.85rem; letter-spacing: 0.5px; }
+td { color: #e0e0e0; }
+tr:last-child td { border-bottom: none; }
+.hook { font-weight: 700; }
+.hook.low { color: #0f0; }
+.hook.medium { color: #ff0; }
+.hook.high { color: #f30; }
+.pct { font-family: 'Monaco', monospace; }
+</style>
+</head>
+<body>
+<div class="container">
+  <h1>Algorithm Mirror</h1>
+  <p class="tagline">The truth behind the numbers</p>
+  <div id="totals" class="totals"></div>
+  <div id="results"></div>
+</div>
+<script>
+const data = {"totals":{"files":1,"rowsIn":1294,"events":1294,"users":3},"files":[{"file":"/tmp/34d1930b9f4cadec0a179b85c7bb5850","format":"","rowsIn":1294,"mapped":1294,"dropped":0,"issues":0,"eventsByAction":{"login":31,"bet":602,"loss":425,"win":112,"near_miss":65,"logout":31,"deposit":28},"sessions":31}],"issues":[],"warnings":[],"users":[{"user":"s1","events":525,"sessions":14,"bets":242,"staked":16470.86,"returned":4436.32,"rtp":26.9,"hook":40,"deposits":13,"pressureShare":0.38461538461538464,"nightShare":0.28512396694214875,"pReBetAfterLoss30s":0.9393939393939394,"pReBetAfterWin30s":0.3953488372093023},{"user":"s2","events":358,"sessions":9,"bets":166,"staked":161779.86,"returned":128003.37,"rtp":79.1,"hook":45,"deposits":8,"pressureShare":0.5,"nightShare":0.7650602409638554,"pReBetAfterLoss30s":0.9344262295081968,"pReBetAfterWin30s":0.4166666666666667},{"user":"s3","events":411,"sessions":8,"bets":194,"staked":5923.26,"returned":3305.46,"rtp":55.8,"hook":46,"deposits":7,"pressureShare":0.42857142857142855,"nightShare":0.5412371134020618,"pReBetAfterLoss30s":0.9565217391304348,"pReBetAfterWin30s":0.4222222222222222}]};
+const totalsDiv = document.getElementById('totals');
+const resultsDiv = document.getElementById('results');
+
+totalsDiv.innerHTML = `
+  <div class="stat"><div class="stat-label">Files</div><div class="stat-value">${data.totals.files}</div></div>
+  <div class="stat"><div class="stat-label">Rows In</div><div class="stat-value">${data.totals.rowsIn}</div></div>
+  <div class="stat"><div class="stat-label">Events</div><div class="stat-value">${data.totals.events}</div></div>
+  <div class="stat"><div class="stat-label">Users</div><div class="stat-value">${data.totals.users}</div></div>
+`;
+
+const hookClass = h => h == null ? '' : (h < 20 ? 'low' : (h < 40 ? 'medium' : 'high'));
+const pct = v => v == null || isNaN(v) ? 'n/a' : (v * 100).toFixed(1) + '%';
+const num = v => v == null ? 'n/a' : v;
+
+const rows = data.users.map(u => `
+  <tr>
+    <td>${u.user}</td>
+    <td>${u.events}</td>
+    <td>${num(u.sessions)}</td>
+    <td>${num(u.bets)}</td>
+    <td>$${Number(u.staked || 0).toFixed(0)}</td>
+    <td>$${Number(u.returned || 0).toFixed(0)}</td>
+    <td class="pct">${num(u.rtp)}%</td>
+    <td class="hook ${hookClass(u.hook)}">${num(u.hook)}</td>
+    <td class="pct">${pct(u.pressureShare)}</td>
+    <td class="pct">${pct(u.nightShare)}</td>
+    <td class="pct">${pct(u.pReBetAfterLoss30s)}</td>
+  </tr>
+`).join('');
+
+resultsDiv.innerHTML = `
+  <h2 style="margin-top: 2rem;">Per-User Metrics</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>User</th>
+        <th>Events</th>
+        <th>Sess</th>
+        <th>Bets</th>
+        <th>Staked</th>
+        <th>Returned</th>
+        <th>RTP</th>
+        <th>Hook</th>
+        <th>Payday Dep</th>
+        <th>Night</th>
+        <th>Chase 30s</th>
+      </tr>
+    </thead>
+    <tbody>${rows}</tbody>
+  </table>
+`;
+</script>
+</body>
+</html>
