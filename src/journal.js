@@ -77,10 +77,10 @@ function analyzeJournal(entries) {
   const silentDays = entries.filter(e => e.urge === 0 && e.loneliness === 0 && !e.played && e.social === 0).length;
 
   // Top triggers: tags that most often precede a high-urge or played day
-  const tagCount = {};
+  const tagCount = Object.create(null);
   for (const e of entries) {
     if (e.urge >= RISK.urgeHi || e.played) {
-      for (const tg of e.tags) tagCount[tg] = (tagCount[tg] || 0) + 1;
+      for (const tg of (e.tags || [])) tagCount[tg] = (tagCount[tg] || 0) + 1;
     }
   }
   const topTriggers = Object.entries(tagCount).sort((a, b) => b[1] - a[1]).slice(0, 5);
@@ -117,7 +117,7 @@ function findEchoes(entries, today, k = 3) {
     Math.abs(e.loneliness - today.loneliness) +
     Math.abs(e.financialStress - today.financialStress);
   return entries
-    .filter(e => !e.played && e.note && e.date !== today.date && e.urge >= RISK.urgeHi)
+    .filter(e => e.played === false && e.note && e.date < today.date && e.urge >= RISK.urgeHi)
     .sort((a, b) => dist(a) - dist(b))
     .slice(0, k);
 }
@@ -127,8 +127,8 @@ function nightlyPrompt(state) {
   const sig = riskSignature(state);
   const base = `Tonight's log — ${state.date}`;
   if (sig.danger) {
-    return `${base}\n⚠ Pre-relapse signature detected: ${sig.flags.join(' · ')}.\n` +
-      `This is the exact state that has preceded play before. Not a forecast — a pattern.\n` +
+    return `${base}\nYou reported several pressures: ${sig.flags.join(' · ')}.\n` +
+      `These are check-in flags, not a prediction of what you will do.\n` +
       `Write it out. What is the money actually for? What would tomorrow-you want you to do in the next ten minutes?`;
   }
   return `${base}\nWhat pushed on you today? What did you do instead? One honest line is enough.`;
@@ -151,4 +151,6 @@ function renderEchoSheet(today, echoes) {
   return out.join('\n');
 }
 
-module.exports = { riskSignature, analyzeJournal, findEchoes, nightlyPrompt, renderEchoSheet };
+const journalAPI = { riskSignature, analyzeJournal, findEchoes, nightlyPrompt, renderEchoSheet };
+if (typeof module !== 'undefined' && module.exports) module.exports = journalAPI;
+else window.Journal = journalAPI;

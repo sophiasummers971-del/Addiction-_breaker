@@ -33,7 +33,7 @@ const DEFAULT_ACTION_ALIASES = {
 };
 
 function invertAliases(aliases) {
-  const map = {};
+  const map = Object.create(null);
   for (const [canonical, list] of Object.entries(aliases)) {
     for (const a of list) map[String(a).toLowerCase().trim()] = canonical;
   }
@@ -67,7 +67,8 @@ function toEpochMs(v) {
 const parseTimestamp = toEpochMs;
 
 /** Minimal RFC4180-ish CSV parser: handles quotes, escaped quotes, CRLF. */
-function parseCSV(text) {
+function parseCSV(text, delimiter = ',') {
+  text = text.replace(/^\uFEFF/, '');
   const rows = [];
   let row = [], field = '', inQuotes = false;
   for (let i = 0; i < text.length; i++) {
@@ -78,17 +79,20 @@ function parseCSV(text) {
         else inQuotes = false;
       } else field += c;
     } else if (c === '"') inQuotes = true;
-    else if (c === ',') { row.push(field); field = ''; }
+    else if (c === delimiter) { row.push(field); field = ''; }
     else if (c === '\n') { row.push(field); rows.push(row); row = []; field = ''; }
     else if (c === '\r') { /* ignore */ }
     else field += c;
   }
+  if (inQuotes) throw new Error('Unclosed quote in CSV input');
   if (field.length || row.length) { row.push(field); rows.push(row); }
   const nonEmpty = rows.filter(r => r.some(f => String(f).trim() !== ''));
   if (!nonEmpty.length) return [];
   const header = nonEmpty[0].map(h => String(h).trim());
+  if (header.some(h => !h) || new Set(header.map(h => h.toLowerCase())).size !== header.length) throw new Error('CSV headers must be unique and non-empty.');
+  if (nonEmpty.slice(1).some(r => r.length !== header.length)) throw new Error('CSV row has a different number of columns from the header. Quote amounts containing commas.');
   return nonEmpty.slice(1).map(r => {
-    const o = {};
+    const o = Object.create(null);
     header.forEach((h, i) => { o[h] = r[i] === undefined ? '' : r[i]; });
     return o;
   });
@@ -112,7 +116,7 @@ function normalise(rows, opts = {}) {
   const sessionGapSec = opts.sessionGapSec ?? 1800;
 
   const events = [];
-  const unmapped = {};
+  const unmapped = Object.create(null);
   const rejected = { badTimestamp: 0, missingAction: 0 };
 
   // `issues` keeps the OFFENDING ROWS themselves, so callers can fail loudly
@@ -120,7 +124,7 @@ function normalise(rows, opts = {}) {
   const issues = [];
   rows.forEach((r, index) => {
     const ts = toEpochMs(cm.ts != null ? r[cm.ts] : undefined);
-    if (ts === null) {
+    if (ts === null || !Number.isFinite(ts) || !Number.isFinite(new Date(ts).getTime())) {
       rejected.badTimestamp++;
       issues.push({ index, reason: 'unparseable timestamp', value: cm.ts != null ? r[cm.ts] : '(no timestamp column mapped)', row: r });
       return;
@@ -137,7 +141,8 @@ function normalise(rows, opts = {}) {
       if (k == null) return undefined;
       const raw = String(r[k] ?? '').trim();
       if (raw === '') return undefined;          // blank cell -> absent, NOT 0
-      const v = Number(raw.replace(/[^0-9.\-]/g, ''));
+      const cleaned = raw.replace(/^[£$€]/, '');
+      const v = /^-?(?:\d+|\d{1,3}(?:,\d{3})+)(?:\.\d+)?$/.test(cleaned) ? Number(cleaned.replace(/,/g, '')) : NaN;
       return Number.isFinite(v) ? v : undefined;
     };
     const userId = String(r[cm.userId] ?? '').trim() || defaultUserId;
@@ -152,13 +157,15 @@ function normalise(rows, opts = {}) {
       sessionId,
       gapSec: null,
       _sourceRow: r,
+      _payoutAvailable: !!cm.payout,
     });
   });
 
   events.sort((a, b) => a.ts - b.ts);
 
   // derive sessions + gaps (a gap larger than sessionGapSec starts a new session)
-  const lastSeen = {};
+  const lastSeen = Object.create(null);
+  const sessionNumbers = Object.create(null);
   for (const e of events) {
     const prev = lastSeen[e.userId];
     if (prev) {
@@ -166,13 +173,13 @@ function normalise(rows, opts = {}) {
       e.gapSec = gap;
       if (e.sessionId === undefined) {
         e.sessionId = (gap > sessionGapSec || prev.action === 'logout')
-          ? `${e.userId}-S${(lastSeen[e.userId + ':n'] = (lastSeen[e.userId + ':n'] || 0) + 1)}`
+          ? `${e.userId}-S${(sessionNumbers[e.userId] = (sessionNumbers[e.userId] || 0) + 1)}`
           : prev.sessionId;
       }
     } else {
       if (e.sessionId === undefined) {
-        lastSeen[e.userId + ':n'] = (lastSeen[e.userId + ':n'] || 0) + 1;
-        e.sessionId = `${e.userId}-S${lastSeen[e.userId + ':n']}`;
+        sessionNumbers[e.userId] = (sessionNumbers[e.userId] || 0) + 1;
+        e.sessionId = `${e.userId}-S${sessionNumbers[e.userId]}`;
       }
     }
     lastSeen[e.userId] = e;

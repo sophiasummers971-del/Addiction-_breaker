@@ -55,8 +55,15 @@ t('assertSchema throws SCHEMA ERROR instead of returning an empty result', () =>
 
 // Case A + Case B: recompute for real, then assert on the produced JSON
 t('adapter round-trip (Case A + Case B) recomputes to exact fidelity', () => {
-  execFileSync('node', [path.join(ROOT, 'scripts', 'adapter_demo.js')], { cwd: ROOT, stdio: 'pipe' });
-  const r = JSON.parse(fs.readFileSync(path.join(OUT, 'adapter_results.json'), 'utf8'));
+  const artifact = path.join(OUT, 'adapter_results.json');
+  const original = fs.existsSync(artifact) ? fs.readFileSync(artifact) : null;
+  let r;
+  try {
+    execFileSync('node', [path.join(ROOT, 'scripts', 'adapter_demo.js')], { cwd: ROOT, stdio: 'pipe' });
+    r = JSON.parse(fs.readFileSync(artifact, 'utf8'));
+  } finally {
+    if (original) fs.writeFileSync(artifact, original); else if (fs.existsSync(artifact)) fs.unlinkSync(artifact);
+  }
   eq(r.caseA.exactRoundTrip, true, 'Case A exact round-trip');
   eq(r.caseB.exactRoundTrip, true, 'Case B exact round-trip');
   eq(r.caseB.dropped, 4, 'Case B dropped rows');

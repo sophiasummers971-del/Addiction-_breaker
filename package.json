@@ -1,7 +1,7 @@
 {
   "name": "addiction-breaker",
-  "version": "0.3.0",
-  "description": "An interpretable behavioural engine that exposes gambling-algorithm mechanics to the people they are run on — next-action prediction, financial-pressure modelling, recovery math, and a daily journal with memory.",
+  "version": "0.4.0",
+  "description": "Standalone gambling-pattern reflection, private check-ins, Echoes and practical next steps.",
   "keywords": [
     "responsible-gambling",
     "addiction",
@@ -14,7 +14,7 @@
   "author": "sophiasummers971-del",
   "type": "commonjs",
   "engines": {
-    "node": ">=18"
+    "node": "^22.22.2 || ^24.15.0 || >=26.0.0"
   },
   "scripts": {
     "run": "node scripts/run.js",
@@ -30,8 +30,14 @@
     "demo:adapter": "node scripts/adapter_demo.js",
     "demo:gate": "node scripts/gate_demo.js",
     "ingest": "node scripts/ingest.js",
-    "test": "node test/run_tests.js",
+    "test": "npm run test:core && npm run test:ui",
     "data:sample": "node scripts/make_sample_data.js",
-    "web:start": "node web/app.js"
+    "web:start": "node web/app.js",
+    "start": "node web/app.js",
+    "test:core": "node test/run_tests.js && node --test test/standalone.test.js",
+    "test:ui": "node --test test/ui.test.js"
+  },
+  "devDependencies": {
+    "jsdom": "30.1.1"
   }
 }

@@ -79,7 +79,7 @@ function readRows(file) {
     if (!arr.length) throw new Error(`ingest: ${file} contains no records`);
     return arr;
   }
-  const parsed = parseCSV(text);
+  const parsed = parseCSV(text, ext === '.tsv' ? '\t' : ',');
   const rows = Array.isArray(parsed) ? parsed : (parsed && Array.isArray(parsed.rows) ? parsed.rows : null);
   if (!rows) throw new Error(`ingest: ${file} — CSV parser returned no row array`);
   return rows;
@@ -104,7 +104,7 @@ function ingest(inputs, opts = {}) {
     const columnMap = opts.columnMap || detectColumns(rows);
     assertSchema(columnMap, rows, file);            // loud structural gate
     const ext = path.extname(file).toLowerCase();
-    const res = ext === '.json' ? fromJSON(rows, { columnMap }) : fromCSV(fs.readFileSync(file, 'utf8'), { columnMap });
+    const res = fromJSON(rows, { columnMap });
     const q = qualityReport(res);
     if (!columnMap.payout) {
       // Honest failure mode: without a win/return column RTP is UNCOMPUTABLE.
@@ -143,20 +143,22 @@ function summarise(events) {
     const pressure = deposits.filter(e => PRESSURE_DAYS.has(utcDay(e.ts))).length;
     const night = bets.filter(e => { const h = e.hour != null ? e.hour : hourOf(e.ts); return h >= 22 || h < 6; }).length;
     const chase = stats.lossChase || {};
+    const stakesKnown = bets.length > 0 && bets.every(e => Number.isFinite(e.stake));
+    const returnsKnown = mine.every(e => e._payoutAvailable !== false) && mine.filter(e => ['win','loss','near_miss'].includes(e.action)).length >= bets.length && mine.filter(e => e.action === 'win').every(e => Number.isFinite(e.payout));
     return {
       user: u,
       events: mine.length,
       sessions: stats.sessions,
       bets: stats.totalBets,
-      staked: stats.totalStaked,
-      returned: stats.totalReturned,
-      rtp: stats.actualRTP,
-      hook: hookScore(stats),
+      staked: stakesKnown ? stats.totalStaked : null,
+      returned: returnsKnown ? stats.totalReturned : null,
+      rtp: stakesKnown && returnsKnown ? stats.actualRTP : null,
+      hook: stakesKnown && stats.losses && stats.wins ? hookScore(stats) : null,
       deposits: deposits.length,
       pressureShare: deposits.length ? pressure / deposits.length : null,
       nightShare: bets.length ? night / bets.length : null,
-      pReBetAfterLoss30s: chase.pReBetAfterLoss30s ?? null,
-      pReBetAfterWin30s: chase.pReBetAfterWin30s ?? null,
+      pReBetAfterLoss30s: stats.losses ? chase.pReBetAfterLoss30s : null,
+      pReBetAfterWin30s: stats.wins ? chase.pReBetAfterWin30s : null,
     };
   });
 }
