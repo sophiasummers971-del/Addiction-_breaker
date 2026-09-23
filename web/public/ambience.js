@@ -1,5 +1,5 @@
 'use strict';
-// Original, sparse piano-like motif. Synthesised locally: no stream, tracking,
+// Original “One Next Step” piano-like composition with a soft pulse. Synthesised locally: no stream, tracking,
 // subliminal layer, binaural beat, or therapeutic claim.
 (()=>{
  const button=document.getElementById('sound-toggle');
@@ -7,7 +7,14 @@
  const status=document.getElementById('sound-status');
  let context=null,master=null,interval=null,playing=false,starting=false,generation=0;
  let nextTime=0,step=0;
- const melody=[64,null,67,71,null,69,67,null,62,null,66,69,null,67,66,null,60,null,64,67,null,64,62,null,59,null,62,67,null,66,62,null];
+ // Eight gently voiced bars, 54 beats/minute; all notes composed for this app.
+ const chords=[[48,55,59,64],[45,52,55,60],[41,48,52,57],[43,50,55,59],
+  [48,55,60,64],[45,52,57,60],[41,48,55,57],[43,50,55,62]];
+ const melody=[[76,null,null,74,71,null,67,null],[72,null,71,null,69,null,null,null],
+  [69,null,null,67,64,null,67,null],[71,null,69,null,67,null,null,null],
+  [72,null,76,null,79,null,76,null],[76,null,null,72,71,null,69,null],
+  [69,null,72,null,67,null,64,null],[67,null,null,69,71,null,null,null]];
+ const halfBeat=60/54/2;
  function show(text){button.textContent=playing?'Turn piano off':'Play gentle piano';button.setAttribute('aria-pressed',String(playing));status.textContent=text;}
  function stop(text='Sound off · optional'){
   generation++;playing=false;starting=false;clearInterval(interval);interval=null;
@@ -23,18 +30,33 @@
    const oscillator=context.createOscillator(),gain=context.createGain();
    oscillator.type='sine';oscillator.frequency.value=fundamental*harmonic;
    gain.gain.setValueAtTime(0,time);
-   gain.gain.linearRampToValueAtTime(strength*[1,.28,.09,.025][i],time+.018);
-   gain.gain.exponentialRampToValueAtTime(.0001,time+3.8/(1+i*.5));
-   oscillator.connect(gain);gain.connect(master);oscillator.start(time);oscillator.stop(time+4);
+   gain.gain.linearRampToValueAtTime(strength*[1,.22,.065,.015][i],time+.035);
+   gain.gain.exponentialRampToValueAtTime(.0001,time+5.8/(1+i*.45));
+   oscillator.connect(gain);gain.connect(master);oscillator.start(time);oscillator.stop(time+6);
    oscillator.onended=()=>{oscillator.disconnect();gain.disconnect();};
   });
  }
+ function pulse(time,strength){
+  const oscillator=context.createOscillator(),gain=context.createGain();
+  oscillator.type='sine';oscillator.frequency.value=78;
+  gain.gain.setValueAtTime(0,time);
+  gain.gain.linearRampToValueAtTime(strength,time+.035);
+  gain.gain.exponentialRampToValueAtTime(.0001,time+.19);
+  oscillator.connect(gain);gain.connect(master);oscillator.start(time);oscillator.stop(time+.22);
+  oscillator.onended=()=>{oscillator.disconnect();gain.disconnect();};
+ }
  function schedule(){
   if(!playing||!context||context.state!=='running')return;
+  // A stalled foreground tab skips ahead instead of playing a burst of old notes.
+  if(nextTime<context.currentTime-.2){const missed=Math.ceil((context.currentTime-nextTime)/halfBeat);step+=missed;nextTime+=missed*halfBeat;}
   while(nextTime<context.currentTime+.2){
-   const midi=melody[step%melody.length];if(midi!==null)note(midi,nextTime,.19);
-   if(step%8===0)note([48,50,48,43][Math.floor(step/8)%4],nextTime,.13);
-   step++;nextTime+=1.15;
+   const bar=Math.floor(step/8)%chords.length,position=step%8;
+   const chord=chords[bar],midi=melody[bar][position];
+   note(chord[[0,2,1,3,1,2,3,2][position]],nextTime,.085);
+   if(position===0)note(chord[0]-12,nextTime,.065);
+   if(midi!==null){note(midi,nextTime,.13);note(midi,nextTime+.31,.025);}
+   if(position%2===0){pulse(nextTime,.055);pulse(nextTime+.23,.032);}
+   step++;nextTime+=halfBeat;
   }
  }
  button.addEventListener('click',async()=>{

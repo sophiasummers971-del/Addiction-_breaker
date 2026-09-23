@@ -1,5 +1,5 @@
 'use strict';
-const CACHE='addiction-breaker-shell-v3';
+const CACHE='addiction-breaker-shell-v4';
 const ASSETS=['/','/index.html','/styles.css','/ambience.js','/thin-ice.webp','/app.js','/analysis-worker.js','/journal.js','/store.js','/icon.svg','/manifest.webmanifest','/sample.csv'];
 self.addEventListener('install',event=>event.waitUntil(caches.open(CACHE).then(cache=>cache.addAll(ASSETS))));
 self.addEventListener('activate',event=>event.waitUntil(caches.keys().then(keys=>Promise.all(keys.filter(k=>k.startsWith('addiction-breaker-shell-')&&k!==CACHE).map(k=>caches.delete(k))))));
