@@ -75,3 +75,14 @@ database or chargeable compute. Local Node API is retained for compatibility.
 36 automated checks pass, including compiled worker equivalence, file-size and
 malformed-input errors, no-network UI analysis and a static-deployment boundary
 check. See docs/DEPLOYMENT.md for reproducible Cloudflare settings.
+
+Dark visual / optional piano update
+- Live target: https://addiction-breaker.pages.dev/
+- Dark charcoal/teal surfaces, amber controls. Approved thin-ice image in hero;
+  mobile shows complete image above copy instead of cropping the person/light.
+- Original piano-like Web Audio motif, entirely local; no samples or service fees.
+  Off by default, volume control, immediate Off, stops on hidden/pagehide, no auto-resume.
+  No subliminal content, binaural layer or therapeutic promises.
+- Build and local server include image/audio script; offline shell bumped to v3.
+- UI checks cover opt-in/off/background pause and unsupported-browser fallback.
+- Synthesised timbre is piano-like, not a recorded acoustic instrument.
