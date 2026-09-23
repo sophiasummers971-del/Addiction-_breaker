@@ -5,6 +5,7 @@ const path = require('node:path');
 const {analyzeText} = require('../src/analysis');
 const MAX_BYTES = 2 * 1024 * 1024;
 const assets = {
+  '/ambience.js':['public/ambience.js','text/javascript'], '/thin-ice.webp':['public/thin-ice.webp','image/webp'],
   '/':['public/index.html','text/html'], '/index.html':['public/index.html','text/html'],
   '/analysis-worker.js':['../dist/analysis-worker.js','text/javascript'],
   '/app.js':['public/app.js','text/javascript'], '/styles.css':['public/styles.css','text/css'],

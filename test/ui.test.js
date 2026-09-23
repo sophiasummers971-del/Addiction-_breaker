@@ -53,3 +53,19 @@ test('local analysis sends no file content over network, renders safely and clea
 test('navigation exposes the requested page and hides others',()=>{
  const app=mount();try{app.w.location.hash='journal';app.w.dispatchEvent(new app.w.HashChangeEvent('hashchange'));assert.equal(app.$('journal').hidden,false);assert.equal(app.$('today').hidden,true);assert.equal(app.w.document.querySelector('nav [aria-current]').textContent,'Journal & Echoes');}finally{app.close();}
 });
+test('piano is opt-in, stops on request and stays off after leaving the page',async()=>{
+ const app=mount();let created=0,closed=0;
+ try{
+ const param={setValueAtTime(){},linearRampToValueAtTime(){},exponentialRampToValueAtTime(){},setTargetAtTime(){}};
+ app.w.AudioContext=class{constructor(){created++;this.state='running';this.currentTime=0;this.destination={};}createGain(){return{gain:{...param},connect(){},disconnect(){}};}createOscillator(){return{frequency:{value:0},connect(){},disconnect(){},start(){},stop(){}};}async resume(){}async close(){closed++;this.state='closed';}};
+ app.w.eval(fs.readFileSync(path.join(root,'web/public/ambience.js'),'utf8'));
+ assert.equal(created,0);assert.equal(app.$('sound-toggle').getAttribute('aria-pressed'),'false');
+ app.$('sound-toggle').click();await new Promise(r=>setImmediate(r));assert.equal(created,1);assert.equal(app.$('sound-toggle').getAttribute('aria-pressed'),'true');
+ app.$('sound-toggle').click();assert.equal(closed,1);assert.equal(app.$('sound-toggle').getAttribute('aria-pressed'),'false');
+ app.$('sound-toggle').click();await new Promise(r=>setImmediate(r));Object.defineProperty(app.w.document,'hidden',{value:true,configurable:true});app.w.document.dispatchEvent(new app.w.Event('visibilitychange'));assert.equal(closed,2);assert.equal(app.$('sound-toggle').getAttribute('aria-pressed'),'false');
+ Object.defineProperty(app.w.document,'hidden',{value:false});app.w.document.dispatchEvent(new app.w.Event('visibilitychange'));assert.equal(created,2);assert.equal(app.$('sound-toggle').getAttribute('aria-pressed'),'false');
+ }finally{app.close();}
+});
+test('unsupported piano does not break the rest of the app',()=>{
+ const app=mount();try{app.w.eval(fs.readFileSync(path.join(root,'web/public/ambience.js'),'utf8'));app.$('sound-toggle').click();assert.match(app.$('sound-status').textContent,/unavailable/);checkin(app,'2026-09-01','Still works');assert.equal(app.$('entry-count').textContent,'1 ENTRIES');}finally{app.close();}
+});
