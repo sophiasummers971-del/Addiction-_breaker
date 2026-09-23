@@ -1,6 +1,6 @@
 {
   "name": "addiction-breaker",
-  "version": "0.4.0",
+  "version": "0.5.0",
   "description": "Standalone gambling-pattern reflection, private check-ins, Echoes and practical next steps.",
   "keywords": [
     "responsible-gambling",
@@ -34,8 +34,12 @@
     "data:sample": "node scripts/make_sample_data.js",
     "web:start": "node web/app.js",
     "start": "node web/app.js",
-    "test:core": "node test/run_tests.js && node --test test/standalone.test.js",
-    "test:ui": "node --test test/ui.test.js"
+    "test:core": "node test/run_tests.js && node --test test/standalone.test.js && node --test test/static.test.js",
+    "test:ui": "node --test test/ui.test.js",
+    "build": "node scripts/build-static.js",
+    "prestart": "npm run build",
+    "preweb:start": "npm run build",
+    "pretest": "npm run build"
   },
   "devDependencies": {
     "jsdom": "30.1.1"

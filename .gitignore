@@ -20,3 +20,6 @@ Thumbs.db
 # Python virtualenvs
 venv/
 .venv/
+
+# Static deployment output
+dist/

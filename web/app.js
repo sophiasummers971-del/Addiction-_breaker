@@ -6,6 +6,7 @@ const {analyzeText} = require('../src/analysis');
 const MAX_BYTES = 2 * 1024 * 1024;
 const assets = {
   '/':['public/index.html','text/html'], '/index.html':['public/index.html','text/html'],
+  '/analysis-worker.js':['../dist/analysis-worker.js','text/javascript'],
   '/app.js':['public/app.js','text/javascript'], '/styles.css':['public/styles.css','text/css'],
   '/journal.js':['../src/journal.js','text/javascript'], '/store.js':['public/store.js','text/javascript'],
   '/sample.csv':['public/sample.csv','text/csv'], '/manifest.webmanifest':['public/manifest.webmanifest','application/manifest+json'],
@@ -13,7 +14,7 @@ const assets = {
 };
 function createServer() {
   return http.createServer(async(req,res)=>{
-    res.setHeader('Content-Security-Policy', "default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; connect-src 'self'; object-src 'none'; base-uri 'none'; frame-ancestors 'none'; form-action 'self'");
+    res.setHeader('Content-Security-Policy', "default-src 'self'; script-src 'self'; worker-src 'self'; style-src 'self'; img-src 'self' data:; connect-src 'self'; object-src 'none'; base-uri 'none'; frame-ancestors 'none'; form-action 'self'");
     res.setHeader('X-Content-Type-Options','nosniff'); res.setHeader('X-Frame-Options','DENY');
     res.setHeader('Referrer-Policy','no-referrer'); res.setHeader('Permissions-Policy','camera=(), microphone=(), geolocation=()');
     res.setHeader('Cache-Control','no-store');

@@ -38,7 +38,7 @@ If gambling happens again, the person can record it without losing access, being
 
 ## 5. Respect the data
 
-No account is required. Journal entries and plans remain in the browser. Persistence is optional and explicitly described as unencrypted. Users can export, restore and erase. No inference is sent to an AI provider. Uploads are processed in server memory and not retained by the application.
+No account is required. Journal entries and plans remain in the browser. Persistence is optional and explicitly described as unencrypted. Users can export, restore and erase. No inference is sent to an AI provider. Selected files are analysed in a browser Web Worker; their contents are not uploaded.
 
 Privacy claims must include practical limits: shared browser profiles, downloaded backups, browser-data clearing and host infrastructure all matter. There is no hidden sync or silent contact with family or support services.
 

@@ -1,6 +1,6 @@
 # Addiction Breaker
 
-A standalone tool for seeing gambling patterns, writing private check-ins, and choosing a next step. Version 0.4 connects the original analytics engine to a usable web application. No account, AI subscription, or database is required.
+A standalone tool for seeing gambling patterns, writing private check-ins, and choosing a next step. Version 0.5 runs as a static Cloudflare Pages app with local browser analysis. No account, AI subscription, or database is required.
 
 ## Run the application
 
@@ -22,13 +22,17 @@ The server listens only on your own computer by default. This address will not o
 - **Your mirror:** CSV, TSV, comma-separated TXT and JSON event exports; counted re-bets, stakes, returns and a descriptive narrative. Missing values stay unknown. A separate fictional sample is included.
 - **Support:** verified NHS/GamCare links, including text options, plus privacy and evidence explanations.
 - **Data controls:** opt-in browser persistence, export/restore and erase. No journal data is sent to the server.
-- **Offline shell:** after an initial successful visit and service-worker installation on localhost or HTTPS, the journal and pause can load offline. History analysis still needs the server. Browser install/offline behaviour has not yet been device-tested.
+- **Offline shell:** after an initial successful visit and service-worker installation on localhost or HTTPS, the journal and pause can load offline. History analysis also runs locally after its worker script has been cached. Browser install/offline behaviour has not yet been device-tested.
 
 ## Privacy
 
 By default entries live only in the current page. Refreshing or closing loses them. “Remember” stores the journal and plan unencrypted in this browser profile, with no cross-device sync. Anyone with access to the profile may read them. Exported JSON backups contain personal notes in plain text.
 
-History uploads require acknowledgement and are processed by the Node server in memory, not written to disk or logged by application code. A hosting provider or reverse proxy may maintain its own logs; configure it appropriately. Clear Analysis removes displayed results. Files must use one currency. Upload limits: 2 MiB, 20,000 rows, 100 people. Journal backups: 5 MiB and 5,000 entries.
+Selected history files are analysed in a dedicated browser Web Worker and are never uploaded by the interface. Clear Analysis removes displayed results. Files must use one currency. Import limits: 2 MiB, 20,000 rows, 100 people. Journal backups: 5 MiB and 5,000 entries. Cloudflare serves static application files only.
+
+## Cloudflare Pages (£0 extra architecture)
+
+Build command: `node scripts/build-static.js`. Output directory: `dist`. No Functions, Workers backend, database, AI binding, analytics, or paid upgrade. See `docs/DEPLOYMENT.md`.
 
 ## Input contract
 
@@ -59,7 +63,7 @@ npm ci
 npm test
 ```
 
-The only development dependency is pinned `jsdom`, used for interface tests. There are zero runtime dependencies. `npm run test:core` works without installation; `npm run test:ui` requires development dependencies. CI is configured for Node 22 and 24.
+The only development dependency is pinned `jsdom`, used for interface tests. There are zero runtime dependencies. After `npm run build`, `npm run test:core` works without installation; `npm run test:ui` requires development dependencies. CI is configured for Node 22 and 24.
 
 Tests cover legacy engine behaviour, corrected loss streaks, missing data, API upload limits and origin checks, persistence, exact Echo text, hostile text rendering, backup restore, save failures and navigation. DOM tests do not replace real-browser rendering, accessibility, installation or offline checks. See `handoff.txt` for verified and outstanding work.
 

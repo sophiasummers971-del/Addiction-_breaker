@@ -65,3 +65,13 @@ not overwritten.
 docs/ARCHITECTURE.md: current implementation and privacy boundaries.
 docs/DEPLOYMENT.md: private local and hosted deployment requirements.
 Historical research output remains separate and is not served by the web app.
+
+CLOUDFLARE FOLLOW-UP — v0.5
+The user selected Cloudflare with a hard £0-extra budget. The merged v0.4
+baseline is 27dfc6d2c6b6a4aa3a8f366dd23de7adc3548a77.
+Analysis now runs in a browser Web Worker, using the same tested source engine.
+The deployed build is static Pages assets only: no server API, Functions, AI,
+database or chargeable compute. Local Node API is retained for compatibility.
+36 automated checks pass, including compiled worker equivalence, file-size and
+malformed-input errors, no-network UI analysis and a static-deployment boundary
+check. See docs/DEPLOYMENT.md for reproducible Cloudflare settings.
