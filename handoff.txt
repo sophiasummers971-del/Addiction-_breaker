@@ -86,3 +86,11 @@ Dark visual / optional piano update
 - Build and local server include image/audio script; offline shell bumped to v3.
 - UI checks cover opt-in/off/background pause and unsupported-browser fallback.
 - Synthesised timbre is piano-like, not a recorded acoustic instrument.
+
+Original soundtrack release: “One Next Step”
+- Replaces isolated notes with an original eight-bar, 54 BPM composition: voiced
+  arpeggios, sustained bass, melody with a quiet echo, and soft double pulse.
+- All sounds synthesised on device. No copied recording, external player or API.
+- Existing opt-in, volume, immediate Off, background-stop protections remain.
+- Scheduler skips missed notes after a stall to avoid catch-up bursts.
+- Offline shell v4 includes the updated composition.
