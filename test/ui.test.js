@@ -40,14 +40,14 @@ test('corrupt backup and save failures do not claim success or discard current e
 test('corrupt existing storage is protected until explicit erase',()=>{
  const app=mount('not json');try{checkin(app,'2026-09-01','New');assert.match(app.$('entry-status').textContent,/Saving is paused/);assert.equal(app.w.localStorage.getItem('addiction-breaker:v1'),'not json');app.$('erase').click();checkin(app,'2026-09-01','New');assert.equal(app.$('entry-count').textContent,'1 ENTRIES');}finally{app.close();}
 });
-test('upload consent, real analysis rendering, hostile text and clearing',async()=>{
+test('local analysis sends no file content over network, renders safely and clears',async()=>{
  const app=mount();try{
  const source='ts,userId,action,stake,payout\n2026-09-01T12:00:00Z,<img src=x>,bet,10,\n2026-09-01T12:00:01Z,<img src=x>,loss,,';
  Object.defineProperty(app.$('history-file'),'files',{value:[{name:'sample.csv',size:source.length,text:async()=>source}],configurable:true});
- let requests=0;app.w.AbortSignal.timeout=()=>undefined;app.w.fetch=async(url,options)=>{requests++;return {ok:true,json:async()=>analyzeText(options.body,'sample.csv')};};
- app.$('analyze').click();await new Promise(r=>setImmediate(r));assert.equal(requests,0);assert.match(app.$('upload-status').textContent,/tick/);
- app.$('upload-consent').checked=true;app.$('analyze').click();await new Promise(r=>setImmediate(r));assert.equal(requests,1);assert.match(app.$('analysis-results').textContent,/Recorded net loss/);assert.equal(app.$('analysis-results').querySelector('img'),null);assert.equal(app.$('analyze').disabled,false);
- app.$('analysis-results').querySelector('button').click();assert.equal(app.$('analysis-results').textContent,'');assert.equal(app.$('upload-consent').checked,false);
+ let requests=0;app.w.fetch=async()=>{requests++;throw new Error('Network forbidden');};
+ let terminated=false;app.w.Worker=class {postMessage(data){queueMicrotask(()=>this.onmessage({data:{result:analyzeText(data.text,data.name)}}));}terminate(){terminated=true;}};
+ app.$('analyze').click();await new Promise(r=>setImmediate(r));assert.equal(requests,0);assert.equal(terminated,true);assert.match(app.$('analysis-results').textContent,/Recorded net loss/);assert.equal(app.$('analysis-results').querySelector('img'),null);assert.equal(app.$('analyze').disabled,false);
+ app.$('analysis-results').querySelector('button').click();assert.equal(app.$('analysis-results').textContent,'');
  }finally{app.close();}
 });
 test('navigation exposes the requested page and hides others',()=>{

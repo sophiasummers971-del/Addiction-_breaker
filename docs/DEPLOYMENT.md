@@ -1,31 +1,32 @@
-# Run and deploy
+# Cloudflare Pages deployment — v0.5
 
-## Private local use
+The production app is static. Gambling histories are analysed in a browser Web Worker, without uploading personal records or invoking Cloudflare Functions. Journal data stays in the browser. No database, AI service, server binding, domain purchase or paid-plan upgrade is required.
 
-Run `npm start`, then open `http://127.0.0.1:3737` on the same computer. No installation is needed for runtime dependencies. Keep a stable scheme/host/port: browser storage belongs to that exact origin. Back up before changing it.
+Cloudflare documents static Pages requests as free and unlimited on both free and paid plans: https://developers.cloudflare.com/pages/functions/pricing/ . Build/platform quotas still apply; no paid feature is enabled by this configuration.
 
-## Hosted phone access
+## Git-connected Pages settings
 
-Use a Node-capable host or container behind HTTPS. This repository is not a static-only site: `/api/analyze` needs the Node process. It is not directly compatible with Cloudflare Workers without a separate runtime adapter.
+- Repository: `sophiasummers971-del/Addiction-_breaker`
+- Production branch: `main`
+- Build command: `node scripts/build-static.js`
+- Output directory: `dist`
+- Environment: `NODE_VERSION=24.19.0`, `SKIP_DEPENDENCY_INSTALL=true`
+- Preview deployments: disabled unless intentionally enabled later
+- Web analytics: disabled
+- Functions / storage / AI bindings: none
 
-Environment variables:
+The static build uses only Node built-ins; package installation is unnecessary. Development dependencies are for tests only. The build copies an explicit asset list, emits the analysis worker, a custom 404 page, and security headers. Never upload the whole repository as public assets.
 
-| Name | Default | Meaning |
-|---|---|---|
-| `HOST` | `127.0.0.1` | Bind address; containers typically require `0.0.0.0` |
-| `PORT` | `3737` | HTTP listener port |
-| `ALLOWED_HOSTS` | empty | Comma-separated public hostnames allowed to upload; no scheme or port |
+## Local run
 
-Start command: `node web/app.js`. Health check: `GET /api/health` → `{"status":"ok"}`. The reverse proxy must preserve the public Host header for same-origin checks.
+`npm start` builds assets and starts the development server at http://127.0.0.1:3737. The legacy POST analysis endpoint remains available locally for compatibility, but the browser UI never calls it. It is not deployed to Pages.
 
-Before public release:
+## Release checks
 
-- Configure HTTPS and HSTS at the reverse proxy. Never expose real history uploads over plain HTTP.
-- Apply request rate/concurrency limits at the edge and test them. Parsing is synchronous and bounded but public traffic can still exhaust capacity.
-- Limit the body to 2 MiB and disable request-body logging or third-party session replay. Review provider logging and retention.
-- Use a dedicated origin and document its privacy terms. Browser journal data is unencrypted and has no account access boundary.
-- Run `npm ci && npm test` on the deployment runtime.
-- Test Android/desktop navigation, keyboard focus, slider labels, uploads, download/restore, persistence across reload, offline shell and deletion in real browsers.
-- Verify support links and have recovery-facing claims reviewed by an appropriate specialist before a broad launch.
+Run `npm ci && npm test`. Check the deployed HTTPS app: navigation, local file analysis, check-ins, Echoes, storage opt-in and reload, restore/export, and support links. Browser install/offline behaviour should be checked on actual devices. A static deployment must not contain `_worker.js` or a Functions directory.
 
-A private test deployment is preferable before a public launch. No deployment, domain change or repository push is part of the local build delivered in this session.
+## Updates and personal data
+
+Git-connected builds publish changes to main. Keep the production domain stable: journal storage belongs to the exact origin. Before moving a site, export journal backups. Restoring does not enable persistent storage automatically.
+
+The service worker caches application code only; bump its cache name when the asset set changes. Personal entries and analysis results are never cached by the service worker. Browser storage and downloaded backups remain unencrypted.

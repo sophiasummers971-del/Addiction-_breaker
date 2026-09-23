@@ -1,0 +1,7 @@
+'use strict';
+const {test}=require('node:test');const assert=require('node:assert/strict');const fs=require('node:fs');const vm=require('node:vm');const {analyzeText}=require('../src/analysis');
+const worker=fs.readFileSync('dist/analysis-worker.js','utf8');
+function run(text,name){let response;const context={TextEncoder,self:{postMessage:value=>response=JSON.parse(JSON.stringify(value))}};vm.runInNewContext(worker,context);context.self.onmessage({data:{text,name}});return response;}
+test('deployed browser worker matches source engine without network access',()=>{const sample=fs.readFileSync('web/public/sample.csv','utf8');assert.deepEqual(run(sample,'sample.csv').result,analyzeText(sample,'sample.csv'));});
+test('browser worker returns errors for oversized and malformed files',()=>{assert.match(run('x'.repeat(2*1024*1024+1),'a.csv').error,/2 MB/);assert.match(run('[null]','a.json').error,/object/);});
+test('static deployment has no Functions, personal files or API requirements',()=>{const files=fs.readdirSync('dist');assert.equal(files.includes('_worker.js'),false);assert.equal(files.includes('functions'),false);assert.equal(files.includes('NEW_LIFE.md'),false);assert.match(fs.readFileSync('dist/_headers','utf8'),/worker-src 'self'/);assert.doesNotMatch(fs.readFileSync('dist/app.js','utf8'),/fetch\('\/api/);assert.match(fs.readFileSync('dist/sw.js','utf8'),/analysis-worker\.js/);});

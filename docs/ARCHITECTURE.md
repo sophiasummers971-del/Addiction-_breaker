@@ -1,10 +1,12 @@
-# Standalone architecture — v0.4
+# Standalone architecture — v0.5
 
 ## Runtime
 
-`web/app.js` uses Node's built-in HTTP server. Static routes are an explicit allowlist; source files, research output and arbitrary paths are not exposed. The exception is `src/journal.js`, intentionally served as `/journal.js` so the browser and research tools use the same Echo retrieval rule.
+The deployed application consists only of static files in `dist/`, built by `scripts/build-static.js` with Node built-ins. A browser Web Worker bundles the existing analysis modules without external dependencies and processes selected files off the UI thread. Files never leave the device.
 
-`web/public/app.js` connects semantic HTML controls to shared journal logic and `store.js`. No bundler, remote scripts, fonts, telemetry or runtime packages are required. `sw.js` caches only a named list of static app assets. It never intercepts POST requests or caches analysis results. Bump its cache version whenever the shell changes. Offline shell use requires a successful initial service-worker installation; analysis requires a reachable server.
+For local development, `web/app.js` uses Node's built-in HTTP server. Static routes are an explicit allowlist; source files, research output and arbitrary paths are not exposed. The exception is `src/journal.js`, intentionally served as `/journal.js` so the browser and research tools use the same Echo retrieval rule.
+
+`web/public/app.js` connects semantic HTML controls to shared journal logic and `store.js`. No bundler, remote scripts, fonts, telemetry or runtime packages are required. `sw.js` caches only a named list of static app assets. It never intercepts POST requests or caches analysis results. Bump its cache version whenever the shell changes. Offline shell use requires a successful initial service-worker installation; local analysis works offline once its worker script is cached.
 
 ## Boundaries
 
@@ -13,7 +15,7 @@
 | Journal, next-step plan | Browser JavaScript | Page memory by default; localStorage after opt-in |
 | Echo retrieval | Browser, `src/journal.js` | Uses existing journal only |
 | Backup | User-triggered JSON download | User-managed file, unencrypted |
-| History upload | POST `/api/analyze?name=...`, raw text/plain | Server memory only |
+| History import | Browser Web Worker | Device memory only |
 | Analysis results | Browser DOM | Until cleared or refreshed |
 | Cached app shell | Browser Cache Storage | Static assets, no personal data |
 | Research fixtures and model experiments | CLI only | Existing `output/` artifacts |
@@ -38,4 +40,4 @@ Echoes use strictly earlier dates, explicit non-play, a non-empty note, and urge
 
 Loopback default, bounded request bodies, row/user limits, same-origin checks, configurable host allowlist, CSP without inline scripts/styles, no framing, no sniffing, no referrer, and a static asset allowlist. All uploaded/journal strings enter the interface through `textContent`, not HTML interpolation. No personal content is logged by application code.
 
-Public hosting needs HTTPS and operational controls described in `DEPLOYMENT.md`. The app has no authentication, server-side journal, encryption, cross-device sync, or background risk monitoring. Do not market it as a validated medical intervention.
+The optional local Node API retains its size/origin protections; the deployed static app has no API or server-side analysis. Cloudflare Pages serves HTTPS and the supplied `_headers` security policy. The app has no authentication, server-side journal, encryption, cross-device sync, or background risk monitoring. Do not market it as a validated medical intervention.
