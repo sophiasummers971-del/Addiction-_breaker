@@ -1,3 +1,5 @@
+> Historical synthetic experiment report. These figures are not clinical evidence or recovery thresholds. Version 0.4 corrects loss-streak and inter-bet timing calculations; earlier score totals below are not current calibration. The standalone application uses the evidence boundaries in `NEW_LIFE.md`.
+
 # Findings
 
 Every number below was produced by the code in this repo, on the synthetic

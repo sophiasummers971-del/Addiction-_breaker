@@ -42,7 +42,7 @@ function main() {
   if (res.warnings.length) console.log(`  warnings: ${res.warnings.join(' | ')}`);
 
   const rows = summarise(res.events);
-  const head = 'user'.padEnd(8) + 'events'.padStart(7) + 'sess'.padStart(6) + 'bets'.padStart(7) + 'staked'.padStart(11) + 'returned'.padStart(11) + 'RTP'.padStart(8) + 'hook'.padStart(6) + 'paydayDep'.padStart(11) + 'night'.padStart(8) + 'chase30s'.padStart(10);
+  const head = 'user'.padEnd(8) + 'events'.padStart(7) + 'sess'.padStart(6) + 'bets'.padStart(7) + 'staked'.padStart(11) + 'returned'.padStart(11) + 'RTP'.padStart(8) + 'hook'.padStart(6) + 'calDaysDep'.padStart(11) + 'night'.padStart(8) + 'chase30s'.padStart(10);
   console.log('\n' + head);
   console.log('─'.repeat(head.length));
   for (const r of rows) {
@@ -51,9 +51,9 @@ function main() {
       String(r.events).padStart(7) +
       String(num(r.sessions)).padStart(6) +
       String(num(r.bets)).padStart(7) +
-      ('$' + Number(r.staked || 0).toFixed(0)).padStart(11) +
-      ('$' + Number(r.returned || 0).toFixed(0)).padStart(11) +
-      (num(r.rtp) + '%').padStart(8) +
+      (r.staked == null ? 'n/a' : Number(r.staked).toFixed(2)).padStart(11) +
+      (r.returned == null ? 'n/a' : Number(r.returned).toFixed(2)).padStart(11) +
+      (r.rtp == null ? 'n/a' : r.rtp + '%').padStart(8) +
       String(num(r.hook)).padStart(6) +
       pct(r.pressureShare).padStart(11) +
       pct(r.nightShare).padStart(8) +
@@ -61,7 +61,7 @@ function main() {
     );
   }
 
-  const avg = k => rows.reduce((a, b) => a + (b[k] || 0), 0) / (rows.length || 1);
+  const avg = k => { const known = rows.filter(r => Number.isFinite(r[k])); return known.length ? known.reduce((sum, r) => sum + r[k], 0) / known.length : NaN; };
   console.log(`\navg hook score: ${avg('hook').toFixed(1)}   avg RTP: ${avg('rtp').toFixed(1)}%`);
 
   console.log('\ntop action transitions across the ingested stream:');

@@ -38,9 +38,9 @@ function predictNext(model, ctx, currentAction) {
 /* ---------------- Truth-exposing behavioral metrics ---------------- */
 
 function analyzeUser(events, userId) {
-  const ev = events.filter(e => e.userId === userId);
+  const ev = events.filter(e => e.userId === userId).sort((a, b) => a.ts - b.ts);
   const bets = ev.filter(e => e.action === 'bet');
-  const bySession = {};
+  const bySession = Object.create(null);
   for (const e of ev) (bySession[e.sessionId] ??= []).push(e);
 
   // 1. Loss-chase ratio: P(bet within 30s | loss) vs P(bet within 30s | win)
@@ -62,16 +62,15 @@ function analyzeUser(events, userId) {
       if (e.action === 'bet') {
         stakeSequences.push({ consec, stake: e.stake });
         if (e.hour >= 22 || e.hour < 6) nightBets++;
-        consec = 0;
       }
       if (e.action === 'loss') {
         consec++; losses++; lossCount++;
-        if (nxt?.action === 'bet' && nxt.gapSec <= 30) reBetAfterLoss++;
+        if (nxt?.action === 'bet' && nxt.ts - e.ts >= 0 && nxt.ts - e.ts <= 30000) reBetAfterLoss++;
         if (nxt && nxt.action !== 'logout') contAfterLoss++;
       }
       if (e.action === 'win') {
         consec = 0; wins++;
-        if (nxt?.action === 'bet' && nxt.gapSec <= 30) reBetAfterWin++;
+        if (nxt?.action === 'bet' && nxt.ts - e.ts >= 0 && nxt.ts - e.ts <= 30000) reBetAfterWin++;
       }
       if (e.action === 'near_miss') {
         consec++; nmCount++;
@@ -80,7 +79,7 @@ function analyzeUser(events, userId) {
     }
     // acceleration within session
     if (sessBets.length >= 6) {
-      const gaps = sessBets.map(b => b.gapSec).filter(g => g != null);
+      const gaps = sessBets.slice(1).map((b, i) => (b.ts - sessBets[i].ts) / 1000);
       const third = Math.floor(gaps.length / 3);
       const med = a => a.slice().sort((x, y) => x - y)[Math.floor(a.length / 2)];
       if (third > 0) accelerations.push(med(gaps.slice(0, third)) / Math.max(1, med(gaps.slice(-third))));
@@ -90,6 +89,7 @@ function analyzeUser(events, userId) {
   // stake escalation slope: avg stake at 0,1,2,3+ consecutive losses
   const stakeByConsec = {};
   for (const s of stakeSequences) {
+    if (!Number.isFinite(s.stake)) continue;
     const k = Math.min(s.consec, 3);
     (stakeByConsec[k] ??= []).push(s.stake);
   }
@@ -108,6 +108,7 @@ function analyzeUser(events, userId) {
     totalStaked: Math.round(totalStaked * 100) / 100,
     totalReturned: Math.round(totalWon * 100) / 100,
     actualRTP: totalStaked > 0 ? Math.round((totalWon / totalStaked) * 1000) / 10 : null,
+    losses, wins, reBetAfterLoss, reBetAfterWin,
     lossChase: {
       pReBetAfterLoss30s: losses ? reBetAfterLoss / losses : 0,
       pReBetAfterWin30s: wins ? reBetAfterWin / wins : 0,
@@ -125,7 +126,7 @@ function analyzeUser(events, userId) {
   };
 }
 
-/** Composite "hook score" 0–100: how strongly the platform's mechanics are working on this user. */
+/** Composite "hook score" 0–100: experimental descriptive index; not a validated measure of addiction. */
 function hookScore(m) {
   const clamp01 = x => Math.max(0, Math.min(1, x));
   const chaseGap = clamp01(m.lossChase.pReBetAfterLoss30s - m.lossChase.pReBetAfterWin30s);

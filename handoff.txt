@@ -1,0 +1,67 @@
+ADDICTION BREAKER — STANDALONE v0.4.0
+Prepared 23 September 2026
+Base repository: sophiasummers971-del/Addiction-_breaker
+Base commit: 171ded618dd951800eb46ca53e4607ad5ae569d5
+
+DELIVERED
+A standalone Node web app with zero runtime dependencies. Start with npm start;
+open http://127.0.0.1:3737 on the same computer. No account, database or AI key.
+
+Today: validated daily check-ins, opt-in browser persistence and personal plan.
+Pause: ten-minute timer with practical actions; resets on reload.
+Journal: earlier exact-text Echoes, recent averages, edit/delete, export/restore.
+Mirror: memory-only CSV/TSV/TXT/JSON upload processing; fictional demo; supported
+counts and narrative, data-quality warnings, unknown results when money or
+outcome coverage is missing, clear-analysis action.
+Support: NHS/GamCare links including text routes, privacy and evidence notes.
+Offline shell: service worker caches static assets only. Analysis needs server.
+
+CORRECTNESS / SECURITY
+Fixed startup's undeclared Express/Multer dependency by using Node HTTP.
+Corrected loss streak and bet-to-bet acceleration calculations.
+Historical RTP is no longer automatically treated as expected future RTP.
+Removed claims of individual platform targeting from generated narratives.
+Experimental Hook Score is subordinate to counts and explicitly unvalidated.
+Echoes require explicit non-play, a note, and a strictly earlier date.
+Uploads: 2 MiB, 20,000 rows, 100 users; missing, malformed and mixed-currency
+values are handled explicitly. Static routes are allowlisted. Same-origin/host
+checks, CSP and baseline security headers are applied. No raw HTML rendering
+of personal/imported text. No application logging of uploaded content.
+Damaged saved data and cross-tab changes pause writes to prevent overwrite.
+Journal backups are versioned and validated before replacement.
+
+FRESH VERIFICATION
+Runtime: Node v24.19.0.
+npm test: PASS, 33 total checks:
+  13 legacy engine/ingestion tests;
+  13 standalone API, evidence, storage and asset tests;
+  7 jsdom interface flow tests.
+node --check: passed for the server, analysis module and client script.
+git diff --check: passed.
+npm audit --omit=dev: 0 vulnerabilities (there are no runtime dependencies).
+CI added for Node 22 and 24; remote CI has not run.
+
+LIMITS / NOT YET VERIFIED
+The cloud browser refused the loopback URL with ERR_BLOCKED_BY_CLIENT.
+Therefore desktop/mobile visual layout, real-browser accessibility, offline
+installation and browser download behaviour are not visually verified.
+DOM tests are not claimed as real-browser end-to-end tests.
+No clinical effectiveness or recovery prediction has been established.
+Public hosting still requires a selected host, HTTPS, edge rate/concurrency
+limits, logging policy and a real-device acceptance pass. See DEPLOYMENT.md.
+No GitHub push, merge, public deployment, account change or secret change was
+performed. Source changes remain in the local checkout and the ZIP deliverable.
+
+PRIVACY
+Journal and plan stay in page memory unless persistence is explicitly enabled.
+Browser storage and exported backups are unencrypted, without cross-device sync.
+Uploads are processed in server memory; reverse-proxy/hosting logs are outside
+application control. Shared browser users may access persisted journal data.
+
+FILES
+README.md: run instructions and supported input contract.
+NEW_LIFE.md: revised evidence-grounded manifesto; original user attachment was
+not overwritten.
+docs/ARCHITECTURE.md: current implementation and privacy boundaries.
+docs/DEPLOYMENT.md: private local and hosted deployment requirements.
+Historical research output remains separate and is not served by the web app.

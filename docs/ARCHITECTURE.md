@@ -1,110 +1,41 @@
-# Architecture
+# Standalone architecture — v0.4
 
-Four engines, one direction: turn a behaviour log into something the person it
-describes can actually read, check, and argue with.
+## Runtime
 
-```
-                 ┌─────────────────────────────────────────────┐
-   event log ───►│  src/model.js     behavioural metrics        │
- (synthetic or   │  src/markov2.js   next-action prediction     │──┐
-   real)         │  src/truth.js     recovery math + narrative  │  │
-                 │  src/journal.js   daily state + echoes       │  │
-                 └─────────────────────────────────────────────┘  │
-                                                                  ▼
-                                            per-user truth + mirror text
-                                                  (output/*.txt, *.json)
-```
+`web/app.js` uses Node's built-in HTTP server. Static routes are an explicit allowlist; source files, research output and arbitrary paths are not exposed. The exception is `src/journal.js`, intentionally served as `/journal.js` so the browser and research tools use the same Echo retrieval rule.
 
-## Why Markov, not a neural net
+`web/public/app.js` connects semantic HTML controls to shared journal logic and `store.js`. No bundler, remote scripts, fonts, telemetry or runtime packages are required. `sw.js` caches only a named list of static app assets. It never intercepts POST requests or caches analysis results. Bump its cache version whenever the shell changes. Offline shell use requires a successful initial service-worker installation; analysis requires a reachable server.
 
-The product's purpose is **explanation**. Every prediction must ship with a
-reason the harmed user can verify against their own memory — *"after a loss you
-re-bet within 30 seconds 95% of the time."* A black box cannot produce that
-sentence. So the engine is deliberately a stack of transparent, countable models.
-**Interpretability is the product, not a constraint on it.**
+## Boundaries
 
-## Layer by layer
+| Area | Location | Persistence |
+|---|---|---|
+| Journal, next-step plan | Browser JavaScript | Page memory by default; localStorage after opt-in |
+| Echo retrieval | Browser, `src/journal.js` | Uses existing journal only |
+| Backup | User-triggered JSON download | User-managed file, unencrypted |
+| History upload | POST `/api/analyze?name=...`, raw text/plain | Server memory only |
+| Analysis results | Browser DOM | Until cleared or refreshed |
+| Cached app shell | Browser Cache Storage | Static assets, no personal data |
+| Research fixtures and model experiments | CLI only | Existing `output/` artifacts |
 
-### `src/simulate.js` — the generator
-Produces event logs for two archetypes: `casual` and `addicted-pattern`. It models
-the mechanics that make a platform sticky, all from published gambling-psychology
-literature:
+## Analysis
 
-| Mechanic | How it's modelled |
-|---|---|
-| Financial-pressure entry | sessions cluster in the pressure window (3 days after payday + the broke days before it); deposits are larger and faster there |
-| Loss-chasing | re-bet gap shrinks; quit probability *falls* after 3+ consecutive losses |
-| Near-miss effect | near-misses are treated as losses for continuation purposes |
-| Session acceleration | gap between bets shrinks as the session deepens |
-| Night vulnerability | a share of sessions start 22:00–03:00 |
-| Streak persistence | `opts.streakPersistence` (0–1) scales the non-loss mass down after a loss — an injected 2nd-order dependency used to test the model |
+`src/analysis.js` is the web-facing validation and evidence boundary. It limits rows/users; detects columns; calls the adapters; checks monetary values; reports omitted records; and suppresses financial conclusions without stake, payout and outcome coverage. It does not infer a casino's intent or a user's diagnosis. No Markov prediction of future gambling outcomes is presented in the app.
 
-The generator's math is calibrated so the *house edge* survives: outcomes are
-drawn with a loss probability of 0.70 at baseline, which is why experienced RTP
-lands below 100%.
+`src/model.js` counts behaviour within sessions. The corrected implementation retains consecutive losses across bets and computes acceleration from bet-to-bet timestamps. Changed calculations mean old synthetic score totals are historical rather than current calibration.
 
-### `src/model.js` — behavioural metrics + Hook Score
-A first-order Markov chain over the 8 actions, plus five truth-exposing metrics:
+`src/truth.js` supplies a descriptive narrative and optional explicitly assumed RTP scenario math. `recoveryMath` forecast fields are null without an assumption. A past RTP is never automatically used as expected future return.
 
-- **loss-chase gap** — P(re-bet ≤30s | loss) vs P(re-bet ≤30s | win)
-- **stake escalation** — mean stake at 0/1/2/3+ consecutive losses
-- **near-miss continuation** — P(continue | near-miss) vs P(continue | loss)
-- **session acceleration** — median bet gap, first third vs last third
-- **night share** — fraction of bets placed 22:00–06:00
+Research Markov/backoff/simulation modules remain separate from the user-facing flow. Running experiments does not modify a person's journal.
 
-These roll into the **Hook Score** (0–100), a weighted composite measuring how
-hard the platform's mechanics are working a given user. Weights live in
-`hookScore()` and are deliberately readable.
+## Journal
 
-### `src/markov2.js` — second-order prediction with backoff
-Keys on the **pair** `(prevAction, currentAction)`, which is sharper in principle
-but sparse in practice. So it interpolates:
+One validated entry per local calendar date, no future dates, integer ratings 0–10, explicit boolean gambling response, notes up to 4,000 characters. Backups are versioned and reject duplicate dates. Restore validates the entire candidate before replacing current data. Failed storage writes do not claim success. A cross-tab change pauses writes to avoid blindly overwriting newer data; unreadable saved data is preserved until the user explicitly erases it.
 
-```
-P(next | prev,cur) = λ·P₂(next | prev,cur) + (1−λ)·P₁(next | cur)
-```
+Echoes use strictly earlier dates, explicit non-play, a non-empty note, and urge ≥6. This is a retrieval heuristic, not a relapse model. Journal averages use the last seven calendar days and do not impute missing entries.
 
-with add-k Laplace smoothing (no probability is ever exactly 0) and a confidence
-score driven by **pair support** and **margin over the runner-up**. Unseen pairs
-return `backedOff: true` and a low label — the model says "I don't know" instead
-of dressing a thin guess as a prediction.
+## Security
 
-### `src/truth.js` — the psychological core
-- **`recoveryMath()`** — takes the user's *experienced* RTP (not the advertised
-  one) and net loss, and shows that chasing costs `wager × (1 − RTP)` per dollar.
-  Handles both cases: net losers get "the money is gone; stopping IS the
-  recovery"; current winners get "your win is variance the house edge hasn't
-  reclaimed yet — it is bait, not proof."
-- **`pressureTimeline()`** — deposit clustering in the payday/broke window.
-- **`mirrorNarrative()`** — the per-user text. Every hard sentence is followed by
-  the reason it is the *design*, not the person.
+Loopback default, bounded request bodies, row/user limits, same-origin checks, configurable host allowlist, CSP without inline scripts/styles, no framing, no sniffing, no referrer, and a static asset allowlist. All uploaded/journal strings enter the interface through `textContent`, not HTML interpolation. No personal content is logged by application code.
 
-### `src/journal.js` — the daily layer
-- **`riskSignature()`** — today's pre-relapse combination (urge, isolation, money
-  pressure, no contact, depleted sleep) flagged *before* play, not after.
-- **`analyzeJournal()`** — urge↔loneliness correlation, danger-day relapse rate
-  vs baseline, **isolation creep** (social contact early→late of the arc), top
-  triggers, and resistance-peak days.
-- **`findEchoes()` / `renderEchoSheet()`** — the part that matters: at peak urge,
-  hand back the user's **own past notes** from days they held at the same
-  intensity. The user's past self becomes the counsellor.
-
-## Data flow
-
-```
-simulate → events[] → trainMarkov / trainMarkov2 → predictions
-                    → analyzeUser → metrics → hookScore
-                    → recoveryMath + pressureTimeline → mirrorNarrative → output/*.txt
-journal entries     → analyzeJournal → riskSignature + isolationCreep
-                    → findEchoes → renderEchoSheet
-```
-
-## Extending it
-
-Adding a metric: put it in `analyzeUser()`, return it, and (if it should count)
-wire it into `hookScore()`. Then show in `docs/FINDINGS.md` that it separates the
-archetypes — a metric that does not discriminate is noise.
-
-Swapping in real data: everything downstream of the generator is unchanged. Shape
-your events as documented in the README and hand them to `trainMarkov` /
-`analyzeUser` directly.
+Public hosting needs HTTPS and operational controls described in `DEPLOYMENT.md`. The app has no authentication, server-side journal, encryption, cross-device sync, or background risk monitoring. Do not market it as a validated medical intervention.
