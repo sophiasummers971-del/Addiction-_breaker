@@ -3,17 +3,17 @@ const {test}=require('node:test');const assert=require('node:assert/strict');con
 const code=fs.readFileSync('web/public/sync.js','utf8');
 const empty=()=>({version:2,entries:[],plan:'',profile:{categories:[],active:'gambling'},remember:true});
 async function settle(){for(let i=0;i<8;i++)await new Promise(resolve=>setImmediate(resolve));}
-async function setup({remote={revision:0,data:{version:1,entries:[],plan:''}},guest=empty(),account=empty(),enabled=false,put}={}){
+async function setup({remote={revision:0,data:{version:1,entries:[],plan:''}},guest=empty(),account=empty(),enabled=false,put,getSnapshot,replace}={}){
  const dom=new JSDOM('<div id="account-panel"></div><p id="sync-status"></p>',{url:'https://app.test/account/',runScripts:'outside-only'});const w=dom.window;w.Blob=Blob;w.eval(fs.readFileSync('web/public/store.js','utf8'));guest=w.JournalStore.validate(guest);account=w.JournalStore.validate(account);let state=guest,ctx=null;const calls=[];let snap=remote;
  w.confirm=()=>true;w.Blob=Blob;w.localStorage.setItem('addiction-breaker:sync:u1',JSON.stringify({enabled,revision:0,pending:false}));
- w.AddictionApp={getState:()=>structuredClone(state),replaceState:data=>{state=structuredClone(data);},switchContext:id=>{ctx=id;state=id?structuredClone(account):structuredClone(guest);},clearContext:()=>{state=empty();},guestData:()=>structuredClone(guest),setProfile:profile=>{state.profile=profile;w.document.dispatchEvent(new w.CustomEvent('journal:changed'));},status:()=>{}};
+ w.AddictionApp={getState:()=>structuredClone(state),replaceState:data=>{if(replace)replace(data);state=structuredClone(data);},switchContext:id=>{ctx=id;state=id?structuredClone(account):structuredClone(guest);},clearContext:()=>{state=empty();},guestData:()=>structuredClone(guest),setProfile:profile=>{state.profile=profile;w.document.dispatchEvent(new w.CustomEvent('journal:changed'));},status:()=>{}};
  w.fetch=async(url,opts)=>{calls.push({url,opts});let data,status=200;
  if(url==='/api/session')data={configured:true,user:{id:'u1',name:'Test',email:'test@example.test'},csrfToken:'csrf'};
  else if(url==='/api/snapshot'&&opts.method==='PUT'){if(put){({data,status}=await put(JSON.parse(opts.body)));}else{const b=JSON.parse(opts.body);data=snap={revision:b.baseRevision+1,data:b.data};}}
- else if(url==='/api/snapshot')data=snap;
+ else if(url==='/api/snapshot')data=getSnapshot?await getSnapshot():snap;
  else data={ok:true};return {ok:status<400,status,json:async()=>data};};
  w.eval(code);await settle();
- return {w,dom,calls,state:()=>state,ctx:()=>ctx,change(plan){state.plan=plan;w.document.dispatchEvent(new w.CustomEvent('journal:changed'));},click(text){const b=[...w.document.querySelectorAll('button')].find(x=>x.textContent===text);assert.ok(b,text);b.click();},remote(v){snap=v;}};
+ return {w,dom,calls,state:()=>state,ctx:()=>ctx,mutate(data){Object.assign(state,data);w.document.dispatchEvent(new w.CustomEvent('journal:changed'));},change(plan){state.plan=plan;w.document.dispatchEvent(new w.CustomEvent('journal:changed'));},click(text){const b=[...w.document.querySelectorAll('button')].find(x=>x.textContent===text);assert.ok(b,text);b.click();},remote(v){snap=v;}};
 }
 test('sign-in separates guest notes and never enables an upload automatically',async()=>{const x=await setup({guest:{...empty(),plan:'private guest'}});try{assert.equal(x.ctx(),'u1');assert.equal(x.state().plan,'');assert.equal(x.calls.filter(c=>c.opts.method==='PUT').length,0);assert.match(x.w.document.body.textContent,/Import guest journal/);}finally{x.dom.window.close();}});
 test('enabling sync imports existing cloud data into empty account, without guest upload',async()=>{const x=await setup({guest:{...empty(),plan:'guest'},remote:{revision:3,data:{version:1,entries:[],plan:'cloud'}}});try{x.click('Enable cloud sync');await settle();assert.equal(x.state().plan,'cloud');assert.equal(x.calls.filter(c=>c.opts.method==='PUT').length,0);}finally{x.dom.window.close();}});
@@ -24,3 +24,20 @@ test('offline upload failure never reports data as synced',async()=>{const x=awa
 test('memory-only pending changes are never persisted as a durable upload queue',async()=>{const x=await setup({enabled:true,account:{...empty(),remember:false,plan:'temporary'},put:async()=>{throw new Error('Offline');}});try{assert.equal(JSON.parse(x.w.localStorage.getItem('addiction-breaker:sync:u1')).pending,false);assert.equal(x.state().plan,'temporary');}finally{x.dom.window.close();}});
 test('device erasure disables sync and does not upload an empty cloud document',async()=>{const x=await setup({enabled:true});try{x.w.document.dispatchEvent(new x.w.CustomEvent('journal:erased'));await settle();assert.equal(x.calls.filter(c=>c.opts.method==='PUT').length,0);assert.equal(JSON.parse(x.w.localStorage.getItem('addiction-breaker:sync:u1')).enabled,false);assert.match(x.w.document.getElementById('sync-status').textContent,/cloud records have not been deleted/);}finally{x.dom.window.close();}});
 test('support profile is included in uploads and survives cloud restore',async()=>{const account={...empty(),profile:{categories:['drugs','smoking'],active:'drugs'}};const x=await setup({account,enabled:true});try{const put=x.calls.find(c=>c.opts.method==='PUT');assert.ok(put);const d=JSON.parse(put.opts.body).data;assert.equal(d.version,2);assert.deepEqual(d.profile,account.profile);}finally{x.dom.window.close();}const y=await setup({enabled:true,remote:{revision:2,data:{...account,remember:undefined}}});try{assert.deepEqual(y.state().profile,account.profile);}finally{y.dom.window.close();}});
+test('new entries and plan typed during delayed cloud read are preserved as conflict',async()=>{
+ let release;const delayed=new Promise(resolve=>{release=resolve;});
+ const x=await setup({enabled:true,getSnapshot:()=>delayed});
+ try{const entry={date:'2026-01-01',category:'gambling',urge:1,loneliness:1,social:1,sleep:1,financialStress:1,played:false,note:'typed while waiting',tags:[]};x.mutate({entries:[entry],plan:'new local plan'});release({revision:3,data:{...empty(),plan:'remote plan'}});await settle();assert.equal(x.state().plan,'new local plan');assert.deepEqual(x.state().entries,[entry]);assert.equal(x.calls.filter(c=>c.opts.method==='PUT').length,0);assert.match(x.w.document.body.textContent,/Two different versions/);}finally{x.dom.window.close();}
+});
+test('failed initial reconciliation blocks upload until cloud can be read successfully',async()=>{
+ let fail=true;const x=await setup({enabled:true,getSnapshot:async()=>{if(fail)throw new Error('Offline read');return {revision:4,data:{...empty(),plan:'cloud'}};}});
+ try{x.change('new local');await new Promise(r=>setTimeout(r,700));await settle();assert.equal(x.calls.filter(c=>c.opts.method==='PUT').length,0);fail=false;x.w.dispatchEvent(new x.w.Event('online'));await settle();assert.match(x.w.document.body.textContent,/Two different versions/);assert.equal(x.state().plan,'new local');assert.equal(x.calls.filter(c=>c.opts.method==='PUT').length,0);}finally{x.dom.window.close();}
+});
+test('draft replacement refusal stays visible and preserves cloud conflict choice',async()=>{
+ const x=await setup({enabled:true,account:{...empty(),plan:'local'},remote:{revision:3,data:{...empty(),plan:'cloud'}},replace:()=>{throw new Error('Save or copy your unfinished draft first.');}});
+ try{x.click('Use cloud version');await settle();assert.equal(x.state().plan,'local');assert.match(x.w.document.getElementById('sync-status').textContent,/unfinished draft/);assert.match(x.w.document.body.textContent,/Two different versions/);assert.equal(x.calls.filter(c=>c.opts.method==='PUT').length,0);}finally{x.dom.window.close();}
+});
+test('initial restore blocked by draft neither uploads nor claims synced',async()=>{
+ const x=await setup({enabled:true,remote:{revision:3,data:{...empty(),plan:'cloud'}},replace:()=>{throw new Error('Save or copy your unfinished draft first.');}});
+ try{assert.equal(x.state().plan,'');assert.match(x.w.document.getElementById('sync-status').textContent,/unfinished draft/);assert.equal(x.calls.filter(c=>c.opts.method==='PUT').length,0);}finally{x.dom.window.close();}
+});

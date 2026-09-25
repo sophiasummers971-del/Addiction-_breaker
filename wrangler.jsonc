@@ -10,7 +10,7 @@
     {
       "binding": "DB",
       "database_name": "addiction-breaker",
-      "database_id": "00000000-0000-0000-0000-000000000000",
+      "database_id": "ab2e069b-2ddf-4385-987e-e3ed9fc1de9d",
       "migrations_dir": "migrations"
     }
   ],

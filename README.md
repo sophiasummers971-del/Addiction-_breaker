@@ -1,6 +1,6 @@
 # Addiction Breaker
 
-Version 0.7 adds a multi-page personal dashboard, five addiction-support journeys, and optional Google accounts with Cloudflare D1 journal sync. Guest use, local analysis and backups still work without an account. The feature branch is deployed to an isolated Cloudflare preview. Google login and initial sync were confirmed by the owner; production release remains separate.
+Version 0.8 adds settings, system/light/dark appearance, FAQs, optional trigger/coping reflections and a plan-writing helper alongside a multi-page personal dashboard, five addiction-support journeys, and optional Google accounts with Cloudflare D1 journal sync. Guest use, local analysis and backups still work without an account. The isolated Cloudflare preview has been exercised by the owner for Google login and initial sync. That confirms the preview flow, not every account, offline or recovery scenario. See [handoff.txt](handoff.txt) for the latest release evidence and [docs/DEPLOYMENT.md](docs/DEPLOYMENT.md) for production setup.
 
 ## Run the application
 
@@ -25,11 +25,14 @@ Open http://127.0.0.1:3737. The local Node preview is guest-only. Cloudflare dep
 | `/journal/` | Entries, exact earlier Echoes, search and date filters, edit/delete |
 | `/mirror/` | Local gambling-history analysis from CSV, TSV or JSON |
 | `/support/` | Support links, privacy, journal export/restore and device erasure |
+| `/settings/` | Appearance, saving guidance and links to account and data controls |
+| `/faq/` | Plain-language answers about privacy, journeys and support |
+| `/roadmap/` | Ideas under consideration; no promised features or paid membership |
 | `/account/` | Google sign-in, explicit sync consent, guest import, conflict resolution, cloud export, logout and account deletion |
 
 Each route has its own generated directory/index page and can be opened directly. Internal navigation preserves in-memory work. Existing hash links remain supported. Desktop uses a sidebar; mobile uses bottom navigation and a More menu. The original illustration and optional local piano remain.
 
-New visitors start with a choice of journeys, including General / not sure. Existing gambling records remain gambling records. A shared account can contain one entry per date per category; the dashboard and journal display only the active category. Gambling alone uses the existing Echo retrieval and gambling-history analysis. Other check-ins use category-appropriate questions, without clinical scoring or detox instructions. The plan is explicitly shared across journeys.
+New visitors start with a choice of journeys, including General / not sure. Existing gambling records remain gambling records. An account can contain one entry per date per category; the dashboard and journal display only the active category. Gambling alone uses the existing Echo retrieval and gambling-history analysis. Other check-ins use category-appropriate questions, without clinical scoring or detox instructions. The plan is explicitly shared across journeys.
 
 Version 2 backups include the support profile and category on every entry. Version 1 backups are still accepted and interpreted as gambling. Cloud reads normalize old records without rewriting them; older clients cannot overwrite an already-upgraded cloud document. Support choices follow the same optional saving and syncing choices as the journal.
 
@@ -37,11 +40,11 @@ Version 2 backups include the support profile and category on every entry. Versi
 
 Guest entries start in page memory. Refreshing or closing loses them unless **Remember my journal** is enabled. That switch takes effect immediately and also enables form-draft saving. Browser storage and exported backups are unencrypted.
 
-Google sign-in alone does not upload guest notes. Account journals have separate browser storage. Cloud sync requires an explicit choice; importing the old guest journal requires a separate confirmation. Sync sends journal entries and the plan to Cloudflare; this is **not end-to-end encryption**. Conflicting device versions pause for an explicit choice instead of silently overwriting. Pending changes survive a refresh only when device saving is enabled. Signing out clears the account's browser copy; the separate guest copy remains.
+Google sign-in alone does not upload guest notes. Account journals have separate browser storage. Cloud sync requires an explicit choice; importing the old guest journal requires a separate confirmation. Sync sends journal entries, selected support journeys and the shared plan to Cloudflare; this is **not end-to-end encryption**. Conflicting device versions pause for an explicit choice instead of silently overwriting. Pending changes are retained across refreshes only when device saving is enabled. Reopening an account journal requires a successful online session check; this is not a fully offline account application. Signing out clears the account's browser copy; the separate guest copy remains.
 
 Device erasure turns off sync and does not delete existing cloud records. Account deletion removes the application's account, journal and sessions; downloaded backups and provider-retained backups are separate. This service does not monitor journals or dispatch emergency help.
 
-Selected gambling-history exports are processed locally in a Web Worker and never uploaded. History limits: 2 MiB, 20,000 rows, 100 people, one currency per file. Local journal backups: 5 MiB and 5,000 entries. Cloud request limit: 1 MiB including request metadata; a document very close to the limit may be rejected. The app shell caches public code only, never API responses or journal data. Actual Android install/offline and visual-browser checks remain release gates.
+Selected gambling-history exports are processed locally in a Web Worker and never uploaded. History limits: 2 MiB, 20,000 rows, 100 people, one currency per file. Local journal backups: 5 MiB and 5,000 entries. Cloud request limit: 1 MiB including request metadata; a document very close to the limit may be rejected. The service worker caches public code and illustrations only, never API responses or journal data. Opted-in journal copies are stored separately in browser localStorage. Initial shell caching requires a successful visit; cached public pages do not guarantee Google login or sync while offline. Actual Android install/offline checks remain unverified; see the release handoff for browser verification.
 
 ## Input contract
 
@@ -80,4 +83,4 @@ Original research commands remain available (`npm run run`, `demo:journal`, `dem
 
 ## Licence
 
-See `LICENSE`, including the project's ethical note. This project is intended to help people understand gambling harm, not optimise compulsive engagement.
+See `LICENSE`, including the project's ethical note. This project offers personal reflection and addiction-support signposting, including gambling-history analysis. It must not optimise compulsive engagement. Planned options and explicit non-goals are tracked in [docs/ROADMAP.md](docs/ROADMAP.md).

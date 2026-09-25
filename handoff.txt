@@ -180,3 +180,41 @@ Legacy v1 imports and stored cloud rows normalize on read; old clients receive
 Both Google values must be Secret type with Wrangler configuration; this avoids
 Text values disappearing during deployment. Owner confirmed login/initial sync.
 Integrated automated checks passed and Worker compiled; publishing preview only.
+
+2026-09-25 — INDEPENDENT RELEASE REVIEW (BEFORE FINAL PUBLICATION)
+Reviewed current API/store, cloud sync, public-shell service worker and deployment
+configuration. No API/store isolation defect identified in this pass: Google sub
+mapping, hashed expiring secure sessions, exact origin and CSRF checks, account
+scoping, atomic revisions and v1-over-v2 downgrade prevention remain in place.
+This is a code review, not a penetration test or live two-account certification.
+
+At review time production wrangler.jsonc DB ID was still all-zero. Distinct
+production D1 creation/migration/binding and production Google credentials and
+callback are required before accounts can launch publicly. Existing preview
+configuration is not evidence of production setup. Coordinator owns those steps.
+
+Raised a draft-loss risk to coordinator: cloud reconciliation's replaceState
+clears an unfinished form draft, potentially after the person types during a
+slow cloud read. Request guarding replacement or retaining draft before release.
+Fresh offline reload cannot reopen an account cache until online session check
+succeeds. README now explicitly states this limitation instead of promising fully
+offline account use. Public-shell cache never includes private API responses;
+opted-in account records are separate unencrypted browser localStorage.
+
+README privacy copy now explicitly includes synced journey/profile choices.
+Added docs/ROADMAP.md distinguishing current foundation, settings/FAQ/appearance
+release work, possible reminders/reasons/goals/coping logs and undecided premium.
+Essential support is not proposed as a paid gate. No clinical, recovery or
+end-to-end-encryption claims added. This review did not deploy or read private
+production data. Coordinator should append actual final release evidence below.
+
+REVIEW FOLLOW-UP — SYNC PROTECTION IMPLEMENTED
+Coordinator assigned sync.js/test/sync.test.js to this review agent. Added a
+successful-reconciliation gate before any upload after init/enable/read failure.
+Cloud replacement refusal (such as unfinished draft protection from app.js)
+remains visible without claiming sync, losing conflict state or advancing its
+revision. Guest import catches the same replacement error. Delayed cloud-read
+coverage confirms newly saved entry and plan remain local and trigger conflict
+against a newer cloud revision. Four additional sync tests pass; sync suite is
+13/13. Final combined suite remains coordinator-owned. No production changes by
+this agent. The earlier draft risk depends on coordinator's matching app.js guard.

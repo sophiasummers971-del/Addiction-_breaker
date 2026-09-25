@@ -1,6 +1,6 @@
 {
   "name": "addiction-breaker",
-  "version": "0.7.0",
+  "version": "0.8.0",
   "description": "Private reflection, addiction support journeys, optional Google accounts and Cloudflare journal sync.",
   "keywords": [
     "responsible-gambling",
@@ -35,7 +35,7 @@
     "web:start": "node web/app.js",
     "start": "node web/app.js",
     "test:core": "node test/run_tests.js && node --test test/standalone.test.js && node --test test/static.test.js",
-    "test:ui": "node --test test/ui.test.js",
+    "test:ui": "node --test test/ui.test.js test/preferences.test.js",
     "build": "node scripts/build-static.js",
     "prestart": "npm run build",
     "preweb:start": "npm run build",

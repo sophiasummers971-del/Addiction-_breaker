@@ -2,7 +2,7 @@
 (()=>{
  const app=window.AddictionApp;if(!app)return;
  const panel=document.getElementById('account-panel'),banner=document.getElementById('sync-status');
- let session=null,configured=false,enabled=false,revision=0,pending=false,conflict=null,busy=false,unavailable=false,epoch=0,changes=0,timer;
+ let session=null,configured=false,enabled=false,revision=0,pending=false,conflict=null,busy=false,unavailable=false,epoch=0,changes=0,reconciled=false,timer;
  const snapshot=()=>{const s=app.getState();return {version:2,entries:s.entries,plan:s.plan,profile:s.profile};};
  const equal=(a,b)=>JSON.stringify(a)===JSON.stringify(b);
  const nonempty=d=>d.entries.length>0||d.plan.length>0||(d.profile?.categories?.length||0)>0;
@@ -32,10 +32,10 @@
   node('p','Cloud journal limit: 1 MB. Device backups can be larger. Raw gambling-history exports stay on your device.');
   if(conflict){const box=node('div');box.className='inset';node('h3','Two different versions need your choice',box);node('p','Another device may have changed your cloud journal. Nothing has been overwritten. Export your device journal from Support before replacing it if you want to keep both.',box);
    button('Use cloud version',()=>resolve(false),box);button('Keep this device version',()=>resolve(true),box);
-  }else if(!enabled){button('Enable cloud sync',enable);}else{button(pending?'Retry pending sync':'Check cloud now',()=>reconcile());button('Turn off cloud sync',()=>{enabled=false;epoch++;clearTimeout(timer);metadata();status('Cloud sync is off. Existing cloud records remain in your account.');draw();});}
+  }else if(!enabled){button('Enable cloud sync',enable);}else{button(pending?'Retry pending sync':'Check cloud now',()=>reconcile());button('Turn off cloud sync',()=>{enabled=false;reconciled=false;epoch++;clearTimeout(timer);metadata();status('Cloud sync is off. Existing cloud records remain in your account.');draw();});}
   const guest=app.guestData();if(guest.entries.length||guest.plan)button('Import guest journal into this account',()=>{
    if(!confirm('Replace this account’s current journal and plan with the guest journal? Your original guest copy stays on this device. If sync is enabled, this also updates the cloud copy.'))return;
-   app.replaceState({...guest,remember:app.getState().remember});markChanged();
+   try{app.replaceState({...guest,remember:app.getState().remember});markChanged();}catch(error){status(error.message);}
   });
   const a=node('a','Download cloud backup');a.href='/api/export';a.className='text-link';
   button('Sign out and clear this account from this browser',()=>endAccount(false));
@@ -48,29 +48,30 @@
   const generation=++epoch;clearTimeout(timer);busy=true;
   try{const next=await request('session');if(generation!==epoch)return;configured=next.configured;unavailable=false;
    if(session?.user.id!==next.user?.id){if(session)app.clearContext();app.switchContext(next.user?.id||null);}
-   session=next.user?next:null;enabled=false;pending=false;revision=0;conflict=null;
+   session=next.user?next:null;reconciled=false;enabled=false;pending=false;revision=0;conflict=null;
    if(session){try{const m=JSON.parse(localStorage.getItem(key())||'{}');enabled=m.enabled===true;revision=Number.isSafeInteger(m.revision)?m.revision:0;pending=m.pending===true;}catch{} }
    busy=false;draw();if(session&&enabled)await reconcile();else {applyOnboarding();status(session?'Signed in. Cloud sync is off.':'Guest mode · your journal stays here.');}
   }catch{if(generation!==epoch)return;unavailable=true;busy=false;status('Account connection unavailable. Your current journal remains here.');draw();}
  }
  async function enable(){
   if(!confirm('Enable cloud storage for this account’s journal, support choices and plan? Your notes will be accessible to this service. Guest notes are not included unless you import them.'))return;
-  enabled=true;metadata();await reconcile();
+  enabled=true;reconciled=false;metadata();await reconcile();
  }
  async function reconcile(){
-  if(!session||!enabled||busy)return;const generation=epoch;busy=true;draw();
+  if(!session||!enabled||busy)return;const generation=epoch;reconciled=false;busy=true;draw();
   try{const remote=await request('snapshot');if(generation!==epoch)return;
    remote.data=normalized(remote.data);const local=snapshot();
    if(equal(local,remote.data)){revision=remote.revision;pending=false;conflict=null;}
    else if(!nonempty(local)&&!pending){app.replaceState({...remote.data,remember:app.getState().remember});revision=remote.revision;pending=false;}
    else if(remote.revision===revision&&(pending||remote.revision===0)){pending=true;}
    else {conflict=remote;status('Sync paused: choose which journal to keep on your account page.');}
-   metadata();busy=false;if(!conflict)applyOnboarding();draw();if(!conflict&&pending)await flush();else if(!conflict)pendingStatus();
+   reconciled=true;metadata();busy=false;if(!conflict)applyOnboarding();draw();if(!conflict&&pending)await flush();else if(!conflict)pendingStatus();
   }catch(error){if(generation!==epoch)return;busy=false;status(error.message);draw();}
  }
  function markChanged(){changes++;if(!session)return;pending=true;metadata();pendingStatus();if(enabled&&!conflict){clearTimeout(timer);timer=setTimeout(flush,650);}}
  async function flush(){
   if(!session||!enabled||busy||conflict||!pending)return;
+  if(!reconciled){await reconcile();return;}
   const generation=epoch,sequence=changes,body={baseRevision:revision,data:snapshot()};
   if(new Blob([JSON.stringify(body.data)]).size>1024*1024){status('Cloud sync paused: journal exceeds 1 MB. Export a backup before removing older entries.');return;}
   busy=true;draw();
@@ -80,7 +81,7 @@
  async function resolve(keepLocal){
   if(!conflict||busy)return;
   if(!confirm(keepLocal?'Replace the cloud journal with this device’s current version?':'Replace this device’s journal with the cloud version? Export a device backup first if needed.'))return;
-  revision=conflict.revision;if(!keepLocal)app.replaceState({...conflict.data,remember:app.getState().remember});pending=keepLocal;conflict=null;metadata();draw();if(pending)await flush();else pendingStatus();
+  try{if(!keepLocal)app.replaceState({...normalized(conflict.data),remember:app.getState().remember});revision=conflict.revision;pending=keepLocal;conflict=null;reconciled=true;metadata();draw();if(pending)await flush();else pendingStatus();}catch(error){status(error.message);draw();}
  }
  async function endAccount(remove){
   if(busy)return;if((remove||pending)&&!confirm(remove?'Permanently delete this application account and its cloud journal?':'Some changes may not be synced. Sign out and remove the local account copy anyway?'))return;
@@ -90,7 +91,7 @@
   }catch(error){busy=false;status(error.message);draw();}
  }
  document.addEventListener('journal:changed',markChanged);
- document.addEventListener('journal:erased',()=>{epoch++;clearTimeout(timer);busy=false;enabled=false;pending=false;conflict=null;if(session)metadata();status('Device journal erased. Sync is off; cloud records have not been deleted.');draw();});
+ document.addEventListener('journal:erased',()=>{epoch++;clearTimeout(timer);busy=false;enabled=false;reconciled=false;pending=false;conflict=null;if(session)metadata();status('Device journal erased. Sync is off; cloud records have not been deleted.');draw();});
  window.addEventListener('storage',event=>{if(session&&event.key===key()&&event.newValue===null)init();});
  window.addEventListener('online',()=>{if(session&&enabled)reconcile();else if(!session)init();});
  window.addEventListener('beforeunload',event=>{if(pending&&enabled&&!app.getState().remember){event.preventDefault();event.returnValue='';}});
