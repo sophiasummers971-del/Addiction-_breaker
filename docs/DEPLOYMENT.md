@@ -1,4 +1,4 @@
-# Cloudflare Pages deployment — v0.6
+# Cloudflare Pages deployment — v0.8
 
 The app has public static pages plus optional Pages Functions and a D1 account database. Guest use does not require Google credentials or a database. Personal gambling-history files are always analysed locally.
 
@@ -24,14 +24,14 @@ npm run pages:dev
 
 `db:local` only migrates local Wrangler storage. Production auth requires HTTPS and an exact matching `APP_ORIGIN`. Do not weaken that check or remove secure cookies for local testing. Backend tests use real SQLite and a test-only function argument for Google's verified identity response; production cannot enable that seam with an environment variable.
 
-## One-time production setup (not performed by this implementation)
+## Production configuration
 
-1. Create a D1 database named `addiction-breaker` in the same Cloudflare account as the Pages project. Replace the all-zero `database_id` in `wrangler.jsonc` with its real ID. The all-zero value is intentionally a local placeholder, not a deployment-ready database.
+1. Production D1 `addiction-breaker` is configured in `wrangler.jsonc`, separate from `addiction-breaker-preview`. It was created and initialized with `0001_accounts.sql` on 25 September 2026. No preview records were copied.
 2. Review and apply `migrations/0001_accounts.sql` to that database, then bind it as `DB` to the Pages production environment. The migration creates new tables; it imports no guest data.
 3. In Google Cloud, configure the OAuth consent screen and create a Web application OAuth client. Authorise the exact redirect URI `https://addiction-breaker.pages.dev/api/auth/google/callback`. Configure test users while consent is in testing, or complete Google's publishing requirements. Do not put the client secret in Git or chat.
 4. Set both `GOOGLE_CLIENT_ID` and `GOOGLE_CLIENT_SECRET` as Secrets in Cloudflare Pages. Set `APP_ORIGIN=https://addiction-breaker.pages.dev`. Use Secret type for both in preview too: Wrangler-managed vars overwrite dashboard Text entries on deploy. Google stores the identity; this app stores the corresponding subject, email and display name.
 5. Change the existing Pages build settings: remove `SKIP_DEPENDENCY_INSTALL=true`, use `npm run build`, output `dist`, and supported Node 24. Dependencies now include `jose`, needed when Functions are bundled. Keep analytics disabled.
-6. Review the branch and release checks before merging or deploying. Git-connected main changes deploy automatically. This implementation has not merged or deployed anything.
+6. Review the branch and release checks before merging or deploying. Git-connected main changes deploy automatically. Check `handoff.txt` for the latest release status.
 
 Production project: `addiction-breaker`, repository `sophiasummers971-del/Addiction-_breaker`. A custom domain is optional. If added later, update `APP_ORIGIN` and the authorised Google callback together. Guest localStorage belongs to each exact origin; export before moving domains.
 

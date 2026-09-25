@@ -218,3 +218,23 @@ coverage confirms newly saved entry and plan remain local and trigger conflict
 against a newer cloud revision. Four additional sync tests pass; sync suite is
 13/13. Final combined suite remains coordinator-owned. No production changes by
 this agent. The earlier draft risk depends on coordinator's matching app.js guard.
+
+2026-09-25 — v0.8 INTEGRATED RELEASE CHECK
+Settings, FAQ and roadmap routes implemented; system/light/dark preference is
+separate from journal data. Help entry follows the selected journey; optional
+trigger/coping tags persist in the existing schema. Plan helper and copyable
+message send nothing automatically. Personal plans require explicit saving.
+Draft protection covers cloud restore and delayed identity/context switches.
+Integrated npm test: 92 checks passed (13 legacy, 16 standalone, 4 static,
+31 UI/preferences, 28 API/sync). Functions bundle compiled. GitHub Node22/24
+checks passed initial v0.8 commit; final draft fix will be checked on CI again.
+Preview browser verified theme persistence, contextual support links, saving
+plan to dashboard, coping tags in journal and FAQ navigation.
+Production D1 ab2e069b-2ddf-4385-987e-e3ed9fc1de9d created and initialized
+with 0001_accounts.sql. Separate from preview; no personal records copied.
+Production Google ID converted from Text to Secret without exposing value;
+existing client secret retained. Dependency-install skip removed.
+Production Google callback/end-to-end sign-in still requires live verification.
+Real two-device sync, Android installation/offline and full accessibility audit
+remain unverified. No support email invented; FAQ points to public technical
+issues with a warning not to submit personal records.

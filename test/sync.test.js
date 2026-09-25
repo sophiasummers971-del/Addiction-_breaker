@@ -3,12 +3,12 @@ const {test}=require('node:test');const assert=require('node:assert/strict');con
 const code=fs.readFileSync('web/public/sync.js','utf8');
 const empty=()=>({version:2,entries:[],plan:'',profile:{categories:[],active:'gambling'},remember:true});
 async function settle(){for(let i=0;i<8;i++)await new Promise(resolve=>setImmediate(resolve));}
-async function setup({remote={revision:0,data:{version:1,entries:[],plan:''}},guest=empty(),account=empty(),enabled=false,put,getSnapshot,replace}={}){
+async function setup({remote={revision:0,data:{version:1,entries:[],plan:''}},guest=empty(),account=empty(),enabled=false,put,getSnapshot,replace,getSession,hasDraft}={}){
  const dom=new JSDOM('<div id="account-panel"></div><p id="sync-status"></p>',{url:'https://app.test/account/',runScripts:'outside-only'});const w=dom.window;w.Blob=Blob;w.eval(fs.readFileSync('web/public/store.js','utf8'));guest=w.JournalStore.validate(guest);account=w.JournalStore.validate(account);let state=guest,ctx=null;const calls=[];let snap=remote;
  w.confirm=()=>true;w.Blob=Blob;w.localStorage.setItem('addiction-breaker:sync:u1',JSON.stringify({enabled,revision:0,pending:false}));
- w.AddictionApp={getState:()=>structuredClone(state),replaceState:data=>{if(replace)replace(data);state=structuredClone(data);},switchContext:id=>{ctx=id;state=id?structuredClone(account):structuredClone(guest);},clearContext:()=>{state=empty();},guestData:()=>structuredClone(guest),setProfile:profile=>{state.profile=profile;w.document.dispatchEvent(new w.CustomEvent('journal:changed'));},status:()=>{}};
+ w.AddictionApp={hasDraft:()=>hasDraft?hasDraft():false,getState:()=>structuredClone(state),replaceState:data=>{if(replace)replace(data);state=structuredClone(data);},switchContext:id=>{ctx=id;state=id?structuredClone(account):structuredClone(guest);},clearContext:()=>{state=empty();},guestData:()=>structuredClone(guest),setProfile:profile=>{state.profile=profile;w.document.dispatchEvent(new w.CustomEvent('journal:changed'));},status:()=>{}};
  w.fetch=async(url,opts)=>{calls.push({url,opts});let data,status=200;
- if(url==='/api/session')data={configured:true,user:{id:'u1',name:'Test',email:'test@example.test'},csrfToken:'csrf'};
+ if(url==='/api/session')data=getSession?await getSession():{configured:true,user:{id:'u1',name:'Test',email:'test@example.test'},csrfToken:'csrf'};
  else if(url==='/api/snapshot'&&opts.method==='PUT'){if(put){({data,status}=await put(JSON.parse(opts.body)));}else{const b=JSON.parse(opts.body);data=snap={revision:b.baseRevision+1,data:b.data};}}
  else if(url==='/api/snapshot')data=getSnapshot?await getSnapshot():snap;
  else data={ok:true};return {ok:status<400,status,json:async()=>data};};
@@ -40,4 +40,16 @@ test('draft replacement refusal stays visible and preserves cloud conflict choic
 test('initial restore blocked by draft neither uploads nor claims synced',async()=>{
  const x=await setup({enabled:true,remote:{revision:3,data:{...empty(),plan:'cloud'}},replace:()=>{throw new Error('Save or copy your unfinished draft first.');}});
  try{assert.equal(x.state().plan,'');assert.match(x.w.document.getElementById('sync-status').textContent,/unfinished draft/);assert.equal(x.calls.filter(c=>c.opts.method==='PUT').length,0);}finally{x.dom.window.close();}
+});
+test('delayed session response preserves guest draft until explicit retry after saving',async()=>{
+ let release,dirty=true;const delayed=new Promise(resolve=>{release=resolve;});const user={configured:true,user:{id:'u1',name:'Test',email:'test@example.test'},csrfToken:'csrf'};
+ const x=await setup({guest:{...empty(),plan:'guest writing'},getSession:()=>delayed,hasDraft:()=>dirty});
+ try{release(user);await settle();assert.equal(x.ctx(),null);assert.equal(x.state().plan,'guest writing');assert.match(x.w.document.getElementById('sync-status').textContent,/unfinished draft/);assert.equal(x.calls.filter(c=>c.url==='/api/snapshot').length,0);dirty=false;x.click('Check account connection again');await settle();assert.equal(x.ctx(),'u1');assert.equal(x.calls.filter(c=>c.opts.method==='PUT').length,0);}finally{x.dom.window.close();}
+});
+test('account change while draft is open pauses sync without clearing current account',async()=>{
+ let dirty=false,other=false;const x=await setup({enabled:true,account:{...empty(),plan:'account journal'},hasDraft:()=>dirty,getSession:async()=>({configured:true,user:{id:other?'u2':'u1',name:'Test',email:'test@example.test'},csrfToken:'csrf'})});
+ try{dirty=true;other=true;x.w.dispatchEvent(new x.w.StorageEvent('storage',{key:'addiction-breaker:sync:u1',newValue:null}));await settle();assert.equal(x.ctx(),'u1');assert.equal(x.state().plan,'account journal');assert.match(x.w.document.body.textContent,/Cloud sync is paused/);const count=x.calls.filter(c=>c.opts.method==='PUT').length;x.change('more writing');await new Promise(r=>setTimeout(r,700));assert.equal(x.calls.filter(c=>c.opts.method==='PUT').length,count);}finally{x.dom.window.close();}
+});
+test('explicit sign-out still clears context despite unfinished draft',async()=>{
+ const x=await setup({hasDraft:()=>false});try{x.w.AddictionApp.hasDraft=()=>true;x.click('Sign out and clear this account from this browser');await settle();assert.equal(x.ctx(),null);assert.equal(x.calls.filter(c=>c.url==='/api/logout').length,1);}finally{x.dom.window.close();}
 });

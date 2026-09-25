@@ -1,4 +1,4 @@
-# Architecture — v0.7
+# Architecture — v0.8
 
 ## Runtime and routes
 
@@ -46,3 +46,9 @@ API tests use real SQLite through a D1-shaped adapter. A function-argument-only 
 ## Journal v2 compatibility
 
 Every entry has an explicit category. Gambling uses played; other categories use engaged. Uniqueness is category plus date. Legacy version 1 is always interpreted as gambling, never relabelled to the active choice. Profile categories/active journey travel with cloud snapshots and backups. The next-step plan is shared. Existing rows normalize on read without being rewritten; a v1 client cannot overwrite a row already written as v2. Session-only onboarding choice may cross the Google redirect; existing account choices take precedence.
+
+## Release 0.8 additions
+
+Settings, FAQ and roadmap have direct routes. Appearance is a separate non-sensitive device preference. Optional trigger/coping reflections use the existing validated entry tags and travel with ordinary journal backups/sync. The writing helper adds user-authored reasons and steps to the shared plan only after an explicit action; Save is still required.
+
+Cloud replacement refuses unfinished drafts. Uploads wait for successful reconciliation; identity changes pause when a draft is open. Saved changes made during a slow read survive, with explicit conflict choices where needed.

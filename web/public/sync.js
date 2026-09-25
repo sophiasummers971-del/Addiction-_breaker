@@ -2,7 +2,7 @@
 (()=>{
  const app=window.AddictionApp;if(!app)return;
  const panel=document.getElementById('account-panel'),banner=document.getElementById('sync-status');
- let session=null,configured=false,enabled=false,revision=0,pending=false,conflict=null,busy=false,unavailable=false,epoch=0,changes=0,reconciled=false,timer;
+ let session=null,configured=false,enabled=false,revision=0,pending=false,conflict=null,busy=false,unavailable=false,epoch=0,changes=0,reconciled=false,contextPaused=false,timer;
  const snapshot=()=>{const s=app.getState();return {version:2,entries:s.entries,plan:s.plan,profile:s.profile};};
  const equal=(a,b)=>JSON.stringify(a)===JSON.stringify(b);
  const nonempty=d=>d.entries.length>0||d.plan.length>0||(d.profile?.categories?.length||0)>0;
@@ -23,6 +23,7 @@
  }
  function draw(){
   panel.replaceChildren();
+  if(contextPaused){node('h2','Your current writing is still here');node('p','The signed-in account changed while this page was open. Save your unfinished check-in or copy your words before switching. Export temporary entries if you want to keep them. Cloud sync is paused.');button('Check account connection again',init);return;}
   if(!session){node('h2','Keep your progress your way');node('p',unavailable?'Account service could not be reached. Guest tools still work.':configured?'Google sign-in is optional. Your existing guest journal stays on this browser until you explicitly import it.':'Accounts are not configured on this installation yet. Guest check-ins, backups and support are available.');
    if(configured){const a=node('a','Continue with Google');a.href='/api/auth/google/start';a.className='button primary';node('p','If you use an app wrapper, open this site in your normal browser to sign in.');}
    button('Check account connection again',init);return;
@@ -47,7 +48,12 @@
  async function init(){
   const generation=++epoch;clearTimeout(timer);busy=true;
   try{const next=await request('session');if(generation!==epoch)return;configured=next.configured;unavailable=false;
-   if(session?.user.id!==next.user?.id){if(session)app.clearContext();app.switchContext(next.user?.id||null);}
+   if(session?.user.id!==next.user?.id){
+    if(app.hasDraft?.()){contextPaused=true;busy=false;reconciled=false;status('Account switch paused: save your unfinished draft or copy your words, then check the account connection again.');draw();return;}
+    if(nonempty(snapshot())&&!app.getState().remember&&!confirm('Switch account context? Your current temporary journal will leave this page. Cancel and export a backup first if you want to keep it.')){contextPaused=true;busy=false;reconciled=false;status('Account switch paused. Export your temporary journal before continuing.');draw();return;}
+    if(session)app.clearContext();app.switchContext(next.user?.id||null);
+   }
+   contextPaused=false;
    session=next.user?next:null;reconciled=false;enabled=false;pending=false;revision=0;conflict=null;
    if(session){try{const m=JSON.parse(localStorage.getItem(key())||'{}');enabled=m.enabled===true;revision=Number.isSafeInteger(m.revision)?m.revision:0;pending=m.pending===true;}catch{} }
    busy=false;draw();if(session&&enabled)await reconcile();else {applyOnboarding();status(session?'Signed in. Cloud sync is off.':'Guest mode · your journal stays here.');}
@@ -58,7 +64,7 @@
   enabled=true;reconciled=false;metadata();await reconcile();
  }
  async function reconcile(){
-  if(!session||!enabled||busy)return;const generation=epoch;reconciled=false;busy=true;draw();
+  if(contextPaused||!session||!enabled||busy)return;const generation=epoch;reconciled=false;busy=true;draw();
   try{const remote=await request('snapshot');if(generation!==epoch)return;
    remote.data=normalized(remote.data);const local=snapshot();
    if(equal(local,remote.data)){revision=remote.revision;pending=false;conflict=null;}
@@ -68,9 +74,9 @@
    reconciled=true;metadata();busy=false;if(!conflict)applyOnboarding();draw();if(!conflict&&pending)await flush();else if(!conflict)pendingStatus();
   }catch(error){if(generation!==epoch)return;busy=false;status(error.message);draw();}
  }
- function markChanged(){changes++;if(!session)return;pending=true;metadata();pendingStatus();if(enabled&&!conflict){clearTimeout(timer);timer=setTimeout(flush,650);}}
+ function markChanged(){changes++;if(contextPaused){status('Account switch paused. Keep or export your current writing, then check the account connection again.');return;}if(!session)return;pending=true;metadata();pendingStatus();if(enabled&&!conflict){clearTimeout(timer);timer=setTimeout(flush,650);}}
  async function flush(){
-  if(!session||!enabled||busy||conflict||!pending)return;
+  if(contextPaused||!session||!enabled||busy||conflict||!pending)return;
   if(!reconciled){await reconcile();return;}
   const generation=epoch,sequence=changes,body={baseRevision:revision,data:snapshot()};
   if(new Blob([JSON.stringify(body.data)]).size>1024*1024){status('Cloud sync paused: journal exceeds 1 MB. Export a backup before removing older entries.');return;}
@@ -93,7 +99,7 @@
  document.addEventListener('journal:changed',markChanged);
  document.addEventListener('journal:erased',()=>{epoch++;clearTimeout(timer);busy=false;enabled=false;reconciled=false;pending=false;conflict=null;if(session)metadata();status('Device journal erased. Sync is off; cloud records have not been deleted.');draw();});
  window.addEventListener('storage',event=>{if(session&&event.key===key()&&event.newValue===null)init();});
- window.addEventListener('online',()=>{if(session&&enabled)reconcile();else if(!session)init();});
+ window.addEventListener('online',()=>{if(contextPaused)init();else if(session&&enabled)reconcile();else if(!session)init();});
  window.addEventListener('beforeunload',event=>{if(pending&&enabled&&!app.getState().remember){event.preventDefault();event.returnValue='';}});
  init().then(()=>{if(new URLSearchParams(location.search).get('auth')==='failed')status('Google sign-in did not complete. Try again, or continue as a guest.');});
 })();
