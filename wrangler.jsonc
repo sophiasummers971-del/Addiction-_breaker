@@ -17,7 +17,7 @@
   "env": {
     "preview": {
       "vars": {
-        "APP_ORIGIN": "https://feature-accounts-and-dashboard.addiction-breaker.pages.dev"
+        "APP_ORIGIN": "https://feature-accounts-and-dashboa.addiction-breaker.pages.dev"
       },
       "d1_databases": [
         {
