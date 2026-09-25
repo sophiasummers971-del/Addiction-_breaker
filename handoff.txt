@@ -153,3 +153,17 @@ Configured Pages previews only for feature/accounts-and-dashboard, with preview
 package installation enabled. Production branch/settings/data remain unchanged.
 Preview OAuth credentials are not yet configured; guest functionality can be
 reviewed without login. Canonical preview origin is the branch alias.
+
+PREVIEW VERIFIED — 2026-09-25
+Published branch through authenticated GitHub connector after CLI push lacked login.
+PR: https://github.com/sophiasummers971-del/Addiction-_breaker/pull/5 (draft)
+Preview: https://feature-accounts-and-dashboa.addiction-breaker.pages.dev/
+Cloudflare truncates branch aliases; corrected APP_ORIGIN accordingly in 4bd7275.
+Preview deployment 171c073e-3a08-48b5-9b1a-2f9fc7fc836d succeeded.
+Both GitHub PR workflows passed on 4bd7275.
+Desktop browser: visually inspected dashboard; synthetic check-in saved and
+survived reload; journal navigation, account unavailable state, journey hub and
+alcohol subpage verified. /api/session returns 200 configured:false, user:null,
+with no-store and security headers. Google credentials still missing; real login
+and two-device account sync remain unverified. Mobile device/offline tests remain.
+Production verified unchanged at e1e67d7, without D1 binding.
