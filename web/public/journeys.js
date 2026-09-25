@@ -10,31 +10,31 @@
  };
  let selected=new Set(),contextKey='';
  const key=()=>window.JournalStore.KEY+':journeys';
- function load(){contextKey=key();selected=new Set();try{const a=JSON.parse(localStorage.getItem(contextKey)||'[]');if(Array.isArray(a))selected=new Set(a.filter(v=>Object.hasOwn(journeys,v)));}catch{}}
- function save(){try{if(window.AddictionApp.getState().remember)localStorage.setItem(key(),JSON.stringify([...selected]));else localStorage.removeItem(key());}catch{window.AddictionApp.status('Journey choices could not be saved on this browser.',true);}}
+ function load(){contextKey=key();selected=new Set(window.AddictionApp.getState().profile?.categories||[]);}
+ function save(){try{const old=window.AddictionApp.getState().profile;const categories=[...selected];if(window.AddictionApp.setProfile({categories,active:categories.includes(old.active)?old.active:(categories[0]||'general')})===false){load();render(location.pathname.split('/')[2]);}}catch(error){window.AddictionApp.status(error.message,true);load();render(location.pathname.split('/')[2]);}}
  function el(tag,text,parent=target){const e=document.createElement(tag);if(text)e.textContent=text;parent.append(e);return e;}
  function link(text,url,parent){const a=el('a',text,parent);a.href=url;a.className='text-link';if(url.startsWith('https:'))a.rel='noreferrer';return a;}
  function render(category){
-  if(contextKey!==key())load();target.replaceChildren();const item=journeys[category];
+  load();target.replaceChildren();const item=journeys[category];
   if(!item){
    el('p','Choose any journeys that matter to you. You can choose more than one, or browse without choosing. These are information and support routes, not diagnoses or treatment programmes.');
    const grid=el('div');grid.className='grid two';for(const [id,data] of Object.entries(journeys)){
     const card=el('article',null,grid);card.className='card';el('h2',data.title,card);el('p',data.intro,card);
     const label=el('label',null,card);label.className='inline';const check=el('input',null,label);check.type='checkbox';check.checked=selected.has(id);check.addEventListener('change',()=>{check.checked?selected.add(id):selected.delete(id);save();});label.append(document.createTextNode(' Add to my journeys'));link('Explore '+data.title+' →','/journeys/'+id+'/',card);
    }
-   el('p','Journey choices are saved only on this browser when “Remember my journal” is enabled. They are not included in cloud sync or journal backups. The check-in and history-analysis tools currently cover gambling; the other journeys provide tailored information and support links.').className='small';
+   el('p','Your choices personalise your dashboard and check-ins. They are included in backups and optional account sync. Without device saving or cloud sync, choices last for this page session. Gambling history analysis remains a separate gambling-only tool.').className='small';
   }else{
    link('← All journeys','/journeys/',target);el('h2',item.title);el('p',item.intro).className='lede';if(item.warning)el('p',item.warning).className='inset';
    const steps=el('div');steps.className='grid';item.steps.forEach(([title,body],i)=>{const card=el('article',null,steps);card.className='card';el('p','STEP '+(i+1),card).className='eyebrow';el('h3',title,card);el('p',body,card);});
    const support=el('article');support.className='card';el('h3','Find support',support);for(const [label,url]of item.links){const p=el('p',null,support);link(label+' ↗',url,p);}
-   if(category==='gambling')link('Open gambling check-in →','/check-in/',support);
-   else el('p','This journey provides information and signposting. Substance-specific tracking and clinical treatment are not provided by this app.',support).className='small';
+   const start=el('button','Open my '+item.title+' dashboard',support);start.type='button';start.className='primary';start.addEventListener('click',()=>{try{const profile=window.AddictionApp.getState().profile;if(window.AddictionApp.setProfile({categories:[...new Set([...profile.categories,category])],active:category})===false)return;window.AddictionApp.navigate('/dashboard/');}catch(error){window.AddictionApp.status(error.message,true);}});
+   el('p','Check-ins are a record of your experience, not a diagnosis, detox plan or clinical treatment.',support).className='small';
    const source=el('p','Information source checked 25 September 2026: ');source.className='small';link('NHS guidance',item.source,source);
   }
   el('p','Support links are UK-focused and open independent services. In an emergency in the UK, call 999. Outside the UK, use your local emergency number.');
  }
  document.addEventListener('journey:route',event=>render(event.detail?.category));
  document.addEventListener('journal:context',()=>{load();render(location.pathname.split('/')[2]);});
- document.addEventListener('journal:changed',save);
+ document.addEventListener('journal:profile',()=>{load();render(location.pathname.split('/')[2]);});
  load();render(location.pathname.split('/')[2]);
 })();

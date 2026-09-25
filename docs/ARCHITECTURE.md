@@ -1,8 +1,8 @@
-# Architecture — v0.6
+# Architecture — v0.7
 
 ## Runtime and routes
 
-`scripts/build-static.js` builds a public asset allowlist, bundled browser analysis worker, security headers and individual route directories. All pages share a shell, but `/dashboard/`, `/check-in/`, `/pause/`, `/journal/`, `/mirror/`, `/support/`, `/account/` and `/journeys/*/` are actual server paths. Client navigation preserves page memory and moves focus. Only `/api/*` invokes Pages Functions, via `_routes.json`.
+`scripts/build-static.js` builds a public asset allowlist, bundled browser analysis worker, security headers and individual route directories, including the first-visit /start/ flow. All pages share a shell, but `/dashboard/`, `/check-in/`, `/pause/`, `/journal/`, `/mirror/`, `/support/`, `/account/` and `/journeys/*/` are actual server paths. Client navigation preserves page memory and moves focus. Only `/api/*` invokes Pages Functions, via `_routes.json`.
 
 `web/app.js` is the guest-only Node preview with a legacy bounded analysis endpoint. Production analysis runs entirely in the browser; production accounts run through `functions/api/[[path]].js` and `server/api.mjs`.
 
@@ -14,7 +14,7 @@
 | Account browser journal | Separate key per random application account ID, same device-saving opt-in |
 | Form draft | Current context only; persisted only with device saving |
 | Pause timer | sessionStorage timestamp, survives refresh within tab session |
-| Journey interests | Context-specific browser preference, only persisted with device saving |
+| Journey interests | Included in journal profile; same optional device/cloud saving |
 | Cloud journal/plan | D1 snapshot, optional explicit sync |
 | Account identity | D1 Google subject, display name, email, random internal ID |
 | Auth session | Secure HttpOnly SameSite=Lax host-only cookie; hash and CSRF token in D1; seven-day expiry |
@@ -37,8 +37,12 @@ Device erasure stops client sync without deleting cloud data. Account deletion t
 
 `src/analysis.js` validates history and suppresses financial conclusions with insufficient evidence. `src/journal.js` retrieves exact prior notes from high-urge, explicitly non-gambling days. Neither is a clinical risk model. Hook Score remains an unvalidated descriptive index; it does not diagnose or measure recovery. Research/Markov experiments remain separate and unpublished.
 
-`journeys.js` offers source-linked, UK-focused signposting. Gambling has structured tracking; other categories do not pretend to have substance-specific tracking or treatment. Alcohol guidance includes withdrawal escalation and explicitly avoids detox instructions. Clinical review and live link review remain necessary before making treatment or commercial claims.
+`journeys.js` offers source-linked, UK-focused signposting. Each category has a contextual reflection check-in. Gambling alone uses historical analysis and Echoes. These tools are not treatment. Alcohol guidance includes withdrawal escalation and explicitly avoids detox instructions. Clinical review and live link review remain necessary before making treatment or commercial claims.
 
 ## Verification limits
 
 API tests use real SQLite through a D1-shaped adapter. A function-argument-only test seam substitutes verified Google claims; it is never configurable from production bindings. Actual Google login, Cloudflare deployment, Android rendering and installed-app/offline behaviour must be verified in a configured preview. See DEPLOYMENT.md and handoff.txt.
+
+## Journal v2 compatibility
+
+Every entry has an explicit category. Gambling uses played; other categories use engaged. Uniqueness is category plus date. Legacy version 1 is always interpreted as gambling, never relabelled to the active choice. Profile categories/active journey travel with cloud snapshots and backups. The next-step plan is shared. Existing rows normalize on read without being rewritten; a v1 client cannot overwrite a row already written as v2. Session-only onboarding choice may cross the Google redirect; existing account choices take precedence.

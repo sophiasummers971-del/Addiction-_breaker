@@ -21,7 +21,7 @@ fs.writeFileSync(path.join(out,'_headers'),`/*
   Cache-Control: no-cache
 `);
 fs.writeFileSync(path.join(out,'404.html'),'<!doctype html><html lang="en"><meta charset="utf-8"><title>Page not found</title><h1>Page not found</h1><a href="/">Return to Addiction Breaker</a></html>');
-const routes=['dashboard','check-in','pause','journal','mirror','support','account','journeys','journeys/gambling','journeys/alcohol','journeys/smoking','journeys/drugs','journeys/behaviours'];
+const routes=['start','dashboard','check-in','pause','journal','mirror','support','account','journeys','journeys/gambling','journeys/alcohol','journeys/smoking','journeys/drugs','journeys/behaviours'];
 const shell=fs.readFileSync(path.join(out,'index.html'),'utf8');
 for(const route of routes){const folder=path.join(out,route);fs.mkdirSync(folder,{recursive:true});const title=route.split('/').at(-1).replaceAll('-',' ');fs.writeFileSync(path.join(folder,'index.html'),shell.replace(/<title>.*?<\/title>/,`<title>${title[0].toUpperCase()+title.slice(1)} — Addiction Breaker</title>`));}
 fs.writeFileSync(path.join(out,'_routes.json'),JSON.stringify({version:1,include:['/api/*'],exclude:[]},null,2));

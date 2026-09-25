@@ -1,6 +1,6 @@
 # Addiction Breaker
 
-Version 0.6 adds a multi-page personal dashboard, five addiction-support journeys, and optional Google accounts with Cloudflare D1 journal sync. Guest use, local analysis and backups still work without an account. **This branch has not been deployed; production account setup and live Google verification remain required.**
+Version 0.7 adds a multi-page personal dashboard, five addiction-support journeys, and optional Google accounts with Cloudflare D1 journal sync. Guest use, local analysis and backups still work without an account. The feature branch is deployed to an isolated Cloudflare preview. Google login and initial sync were confirmed by the owner; production release remains separate.
 
 ## Run the application
 
@@ -17,9 +17,10 @@ Open http://127.0.0.1:3737. The local Node preview is guest-only. Cloudflare dep
 
 | Page | What it does |
 |---|---|
-| `/dashboard/` | Recorded check-in totals, recent information and your plan; no invented recovery score |
+| `/start/` | Choose support journeys, continue without an account, or sign in |
+| `/dashboard/` | Active-journey check-ins, relevant support and your shared plan |
 | `/journeys/` | Choose several interests and open gambling, alcohol, smoking, drugs/medication concerns or compulsive-behaviour information pages |
-| `/check-in/` | Gambling-specific daily ratings, notes and whether gambling occurred |
+| `/check-in/` | Category-specific daily reflection, ratings and notes |
 | `/pause/` | Ten-minute pause with tab-session timer recovery and a next-step plan |
 | `/journal/` | Entries, exact earlier Echoes, search and date filters, edit/delete |
 | `/mirror/` | Local gambling-history analysis from CSV, TSV or JSON |
@@ -28,7 +29,9 @@ Open http://127.0.0.1:3737. The local Node preview is guest-only. Cloudflare dep
 
 Each route has its own generated directory/index page and can be opened directly. Internal navigation preserves in-memory work. Existing hash links remain supported. Desktop uses a sidebar; mobile uses bottom navigation and a More menu. The original illustration and optional local piano remain.
 
-Journey pages provide different information and source links, not five copies of a gambling form. Only gambling has structured check-ins and history analysis in this release. Other journeys are support signposting, not treatment programmes. Selections are local, opt-in browser preferences; they are not cloud-synced or included in journal backups.
+New visitors start with a choice of journeys, including General / not sure. Existing gambling records remain gambling records. A shared account can contain one entry per date per category; the dashboard and journal display only the active category. Gambling alone uses the existing Echo retrieval and gambling-history analysis. Other check-ins use category-appropriate questions, without clinical scoring or detox instructions. The plan is explicitly shared across journeys.
+
+Version 2 backups include the support profile and category on every entry. Version 1 backups are still accepted and interpreted as gambling. Cloud reads normalize old records without rewriting them; older clients cannot overwrite an already-upgraded cloud document. Support choices follow the same optional saving and syncing choices as the journal.
 
 ## Saving and privacy
 

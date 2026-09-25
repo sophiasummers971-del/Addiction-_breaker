@@ -167,3 +167,16 @@ alcohol subpage verified. /api/session returns 200 configured:false, user:null,
 with no-store and security headers. Google credentials still missing; real login
 and two-device account sync remain unverified. Mobile device/offline tests remain.
 Production verified unchanged at e1e67d7, without D1 binding.
+
+2026-09-25 — v0.7 PERSONALISED JOURNEYS
+New first-visit /start page uses existing art and asks for support journeys.
+Multiple choices, general/skip, guest continuation and sign-in handoff supported.
+Dashboard/check-in/journal scope to active category; original gambling entries
+retain gambling meaning. Category/date uniqueness permits separate same-day logs.
+Non-gambling records use engaged, without gambling Echoes or clinical claims.
+Shared plan is labeled. Profile choices now sync and export with schema v2.
+Legacy v1 imports and stored cloud rows normalize on read; old clients receive
+426 instead of overwriting a v2 document. No bulk migration or personal data read.
+Both Google values must be Secret type with Wrangler configuration; this avoids
+Text values disappearing during deployment. Owner confirmed login/initial sync.
+Integrated automated checks passed and Worker compiled; publishing preview only.

@@ -13,7 +13,7 @@ const assets = {
   '/sample.csv':['public/sample.csv','text/csv'], '/manifest.webmanifest':['public/manifest.webmanifest','application/manifest+json'],
   '/icon.svg':['public/icon.svg','image/svg+xml'], '/sw.js':['public/sw.js','text/javascript']
 };
-for(const route of ['dashboard','check-in','pause','journal','mirror','support','account','journeys','journeys/gambling','journeys/alcohol','journeys/smoking','journeys/drugs','journeys/behaviours'])assets['/'+route+'/']=['../dist/'+route+'/index.html','text/html'];
+for(const route of ['start','dashboard','check-in','pause','journal','mirror','support','account','journeys','journeys/gambling','journeys/alcohol','journeys/smoking','journeys/drugs','journeys/behaviours'])assets['/'+route+'/']=['../dist/'+route+'/index.html','text/html'];
 function createServer() {
   return http.createServer(async(req,res)=>{
     res.setHeader('Content-Security-Policy', "default-src 'self'; script-src 'self'; worker-src 'self'; style-src 'self'; img-src 'self' data:; connect-src 'self'; object-src 'none'; base-uri 'none'; frame-ancestors 'none'; form-action 'self'");
