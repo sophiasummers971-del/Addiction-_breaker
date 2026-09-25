@@ -238,3 +238,12 @@ Production Google callback/end-to-end sign-in still requires live verification.
 Real two-device sync, Android installation/offline and full accessibility audit
 remain unverified. No support email invented; FAQ points to public technical
 issues with a warning not to submit personal records.
+
+2026-09-25 — LIVE OWNER VERIFICATION AND SAVING COPY
+Owner added production OAuth callback and confirmed successful Google login.
+Owner confirmed same-account sync between Chrome and Edge on Android; screenshots
+show both signed in and up to date. Mobile layout confirmed after desktop mode
+was disabled. These are owner-reported checks, not automated two-device coverage.
+Changed misleading Temporary label to Device saving off / cloud sync shown below.
+Device saving on explicitly says this browser. Cloud status remains separately
+reported by the existing sync state machine; persistence behavior is unchanged.
