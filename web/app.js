@@ -8,11 +8,12 @@ const assets = {
   '/ambience.js':['public/ambience.js','text/javascript'], '/thin-ice.webp':['public/thin-ice.webp','image/webp'],
   '/':['public/index.html','text/html'], '/index.html':['public/index.html','text/html'],
   '/analysis-worker.js':['../dist/analysis-worker.js','text/javascript'],
-  '/app.js':['public/app.js','text/javascript'], '/styles.css':['public/styles.css','text/css'],
+  '/preferences.js':['public/preferences.js','text/javascript'], '/coping.js':['public/coping.js','text/javascript'], '/journeys.js':['public/journeys.js','text/javascript'], '/sync.js':['public/sync.js','text/javascript'], '/app.js':['public/app.js','text/javascript'], '/styles.css':['public/styles.css','text/css'],
   '/journal.js':['../src/journal.js','text/javascript'], '/store.js':['public/store.js','text/javascript'],
   '/sample.csv':['public/sample.csv','text/csv'], '/manifest.webmanifest':['public/manifest.webmanifest','application/manifest+json'],
   '/icon.svg':['public/icon.svg','image/svg+xml'], '/sw.js':['public/sw.js','text/javascript']
 };
+for(const route of ['settings','faq','roadmap','start','dashboard','check-in','pause','journal','mirror','support','account','journeys','journeys/gambling','journeys/alcohol','journeys/smoking','journeys/drugs','journeys/behaviours'])assets['/'+route+'/']=['../dist/'+route+'/index.html','text/html'];
 function createServer() {
   return http.createServer(async(req,res)=>{
     res.setHeader('Content-Security-Policy', "default-src 'self'; script-src 'self'; worker-src 'self'; style-src 'self'; img-src 'self' data:; connect-src 'self'; object-src 'none'; base-uri 'none'; frame-ancestors 'none'; form-action 'self'");
@@ -21,6 +22,7 @@ function createServer() {
     res.setHeader('Cache-Control','no-store');
     const json=(status,body)=>{res.writeHead(status,{'Content-Type':'application/json; charset=utf-8'});res.end(JSON.stringify(body));};
     let url; try {url=new URL(req.url,'http://localhost');} catch {return json(400,{error:'Invalid URL'});}
+    if (req.method==='GET' && url.pathname==='/api/session') return json(200,{configured:false,user:null});
     if (req.method==='GET' && url.pathname==='/api/health') return json(200,{status:'ok'});
     if (req.method==='GET' && assets[url.pathname]) {
       const [file,type]=assets[url.pathname];

@@ -94,3 +94,147 @@ Original soundtrack release: “One Next Step”
 - Existing opt-in, volume, immediate Off, background-stop protections remain.
 - Scheduler skips missed notes after a stall to avoid catch-up bursts.
 - Offline shell v4 includes the updated composition.
+
+2026-09-25 — v0.6 COMPLETE-APP IMPLEMENTATION CHECKPOINT
+Current worktree: /workspace/scratch/addiction-breaker-complete
+Branch: feature/accounts-and-dashboard
+Base: origin/main e1e67d747281814a5b5ac8137d72f865d8c1cc80
+No commits, pushes, merges, deployment, live database mutation or paid upgrade.
+Prior sections above describe historical releases; README and docs now describe
+this v0.6 implementation, not the still-live v0.5 deployment.
+
+Implemented:
+- Real page directories for dashboard, check-in, pause, journal, mirror,
+  support/privacy, account, journey hub and five nested addiction journeys.
+- Desktop sidebar, mobile bottom navigation/More, true dashboard metrics,
+  in-page navigation preserving temporary state, focus and hash compatibility.
+- Journal filters, immediate Remember controls, opted-in drafts and timer recovery.
+- Original visual asset and local optional piano retained.
+- Google OAuth backend with PKCE/state/nonce/jose verification, secure sessions,
+  exact origin/CSRF checks, account isolation, rate limits and D1 migration.
+- Opt-in cloud journal sync, guest/account separation, explicit guest import,
+  atomic revision conflicts, retry, cloud export, logout and deletion.
+- Device erase stops sync, never uploads an empty replacement. Pending changes
+  are durable only when device saving is enabled. Unreadable data is protected.
+- Five source-linked UK support journeys; alcohol warning avoids unsafe detox
+  instructions. Structured check-in/history tracking remain gambling-specific.
+  Journey selections are local-only, not included in cloud/backups.
+
+Verification on integrated code:
+- npm test: 64 passed (13 legacy + 13 standalone + 4 static + 18 UI + 16 account).
+- npm run functions:build: compiled Worker successfully.
+- npm run db:local: all 11 migration statements applied to local D1 successfully.
+- git diff --check: passed.
+- No actual Google token exchange tested: backend test seam substitutes verified
+  claims, not production env configuration. Actual credentials are a launch gate.
+- Browser visual checks BLOCKED: Browser Use cannot open localhost, reports
+  net::ERR_BLOCKED_BY_CLIENT. No screenshot or real-browser validation claimed.
+- Wrangler Pages local runtime BLOCKED: uv_interface_addresses Unknown system
+  error 1 after successful compile. Local D1 migration works; full local Pages
+  HTTP runtime not demonstrated. Do not bypass environment restrictions.
+
+Remaining before release:
+1. Review current code/diff and authorise commit/push/preview separately, per
+   applied code-work skill (does not infer publication from implementation).
+2. Set up dedicated preview D1, Google Web OAuth client/consent and secure secrets.
+   Replace dummy database ID only with real authorised database. No secrets in chat.
+3. Remove SKIP_DEPENDENCY_INSTALL=true from existing Pages config because Functions
+   now depend on jose. Build npm run build; output dist; supported Node 24.
+4. Run preview with live Google cancellation/sign-in/logout and two real accounts;
+   test two-device conflicts/export/delete, narrow Android, keyboard and offline.
+5. Review content/privacy and provider retention terms before public launch.
+   This is reflection/support signposting, not validated clinical treatment.
+See docs/DEPLOYMENT.md for exact callback and configuration requirements.
+
+2026-09-25 — AUTHORISED PREVIEW PUBLICATION
+User explicitly approved commit, push and Cloudflare preview.
+Created separate addiction-breaker-preview D1 database and applied initial schema.
+Configured Pages previews only for feature/accounts-and-dashboard, with preview
+package installation enabled. Production branch/settings/data remain unchanged.
+Preview OAuth credentials are not yet configured; guest functionality can be
+reviewed without login. Canonical preview origin is the branch alias.
+
+PREVIEW VERIFIED — 2026-09-25
+Published branch through authenticated GitHub connector after CLI push lacked login.
+PR: https://github.com/sophiasummers971-del/Addiction-_breaker/pull/5 (draft)
+Preview: https://feature-accounts-and-dashboa.addiction-breaker.pages.dev/
+Cloudflare truncates branch aliases; corrected APP_ORIGIN accordingly in 4bd7275.
+Preview deployment 171c073e-3a08-48b5-9b1a-2f9fc7fc836d succeeded.
+Both GitHub PR workflows passed on 4bd7275.
+Desktop browser: visually inspected dashboard; synthetic check-in saved and
+survived reload; journal navigation, account unavailable state, journey hub and
+alcohol subpage verified. /api/session returns 200 configured:false, user:null,
+with no-store and security headers. Google credentials still missing; real login
+and two-device account sync remain unverified. Mobile device/offline tests remain.
+Production verified unchanged at e1e67d7, without D1 binding.
+
+2026-09-25 — v0.7 PERSONALISED JOURNEYS
+New first-visit /start page uses existing art and asks for support journeys.
+Multiple choices, general/skip, guest continuation and sign-in handoff supported.
+Dashboard/check-in/journal scope to active category; original gambling entries
+retain gambling meaning. Category/date uniqueness permits separate same-day logs.
+Non-gambling records use engaged, without gambling Echoes or clinical claims.
+Shared plan is labeled. Profile choices now sync and export with schema v2.
+Legacy v1 imports and stored cloud rows normalize on read; old clients receive
+426 instead of overwriting a v2 document. No bulk migration or personal data read.
+Both Google values must be Secret type with Wrangler configuration; this avoids
+Text values disappearing during deployment. Owner confirmed login/initial sync.
+Integrated automated checks passed and Worker compiled; publishing preview only.
+
+2026-09-25 — INDEPENDENT RELEASE REVIEW (BEFORE FINAL PUBLICATION)
+Reviewed current API/store, cloud sync, public-shell service worker and deployment
+configuration. No API/store isolation defect identified in this pass: Google sub
+mapping, hashed expiring secure sessions, exact origin and CSRF checks, account
+scoping, atomic revisions and v1-over-v2 downgrade prevention remain in place.
+This is a code review, not a penetration test or live two-account certification.
+
+At review time production wrangler.jsonc DB ID was still all-zero. Distinct
+production D1 creation/migration/binding and production Google credentials and
+callback are required before accounts can launch publicly. Existing preview
+configuration is not evidence of production setup. Coordinator owns those steps.
+
+Raised a draft-loss risk to coordinator: cloud reconciliation's replaceState
+clears an unfinished form draft, potentially after the person types during a
+slow cloud read. Request guarding replacement or retaining draft before release.
+Fresh offline reload cannot reopen an account cache until online session check
+succeeds. README now explicitly states this limitation instead of promising fully
+offline account use. Public-shell cache never includes private API responses;
+opted-in account records are separate unencrypted browser localStorage.
+
+README privacy copy now explicitly includes synced journey/profile choices.
+Added docs/ROADMAP.md distinguishing current foundation, settings/FAQ/appearance
+release work, possible reminders/reasons/goals/coping logs and undecided premium.
+Essential support is not proposed as a paid gate. No clinical, recovery or
+end-to-end-encryption claims added. This review did not deploy or read private
+production data. Coordinator should append actual final release evidence below.
+
+REVIEW FOLLOW-UP — SYNC PROTECTION IMPLEMENTED
+Coordinator assigned sync.js/test/sync.test.js to this review agent. Added a
+successful-reconciliation gate before any upload after init/enable/read failure.
+Cloud replacement refusal (such as unfinished draft protection from app.js)
+remains visible without claiming sync, losing conflict state or advancing its
+revision. Guest import catches the same replacement error. Delayed cloud-read
+coverage confirms newly saved entry and plan remain local and trigger conflict
+against a newer cloud revision. Four additional sync tests pass; sync suite is
+13/13. Final combined suite remains coordinator-owned. No production changes by
+this agent. The earlier draft risk depends on coordinator's matching app.js guard.
+
+2026-09-25 — v0.8 INTEGRATED RELEASE CHECK
+Settings, FAQ and roadmap routes implemented; system/light/dark preference is
+separate from journal data. Help entry follows the selected journey; optional
+trigger/coping tags persist in the existing schema. Plan helper and copyable
+message send nothing automatically. Personal plans require explicit saving.
+Draft protection covers cloud restore and delayed identity/context switches.
+Integrated npm test: 92 checks passed (13 legacy, 16 standalone, 4 static,
+31 UI/preferences, 28 API/sync). Functions bundle compiled. GitHub Node22/24
+checks passed initial v0.8 commit; final draft fix will be checked on CI again.
+Preview browser verified theme persistence, contextual support links, saving
+plan to dashboard, coping tags in journal and FAQ navigation.
+Production D1 ab2e069b-2ddf-4385-987e-e3ed9fc1de9d created and initialized
+with 0001_accounts.sql. Separate from preview; no personal records copied.
+Production Google ID converted from Text to Secret without exposing value;
+existing client secret retained. Dependency-install skip removed.
+Production Google callback/end-to-end sign-in still requires live verification.
+Real two-device sync, Android installation/offline and full accessibility audit
+remain unverified. No support email invented; FAQ points to public technical
+issues with a warning not to submit personal records.

@@ -63,18 +63,18 @@ test('HTTP startup, upload contract, limits, origin and security headers',async(
 const Store=require('../web/public/store');
 test('journal storage is opt-in, round-trips, and can be removed without other site data',()=>{
  const values=new Map([['other-app','keep']]);const storage={getItem:k=>values.get(k)||null,setItem:(k,v)=>values.set(k,v),removeItem:k=>values.delete(k)};
- const entry={date:'2026-09-01',urge:8,loneliness:7,social:2,sleep:4,financialStress:6,played:false,note:'My exact words <img src=x>',tags:[]};
+ const entry={category:'gambling',date:'2026-09-01',urge:8,loneliness:7,social:2,sleep:4,financialStress:6,played:false,note:'My exact words <img src=x>',tags:[]};
  let state={...Store.empty(),entries:[entry],plan:'Message someone'};
  Store.save(storage,state);assert.equal(values.has(Store.KEY),false);
  state.remember=true;Store.save(storage,state);assert.deepEqual(Store.load(storage),state);
  Store.save(storage,{...state,remember:false});assert.equal(values.has(Store.KEY),false);assert.equal(values.get('other-app'),'keep');
 });
 test('damaged, duplicate, future or invalid journal records are rejected',()=>{
- const entry={date:'2026-09-01',urge:8,loneliness:7,social:2,sleep:4,financialStress:6,played:false,note:'note'};
+ const entry={category:'gambling',date:'2026-09-01',urge:8,loneliness:7,social:2,sleep:4,financialStress:6,played:false,note:'note'};
  assert.throws(()=>Store.validate({...Store.empty(),entries:[entry,entry]}),/duplicate/);
  assert.throws(()=>Store.validateEntry({...entry,date:'2099-01-01'}),/date/);
  assert.throws(()=>Store.validateEntry({...entry,date:'2026-02-30'}),/date/);
- assert.throws(()=>Store.validateEntry({...entry,played:'false'}),/gamble/);
+ assert.throws(()=>Store.validateEntry({...entry,played:'false'}),/behaviour/);
  assert.throws(()=>Store.validateEntry({...entry,urge:11}),/ratings/);
  assert.throws(()=>Store.validateEntry({...entry,note:'x'.repeat(4001)}),/4,000/);
 });
@@ -95,3 +95,22 @@ test('all app shell assets are served and no research documents are exposed',asy
  assert.equal((await fetch(base+'/output/report_data.json')).status,404);
  }finally{await new Promise(r=>server.close(r));}
 });
+test('legacy journal backup migrates without relabeling gambling history',()=>{
+ const entry={date:'2026-01-01',urge:1,loneliness:1,social:1,sleep:1,financialStress:1,played:false,note:'old',tags:[]};
+ const v=Store.validate({version:1,entries:[{...entry,category:'alcohol'}],plan:'shared',remember:true});
+ assert.equal(v.version,2);assert.equal(v.entries[0].category,'gambling');assert.equal(v.entries[0].played,false);assert.deepEqual(v.profile,{categories:['gambling'],active:'gambling'});
+ assert.deepEqual(Store.validate({version:1,entries:[],plan:''}).profile,{categories:[],active:'gambling'});
+ assert.deepEqual(Store.validate({version:1,entries:[],plan:'existing plan'}).profile.categories,['gambling']);
+});
+test('multiple journeys allow one entry per category and date with strict behavior types',()=>{
+ const base={date:'2026-01-01',urge:1,loneliness:1,social:1,sleep:1,financialStress:1,note:'note',tags:[]};
+ const entries=[{...base,category:'gambling',played:false},{...base,category:'smoking',engaged:true}];
+ const data={...Store.empty(),entries,profile:{categories:['gambling','smoking'],active:'smoking'}};
+ assert.equal(Store.validate(data).entries.length,2);assert.equal(Store.validate(data).entries[1].played,undefined);
+ assert.throws(()=>Store.validate({...data,entries:[entries[1],entries[1]]}),/duplicate/);
+ assert.throws(()=>Store.validate({...data,entries:[{...base,category:'smoking',played:true}]}),/behaviour/);
+ assert.throws(()=>Store.validate({...data,profile:{categories:['smoking','smoking'],active:'smoking'}}),/unique/);
+ assert.throws(()=>Store.validate({...data,entries:[{...entries[0],category:'unknown'}]}),/category/);
+});
+
+test('active journey is one of the selected profile categories',()=>{assert.throws(()=>Store.validate({...Store.empty(),profile:{categories:['drugs'],active:'alcohol'}}),/journey/);assert.doesNotThrow(()=>Store.validate({...Store.empty(),profile:{categories:[],active:'general'}}));});

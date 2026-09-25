@@ -1,32 +1,53 @@
-# Cloudflare Pages deployment — v0.5
+# Cloudflare Pages deployment — v0.8
 
-The production app is static. Gambling histories are analysed in a browser Web Worker, without uploading personal records or invoking Cloudflare Functions. Journal data stays in the browser. No database, AI service, server binding, domain purchase or paid-plan upgrade is required.
+The app has public static pages plus optional Pages Functions and a D1 account database. Guest use does not require Google credentials or a database. Personal gambling-history files are always analysed locally.
 
-Cloudflare documents static Pages requests as free and unlimited on both free and paid plans: https://developers.cloudflare.com/pages/functions/pricing/ . Build/platform quotas still apply; no paid feature is enabled by this configuration.
+## Local development
 
-## Git-connected Pages settings
+Use Node 22.22.2+ or 24.15.0+ (CI covers 22 and 24):
 
-- Repository: `sophiasummers971-del/Addiction-_breaker`
-- Production branch: `main`
-- Build command: `node scripts/build-static.js`
-- Output directory: `dist`
-- Environment: `NODE_VERSION=24.19.0`, `SKIP_DEPENDENCY_INSTALL=true`
-- Preview deployments: disabled unless intentionally enabled later
-- Web analytics: disabled
-- Functions / storage / AI bindings: none
+```sh
+npm ci
+npm test
+npm start
+```
 
-The static build uses only Node built-ins; package installation is unnecessary. Development dependencies are for tests only. The build copies an explicit asset list, emits the analysis worker, a custom 404 page, and security headers. Never upload the whole repository as public assets.
+The local Node server at http://127.0.0.1:3737 is guest-only. It explicitly reports accounts as unconfigured. Do not mistake a guest preview for a working Google deployment.
 
-## Local run
+Validate the Cloudflare bundle and local database:
 
-`npm start` builds assets and starts the development server at http://127.0.0.1:3737. The legacy POST analysis endpoint remains available locally for compatibility, but the browser UI never calls it. It is not deployed to Pages.
+```sh
+npm run functions:build
+npm run db:local
+npm run pages:dev
+```
 
-## Release checks
+`db:local` only migrates local Wrangler storage. Production auth requires HTTPS and an exact matching `APP_ORIGIN`. Do not weaken that check or remove secure cookies for local testing. Backend tests use real SQLite and a test-only function argument for Google's verified identity response; production cannot enable that seam with an environment variable.
 
-Run `npm ci && npm test`. Check the deployed HTTPS app: navigation, local file analysis, check-ins, Echoes, storage opt-in and reload, restore/export, and support links. Browser install/offline behaviour should be checked on actual devices. A static deployment must not contain `_worker.js` or a Functions directory.
+## Production configuration
 
-## Updates and personal data
+1. Production D1 `addiction-breaker` is configured in `wrangler.jsonc`, separate from `addiction-breaker-preview`. It was created and initialized with `0001_accounts.sql` on 25 September 2026. No preview records were copied.
+2. Review and apply `migrations/0001_accounts.sql` to that database, then bind it as `DB` to the Pages production environment. The migration creates new tables; it imports no guest data.
+3. In Google Cloud, configure the OAuth consent screen and create a Web application OAuth client. Authorise the exact redirect URI `https://addiction-breaker.pages.dev/api/auth/google/callback`. Configure test users while consent is in testing, or complete Google's publishing requirements. Do not put the client secret in Git or chat.
+4. Set both `GOOGLE_CLIENT_ID` and `GOOGLE_CLIENT_SECRET` as Secrets in Cloudflare Pages. Set `APP_ORIGIN=https://addiction-breaker.pages.dev`. Use Secret type for both in preview too: Wrangler-managed vars overwrite dashboard Text entries on deploy. Google stores the identity; this app stores the corresponding subject, email and display name.
+5. Change the existing Pages build settings: remove `SKIP_DEPENDENCY_INSTALL=true`, use `npm run build`, output `dist`, and supported Node 24. Dependencies now include `jose`, needed when Functions are bundled. Keep analytics disabled.
+6. Review the branch and release checks before merging or deploying. Git-connected main changes deploy automatically. Check `handoff.txt` for the latest release status.
 
-Git-connected builds publish changes to main. Keep the production domain stable: journal storage belongs to the exact origin. Before moving a site, export journal backups. Restoring does not enable persistent storage automatically.
+Production project: `addiction-breaker`, repository `sophiasummers971-del/Addiction-_breaker`. A custom domain is optional. If added later, update `APP_ORIGIN` and the authorised Google callback together. Guest localStorage belongs to each exact origin; export before moving domains.
 
-The service worker caches application code only; bump its cache name when the asset set changes. Personal entries and analysis results are never cached by the service worker. Browser storage and downloaded backups remain unencrypted.
+## Release gates
+
+- `npm ci`, `npm test`, `npm run functions:build`, and local D1 migration succeed.
+- On a dedicated preview with its own D1 and Google callback, verify actual Google sign-in, cancellation, repeat sign-in, logout and expiry. Never bind a public preview to production private data.
+- Verify guest data does not upload on login; explicit sync/import; two-device conflict choices; offline retry; export/restore; deletion and isolation between two real accounts.
+- Check narrow Android and desktop layouts, keyboard focus, accessible controls, refresh on each real page path, installed-app behaviour and offline loading. Google sign-in may require the normal browser rather than an embedded WebView.
+- Confirm API responses are private/no-store and service worker never caches `/api/*`.
+- Confirm privacy/support copy and provider retention terms before opening to public users. Informational content has source links; this is not clinically validated treatment.
+
+## Free-tier and rollback boundaries
+
+No paid services or upgrades are enabled here. Static assets and Functions/D1 have different quotas; monitor usage and confirm current free limits before launch. Rate limits reduce accidental abuse but do not guarantee zero infrastructure cost on a paid account.
+
+If the account service is unavailable, guest tools remain usable and existing guest data stays local. Disabling cloud sync does not delete cloud records. Account deletion removes application rows and all active sessions; provider backups follow provider retention. Downloaded backups are outside server deletion.
+
+Keep the previous Pages deployment available for rollback. A code rollback does not undo D1 records. Do not drop the account database as a rollback shortcut. The service worker caches only public shell assets and removes older shell caches on activation.

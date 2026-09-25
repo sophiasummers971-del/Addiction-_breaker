@@ -1,7 +1,7 @@
 {
   "name": "addiction-breaker",
-  "version": "0.5.0",
-  "description": "Standalone gambling-pattern reflection, private check-ins, Echoes and practical next steps.",
+  "version": "0.8.0",
+  "description": "Private reflection, addiction support journeys, optional Google accounts and Cloudflare journal sync.",
   "keywords": [
     "responsible-gambling",
     "addiction",
@@ -30,18 +30,26 @@
     "demo:adapter": "node scripts/adapter_demo.js",
     "demo:gate": "node scripts/gate_demo.js",
     "ingest": "node scripts/ingest.js",
-    "test": "npm run test:core && npm run test:ui",
+    "test": "npm run test:core && npm run test:ui && npm run test:accounts",
     "data:sample": "node scripts/make_sample_data.js",
     "web:start": "node web/app.js",
     "start": "node web/app.js",
     "test:core": "node test/run_tests.js && node --test test/standalone.test.js && node --test test/static.test.js",
-    "test:ui": "node --test test/ui.test.js",
+    "test:ui": "node --test test/ui.test.js test/preferences.test.js",
     "build": "node scripts/build-static.js",
     "prestart": "npm run build",
     "preweb:start": "npm run build",
-    "pretest": "npm run build"
+    "pretest": "npm run build",
+    "test:accounts": "node --test test/api.test.mjs test/sync.test.js",
+    "pages:dev": "npm run build && wrangler pages dev dist",
+    "db:local": "wrangler d1 migrations apply DB --local",
+    "functions:build": "wrangler pages functions build functions --outdir=dist-functions"
   },
   "devDependencies": {
-    "jsdom": "30.1.1"
+    "jsdom": "30.1.1",
+    "wrangler": "4.140.0"
+  },
+  "dependencies": {
+    "jose": "6.2.12"
   }
 }

@@ -1,43 +1,54 @@
-# Standalone architecture — v0.5
+# Architecture — v0.8
 
-## Runtime
+## Runtime and routes
 
-The deployed application consists only of static files in `dist/`, built by `scripts/build-static.js` with Node built-ins. A browser Web Worker bundles the existing analysis modules without external dependencies and processes selected files off the UI thread. Files never leave the device.
+`scripts/build-static.js` builds a public asset allowlist, bundled browser analysis worker, security headers and individual route directories, including the first-visit /start/ flow. All pages share a shell, but `/dashboard/`, `/check-in/`, `/pause/`, `/journal/`, `/mirror/`, `/support/`, `/account/` and `/journeys/*/` are actual server paths. Client navigation preserves page memory and moves focus. Only `/api/*` invokes Pages Functions, via `_routes.json`.
 
-For local development, `web/app.js` uses Node's built-in HTTP server. Static routes are an explicit allowlist; source files, research output and arbitrary paths are not exposed. The exception is `src/journal.js`, intentionally served as `/journal.js` so the browser and research tools use the same Echo retrieval rule.
+`web/app.js` is the guest-only Node preview with a legacy bounded analysis endpoint. Production analysis runs entirely in the browser; production accounts run through `functions/api/[[path]].js` and `server/api.mjs`.
 
-`web/public/app.js` connects semantic HTML controls to shared journal logic and `store.js`. No bundler, remote scripts, fonts, telemetry or runtime packages are required. `sw.js` caches only a named list of static app assets. It never intercepts POST requests or caches analysis results. Bump its cache version whenever the shell changes. Offline shell use requires a successful initial service-worker installation; local analysis works offline once its worker script is cached.
+## Data boundaries
 
-## Boundaries
+| Data | Location and lifetime |
+|---|---|
+| Guest journal/plan | Page memory, or unencrypted localStorage after explicit opt-in |
+| Account browser journal | Separate key per random application account ID, same device-saving opt-in |
+| Form draft | Current context only; persisted only with device saving |
+| Pause timer | sessionStorage timestamp, survives refresh within tab session |
+| Journey interests | Included in journal profile; same optional device/cloud saving |
+| Cloud journal/plan | D1 snapshot, optional explicit sync |
+| Account identity | D1 Google subject, display name, email, random internal ID |
+| Auth session | Secure HttpOnly SameSite=Lax host-only cookie; hash and CSRF token in D1; seven-day expiry |
+| Google challenge | Hashed state plus verifier/nonce, ten-minute expiry, atomically consumed |
+| History files/results | Browser worker/memory only, never sent to account API |
+| Service-worker cache | Public shell allowlist, no API interception |
+| Downloaded backups | User-managed plaintext JSON outside server deletion |
 
-| Area | Location | Persistence |
-|---|---|---|
-| Journal, next-step plan | Browser JavaScript | Page memory by default; localStorage after opt-in |
-| Echo retrieval | Browser, `src/journal.js` | Uses existing journal only |
-| Backup | User-triggered JSON download | User-managed file, unencrypted |
-| History import | Browser Web Worker | Device memory only |
-| Analysis results | Browser DOM | Until cleared or refreshed |
-| Cached app shell | Browser Cache Storage | Static assets, no personal data |
-| Research fixtures and model experiments | CLI only | Existing `output/` artifacts |
+## Auth and sync
 
-## Analysis
+Google authorization uses state, PKCE S256 and nonce. The callback exchanges against fixed Google endpoints and verifies signed RS256 ID tokens with `jose`, Google issuer/audience/expiry, verified email, nonce and authorized-party checks. Accounts are keyed by Google subject, not email. No Google access/refresh token is retained. Unconfigured or mismatched origins fail closed.
 
-`src/analysis.js` is the web-facing validation and evidence boundary. It limits rows/users; detects columns; calls the adapters; checks monetary values; reports omitted records; and suppresses financial conclusions without stake, payout and outcome coverage. It does not infer a casino's intent or a user's diagnosis. No Markov prediction of future gambling outcomes is presented in the app.
+Authenticated mutations require exact `Origin` and session-bound `X-CSRF-Token`. Queries always select by server-derived account ID. JSON size, dates, ratings and string lengths are bounded. Login and account API rate limits are D1-backed. API responses are no-store and noindex. Application code does not log notes or credentials.
 
-`src/model.js` counts behaviour within sessions. The corrected implementation retains consecutive losses across bets and computes acceleration from bet-to-bet timestamps. Changed calculations mean old synthetic score totals are historical rather than current calibration.
+Cloud updates carry an expected revision; a single SQL conditional update increments it. Concurrent writes cannot both win. The client keeps its current data on 409 and requires a cloud/device choice. It only marks the captured revision synced after success, retains newer edits while an older request finishes, and retries when online. Pending device changes are durable only with local saving. Separate guest data requires explicit import, never automatic login migration.
 
-`src/truth.js` supplies a descriptive narrative and optional explicitly assumed RTP scenario math. `recoveryMath` forecast fields are null without an assumption. A past RTP is never automatically used as expected future return.
+Device erasure stops client sync without deleting cloud data. Account deletion transactionally removes the identity, journal and sessions. OAuth challenges are anonymous pre-auth records, expire in ten minutes, and are consumed or pruned at subsequent login. Expired sessions/rate rows are also pruned on login.
 
-Research Markov/backoff/simulation modules remain separate from the user-facing flow. Running experiments does not modify a person's journal.
+## Analysis and support boundaries
 
-## Journal
+`src/analysis.js` validates history and suppresses financial conclusions with insufficient evidence. `src/journal.js` retrieves exact prior notes from high-urge, explicitly non-gambling days. Neither is a clinical risk model. Hook Score remains an unvalidated descriptive index; it does not diagnose or measure recovery. Research/Markov experiments remain separate and unpublished.
 
-One validated entry per local calendar date, no future dates, integer ratings 0–10, explicit boolean gambling response, notes up to 4,000 characters. Backups are versioned and reject duplicate dates. Restore validates the entire candidate before replacing current data. Failed storage writes do not claim success. A cross-tab change pauses writes to avoid blindly overwriting newer data; unreadable saved data is preserved until the user explicitly erases it.
+`journeys.js` offers source-linked, UK-focused signposting. Each category has a contextual reflection check-in. Gambling alone uses historical analysis and Echoes. These tools are not treatment. Alcohol guidance includes withdrawal escalation and explicitly avoids detox instructions. Clinical review and live link review remain necessary before making treatment or commercial claims.
 
-Echoes use strictly earlier dates, explicit non-play, a non-empty note, and urge ≥6. This is a retrieval heuristic, not a relapse model. Journal averages use the last seven calendar days and do not impute missing entries.
+## Verification limits
 
-## Security
+API tests use real SQLite through a D1-shaped adapter. A function-argument-only test seam substitutes verified Google claims; it is never configurable from production bindings. Actual Google login, Cloudflare deployment, Android rendering and installed-app/offline behaviour must be verified in a configured preview. See DEPLOYMENT.md and handoff.txt.
 
-Loopback default, bounded request bodies, row/user limits, same-origin checks, configurable host allowlist, CSP without inline scripts/styles, no framing, no sniffing, no referrer, and a static asset allowlist. All uploaded/journal strings enter the interface through `textContent`, not HTML interpolation. No personal content is logged by application code.
+## Journal v2 compatibility
 
-The optional local Node API retains its size/origin protections; the deployed static app has no API or server-side analysis. Cloudflare Pages serves HTTPS and the supplied `_headers` security policy. The app has no authentication, server-side journal, encryption, cross-device sync, or background risk monitoring. Do not market it as a validated medical intervention.
+Every entry has an explicit category. Gambling uses played; other categories use engaged. Uniqueness is category plus date. Legacy version 1 is always interpreted as gambling, never relabelled to the active choice. Profile categories/active journey travel with cloud snapshots and backups. The next-step plan is shared. Existing rows normalize on read without being rewritten; a v1 client cannot overwrite a row already written as v2. Session-only onboarding choice may cross the Google redirect; existing account choices take precedence.
+
+## Release 0.8 additions
+
+Settings, FAQ and roadmap have direct routes. Appearance is a separate non-sensitive device preference. Optional trigger/coping reflections use the existing validated entry tags and travel with ordinary journal backups/sync. The writing helper adds user-authored reasons and steps to the shared plan only after an explicit action; Save is still required.
+
+Cloud replacement refuses unfinished drafts. Uploads wait for successful reconciliation; identity changes pause when a draft is open. Saved changes made during a slow read survive, with explicit conflict choices where needed.
