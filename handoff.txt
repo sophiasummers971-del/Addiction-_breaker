@@ -94,3 +94,62 @@ Original soundtrack release: “One Next Step”
 - Existing opt-in, volume, immediate Off, background-stop protections remain.
 - Scheduler skips missed notes after a stall to avoid catch-up bursts.
 - Offline shell v4 includes the updated composition.
+
+2026-09-25 — v0.6 COMPLETE-APP IMPLEMENTATION CHECKPOINT
+Current worktree: /workspace/scratch/addiction-breaker-complete
+Branch: feature/accounts-and-dashboard
+Base: origin/main e1e67d747281814a5b5ac8137d72f865d8c1cc80
+No commits, pushes, merges, deployment, live database mutation or paid upgrade.
+Prior sections above describe historical releases; README and docs now describe
+this v0.6 implementation, not the still-live v0.5 deployment.
+
+Implemented:
+- Real page directories for dashboard, check-in, pause, journal, mirror,
+  support/privacy, account, journey hub and five nested addiction journeys.
+- Desktop sidebar, mobile bottom navigation/More, true dashboard metrics,
+  in-page navigation preserving temporary state, focus and hash compatibility.
+- Journal filters, immediate Remember controls, opted-in drafts and timer recovery.
+- Original visual asset and local optional piano retained.
+- Google OAuth backend with PKCE/state/nonce/jose verification, secure sessions,
+  exact origin/CSRF checks, account isolation, rate limits and D1 migration.
+- Opt-in cloud journal sync, guest/account separation, explicit guest import,
+  atomic revision conflicts, retry, cloud export, logout and deletion.
+- Device erase stops sync, never uploads an empty replacement. Pending changes
+  are durable only when device saving is enabled. Unreadable data is protected.
+- Five source-linked UK support journeys; alcohol warning avoids unsafe detox
+  instructions. Structured check-in/history tracking remain gambling-specific.
+  Journey selections are local-only, not included in cloud/backups.
+
+Verification on integrated code:
+- npm test: 64 passed (13 legacy + 13 standalone + 4 static + 18 UI + 16 account).
+- npm run functions:build: compiled Worker successfully.
+- npm run db:local: all 11 migration statements applied to local D1 successfully.
+- git diff --check: passed.
+- No actual Google token exchange tested: backend test seam substitutes verified
+  claims, not production env configuration. Actual credentials are a launch gate.
+- Browser visual checks BLOCKED: Browser Use cannot open localhost, reports
+  net::ERR_BLOCKED_BY_CLIENT. No screenshot or real-browser validation claimed.
+- Wrangler Pages local runtime BLOCKED: uv_interface_addresses Unknown system
+  error 1 after successful compile. Local D1 migration works; full local Pages
+  HTTP runtime not demonstrated. Do not bypass environment restrictions.
+
+Remaining before release:
+1. Review current code/diff and authorise commit/push/preview separately, per
+   applied code-work skill (does not infer publication from implementation).
+2. Set up dedicated preview D1, Google Web OAuth client/consent and secure secrets.
+   Replace dummy database ID only with real authorised database. No secrets in chat.
+3. Remove SKIP_DEPENDENCY_INSTALL=true from existing Pages config because Functions
+   now depend on jose. Build npm run build; output dist; supported Node 24.
+4. Run preview with live Google cancellation/sign-in/logout and two real accounts;
+   test two-device conflicts/export/delete, narrow Android, keyboard and offline.
+5. Review content/privacy and provider retention terms before public launch.
+   This is reflection/support signposting, not validated clinical treatment.
+See docs/DEPLOYMENT.md for exact callback and configuration requirements.
+
+2026-09-25 — AUTHORISED PREVIEW PUBLICATION
+User explicitly approved commit, push and Cloudflare preview.
+Created separate addiction-breaker-preview D1 database and applied initial schema.
+Configured Pages previews only for feature/accounts-and-dashboard, with preview
+package installation enabled. Production branch/settings/data remain unchanged.
+Preview OAuth credentials are not yet configured; guest functionality can be
+reviewed without login. Canonical preview origin is the branch alias.

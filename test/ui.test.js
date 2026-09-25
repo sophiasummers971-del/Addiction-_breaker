@@ -7,10 +7,12 @@ const {JSDOM}=require('jsdom');
 const {analyzeText}=require('../src/analysis');
 const root=path.join(__dirname,'..');
 const html=fs.readFileSync(path.join(root,'web/public/index.html'),'utf8');
-function mount(saved){
- const dom=new JSDOM(html,{url:'http://localhost:3737',runScripts:'outside-only',pretendToBeVisual:true});
+function mount(saved,url='http://localhost:3737',draft=null,pauseEnd=null){
+ const dom=new JSDOM(html,{url,runScripts:'outside-only',pretendToBeVisual:true});
  const w=dom.window;w.scrollTo=()=>{};w.HTMLElement.prototype.scrollIntoView=()=>{};w.confirm=()=>true;
  if(saved)w.localStorage.setItem('addiction-breaker:v1',saved);
+ if(draft)w.localStorage.setItem('addiction-breaker:v1:draft',draft);
+ if(pauseEnd)w.sessionStorage.setItem('addiction-breaker:pause',String(pauseEnd));
  for(const script of ['src/journal.js','web/public/store.js','web/public/app.js'])w.eval(fs.readFileSync(path.join(root,script),'utf8'));
  const $=id=>w.document.getElementById(id);
  return {dom,w,$,close:()=>w.close()};
@@ -51,7 +53,7 @@ test('local analysis sends no file content over network, renders safely and clea
  }finally{app.close();}
 });
 test('navigation exposes the requested page and hides others',()=>{
- const app=mount();try{app.w.location.hash='journal';app.w.dispatchEvent(new app.w.HashChangeEvent('hashchange'));assert.equal(app.$('journal').hidden,false);assert.equal(app.$('today').hidden,true);assert.equal(app.w.document.querySelector('nav [aria-current]').textContent,'Journal & Echoes');}finally{app.close();}
+ const app=mount();try{app.w.location.hash='journal';app.w.dispatchEvent(new app.w.HashChangeEvent('hashchange'));assert.equal(app.$('journal').hidden,false);assert.equal(app.$('dashboard').hidden,true);assert.match(app.w.document.querySelector('nav [aria-current]').textContent,/Journal & Echoes/);}finally{app.close();}
 });
 test('piano is opt-in, stops on request and stays off after leaving the page',async()=>{
  const app=mount();let created=0,closed=0;
@@ -68,4 +70,42 @@ test('piano is opt-in, stops on request and stays off after leaving the page',as
 });
 test('unsupported piano does not break the rest of the app',()=>{
  const app=mount();try{app.w.eval(fs.readFileSync(path.join(root,'web/public/ambience.js'),'utf8'));app.$('sound-toggle').click();assert.match(app.$('sound-status').textContent,/unavailable/);checkin(app,'2026-09-01','Still works');assert.equal(app.$('entry-count').textContent,'1 ENTRIES');}finally{app.close();}
+});
+test('real page navigation preserves guest entries and moves focus to page heading',()=>{
+ const app=mount();try{checkin(app,'2026-09-01','Keep in this page');app.w.document.querySelector('a[href="/journal/"]').click();assert.equal(app.w.location.pathname,'/journal/');assert.equal(app.$('journal').hidden,false);assert.equal(app.$('check-in').hidden,true);assert.equal(app.w.document.activeElement.tagName,'H1');assert.equal(app.w.AddictionApp.getState().entries.length,1);app.w.document.querySelector('a[href="/journeys/"]').click();assert.equal(app.$('journeys').hidden,false);}finally{app.close();}
+});
+test('remember immediately writes and removes device journal and opted-in drafts',()=>{
+ const app=mount();try{checkin(app,'2026-09-01','Keep');app.$('remember').checked=true;app.$('remember').dispatchEvent(new app.w.Event('change'));assert.ok(app.w.localStorage.getItem('addiction-breaker:v1'));app.$('entry-note').value='Unfinished';app.$('entry-note').dispatchEvent(new app.w.Event('input',{bubbles:true}));assert.match(app.w.localStorage.getItem('addiction-breaker:v1:draft'),/Unfinished/);app.$('remember').checked=false;app.$('remember').dispatchEvent(new app.w.Event('change'));assert.equal(app.w.localStorage.getItem('addiction-breaker:v1'),null);assert.equal(app.w.localStorage.getItem('addiction-breaker:v1:draft'),null);assert.equal(app.w.AddictionApp.getState().entries.length,1);}finally{app.close();}
+});
+test('journal filters search literal text and dates without changing saved state',()=>{
+ const app=mount();try{checkin(app,'2026-09-01','Walk outside');checkin(app,'2026-09-02','Message friend');app.$('journal-search').value='walk';app.$('journal-search').dispatchEvent(new app.w.Event('input'));assert.match(app.$('entries').textContent,/Walk outside/);assert.doesNotMatch(app.$('entries').textContent,/Message friend/);app.$('journal-from').value='2026-09-02';app.$('journal-from').dispatchEvent(new app.w.Event('input'));assert.match(app.$('entries').textContent,/No entries match/);app.$('clear-filters').click();assert.equal(app.$('entries').querySelectorAll('article').length,2);assert.equal(app.w.AddictionApp.getState().entries.length,2);}finally{app.close();}
+});
+test('account context isolation and replacement do not emit user mutation loops',()=>{
+ const app=mount();try{app.$('remember').checked=true;checkin(app,'2026-09-01','Guest only');let changes=0;app.w.document.addEventListener('journal:changed',()=>changes++);app.w.AddictionApp.switchContext('user-1');assert.equal(app.w.AddictionApp.getState().entries.length,0);assert.equal(app.w.AddictionApp.guestData().entries[0].note,'Guest only');app.w.AddictionApp.replaceState({version:1,entries:[],plan:'Account plan'});assert.equal(changes,0);app.w.AddictionApp.clearContext();app.w.AddictionApp.switchContext(null);assert.equal(app.w.AddictionApp.getState().entries[0].note,'Guest only');assert.equal(changes,0);}finally{app.close();}
+});
+test('draft recovery requires remember opt-in and pause survives tab reload',()=>{
+ const saved=JSON.stringify({version:1,remember:true,entries:[],plan:''});const draft=JSON.stringify({date:'2026-09-01',note:'Still writing',plan:'My draft plan',played:'no',urge:7});
+ const app=mount(saved,'http://localhost:3737/check-in/',draft,Date.now()+590000);try{assert.equal(app.$('entry-note').value,'Still writing');assert.equal(app.$('plan').value,'My draft plan');assert.match(app.$('draft-status').textContent,/Recovered/);assert.equal(app.$('start-pause').disabled,true);assert.match(app.$('timer').textContent,/09:/);}finally{app.close();}
+ const guest=mount(null,'http://localhost:3737/check-in/',draft);try{assert.equal(guest.$('entry-note').value,'');}finally{guest.close();}
+});
+test('journeys have real nested routes, safe signposting and isolated optional selections',()=>{
+ const app=mount(null,'http://localhost:3737/journeys/alcohol/');try{
+ app.w.eval(fs.readFileSync(path.join(root,'web/public/journeys.js'),'utf8'));
+ assert.equal(app.$('journeys').hidden,false);assert.match(app.$('journey-content').textContent,/Sudden withdrawal can be dangerous/);
+ app.$('journey-content').querySelector('a[href="/journeys/"]').click();assert.equal(app.w.location.pathname,'/journeys/');
+ const checkbox=app.$('journey-content').querySelector('input');checkbox.checked=true;checkbox.dispatchEvent(new app.w.Event('change'));assert.equal(app.w.localStorage.getItem('addiction-breaker:v1:journeys'),null);
+ app.$('remember').checked=true;app.$('remember').dispatchEvent(new app.w.Event('change'));assert.match(app.w.localStorage.getItem('addiction-breaker:v1:journeys'),/gambling/);
+ app.w.AddictionApp.switchContext('account-test');assert.equal(app.$('journey-content').querySelector('input').checked,false);
+ app.w.AddictionApp.switchContext(null);assert.equal(app.$('journey-content').querySelector('input').checked,true);
+ app.w.AddictionApp.clearContext();assert.equal(app.w.localStorage.getItem('addiction-breaker:v1:journeys'),null);assert.equal(app.$('journey-content').querySelector('input').checked,false);
+ }finally{app.close();}
+});
+test('all page sections and navigation controls are structurally accessible',()=>{
+ const app=mount();try{const sections=[...app.w.document.querySelectorAll('main > section.page')];assert.equal(sections.length,8);assert.equal(sections.filter(s=>!s.hidden).length,1);assert.equal(new Set([...app.w.document.querySelectorAll('[id]')].map(n=>n.id)).size,app.w.document.querySelectorAll('[id]').length);app.$('more-toggle').click();assert.equal(app.$('more-menu').hidden,false);assert.equal(app.$('more-toggle').getAttribute('aria-expanded'),'true');app.w.document.dispatchEvent(new app.w.KeyboardEvent('keydown',{key:'Escape'}));assert.equal(app.$('more-menu').hidden,true);}finally{app.close();}
+});
+test('device erase emits a dedicated event rather than an empty cloud mutation',()=>{
+ const app=mount();try{checkin(app,'2026-09-01','Local');let changes=0,erased=0;app.w.document.addEventListener('journal:changed',()=>changes++);app.w.document.addEventListener('journal:erased',()=>erased++);app.$('erase').click();assert.equal(changes,0);assert.equal(erased,1);assert.equal(app.w.AddictionApp.getState().entries.length,0);}finally{app.close();}
+});
+test('cloud replacement cannot overwrite unreadable device state and guest preview is safe',()=>{
+ const app=mount('bad json');try{assert.throws(()=>app.w.AddictionApp.replaceState({version:1,entries:[],plan:'Cloud'}),/Saving is paused/);assert.equal(app.w.AddictionApp.guestData().entries.length,0);assert.equal(app.w.localStorage.getItem('addiction-breaker:v1'),'bad json');assert.match(app.$('global-status').textContent,/preserved/);}finally{app.close();}
 });

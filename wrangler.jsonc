@@ -1,0 +1,32 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "addiction-breaker",
+  "pages_build_output_dir": "dist",
+  "compatibility_date": "2026-09-25",
+  "vars": {
+    "APP_ORIGIN": "https://addiction-breaker.pages.dev"
+  },
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "addiction-breaker",
+      "database_id": "00000000-0000-0000-0000-000000000000",
+      "migrations_dir": "migrations"
+    }
+  ],
+  "env": {
+    "preview": {
+      "vars": {
+        "APP_ORIGIN": "https://feature-accounts-and-dashboard.addiction-breaker.pages.dev"
+      },
+      "d1_databases": [
+        {
+          "binding": "DB",
+          "database_name": "addiction-breaker-preview",
+          "database_id": "0fdf790e-408a-4eb1-96e7-f32be3eef701",
+          "migrations_dir": "migrations"
+        }
+      ]
+    }
+  }
+}

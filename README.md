@@ -1,38 +1,44 @@
 # Addiction Breaker
 
-A standalone tool for seeing gambling patterns, writing private check-ins, and choosing a next step. Version 0.5 runs as a static Cloudflare Pages app with local browser analysis. No account, AI subscription, or database is required.
+Version 0.6 adds a multi-page personal dashboard, five addiction-support journeys, and optional Google accounts with Cloudflare D1 journal sync. Guest use, local analysis and backups still work without an account. **This branch has not been deployed; production account setup and live Google verification remain required.**
 
 ## Run the application
 
-Install Node.js **22.22.2+, 24.15.0+, or 26+**, then in this folder:
+Use Node.js **22.22.2+, 24.15.0+, or 26+**:
 
 ```sh
+npm ci
 npm start
 ```
 
-Open **http://127.0.0.1:3737**. No package installation or build step is required to run the app. Keep the terminal open while using history analysis. Stop with Ctrl+C.
+Open http://127.0.0.1:3737. The local Node preview is guest-only. Cloudflare deployment and credential setup are documented in [docs/DEPLOYMENT.md](docs/DEPLOYMENT.md).
 
-The server listens only on your own computer by default. This address will not open the application on a different device. A hosted HTTPS deployment is needed for convenient phone access; see `docs/DEPLOYMENT.md`.
+## Pages and capabilities
 
-## What works
+| Page | What it does |
+|---|---|
+| `/dashboard/` | Recorded check-in totals, recent information and your plan; no invented recovery score |
+| `/journeys/` | Choose several interests and open gambling, alcohol, smoking, drugs/medication concerns or compulsive-behaviour information pages |
+| `/check-in/` | Gambling-specific daily ratings, notes and whether gambling occurred |
+| `/pause/` | Ten-minute pause with tab-session timer recovery and a next-step plan |
+| `/journal/` | Entries, exact earlier Echoes, search and date filters, edit/delete |
+| `/mirror/` | Local gambling-history analysis from CSV, TSV or JSON |
+| `/support/` | Support links, privacy, journal export/restore and device erasure |
+| `/account/` | Google sign-in, explicit sync consent, guest import, conflict resolution, cloud export, logout and account deletion |
 
-- **Today:** daily check-in for urge, loneliness, meaningful contact, rest and money pressure; editable notes and whether gambling occurred.
-- **Pause:** ten-minute timer and a choice of simple actions; a personal next-step plan. The timer resets on page refresh.
-- **Journal & Echoes:** exact earlier notes from reported non-gambling days with high urge; recent averages and entry editing/deletion. The latest 100 entries are displayed; backups include all entries.
-- **Your mirror:** CSV, TSV, comma-separated TXT and JSON event exports; counted re-bets, stakes, returns and a descriptive narrative. Missing values stay unknown. A separate fictional sample is included.
-- **Support:** verified NHS/GamCare links, including text options, plus privacy and evidence explanations.
-- **Data controls:** opt-in browser persistence, export/restore and erase. No journal data is sent to the server.
-- **Offline shell:** after an initial successful visit and service-worker installation on localhost or HTTPS, the journal and pause can load offline. History analysis also runs locally after its worker script has been cached. Browser install/offline behaviour has not yet been device-tested.
+Each route has its own generated directory/index page and can be opened directly. Internal navigation preserves in-memory work. Existing hash links remain supported. Desktop uses a sidebar; mobile uses bottom navigation and a More menu. The original illustration and optional local piano remain.
 
-## Privacy
+Journey pages provide different information and source links, not five copies of a gambling form. Only gambling has structured check-ins and history analysis in this release. Other journeys are support signposting, not treatment programmes. Selections are local, opt-in browser preferences; they are not cloud-synced or included in journal backups.
 
-By default entries live only in the current page. Refreshing or closing loses them. “Remember” stores the journal and plan unencrypted in this browser profile, with no cross-device sync. Anyone with access to the profile may read them. Exported JSON backups contain personal notes in plain text.
+## Saving and privacy
 
-Selected history files are analysed in a dedicated browser Web Worker and are never uploaded by the interface. Clear Analysis removes displayed results. Files must use one currency. Import limits: 2 MiB, 20,000 rows, 100 people. Journal backups: 5 MiB and 5,000 entries. Cloudflare serves static application files only.
+Guest entries start in page memory. Refreshing or closing loses them unless **Remember my journal** is enabled. That switch takes effect immediately and also enables form-draft saving. Browser storage and exported backups are unencrypted.
 
-## Cloudflare Pages (£0 extra architecture)
+Google sign-in alone does not upload guest notes. Account journals have separate browser storage. Cloud sync requires an explicit choice; importing the old guest journal requires a separate confirmation. Sync sends journal entries and the plan to Cloudflare; this is **not end-to-end encryption**. Conflicting device versions pause for an explicit choice instead of silently overwriting. Pending changes survive a refresh only when device saving is enabled. Signing out clears the account's browser copy; the separate guest copy remains.
 
-Build command: `node scripts/build-static.js`. Output directory: `dist`. No Functions, Workers backend, database, AI binding, analytics, or paid upgrade. See `docs/DEPLOYMENT.md`.
+Device erasure turns off sync and does not delete existing cloud records. Account deletion removes the application's account, journal and sessions; downloaded backups and provider-retained backups are separate. This service does not monitor journals or dispatch emergency help.
+
+Selected gambling-history exports are processed locally in a Web Worker and never uploaded. History limits: 2 MiB, 20,000 rows, 100 people, one currency per file. Local journal backups: 5 MiB and 5,000 entries. Cloud request limit: 1 MiB including request metadata; a document very close to the limit may be rejected. The app shell caches public code only, never API responses or journal data. Actual Android install/offline and visual-browser checks remain release gates.
 
 ## Input contract
 
@@ -63,7 +69,7 @@ npm ci
 npm test
 ```
 
-The only development dependency is pinned `jsdom`, used for interface tests. There are zero runtime dependencies. After `npm run build`, `npm run test:core` works without installation; `npm run test:ui` requires development dependencies. CI is configured for Node 22 and 24.
+Pinned `jsdom` supports DOM tests, Wrangler builds Pages Functions and exercises local D1, and `jose` validates Google ID tokens on the server. CI covers Node 22 and 24. `npm test` includes UI, account API and sync tests; `npm run functions:build` verifies the deployment bundle.
 
 Tests cover legacy engine behaviour, corrected loss streaks, missing data, API upload limits and origin checks, persistence, exact Echo text, hostile text rendering, backup restore, save failures and navigation. DOM tests do not replace real-browser rendering, accessibility, installation or offline checks. See `handoff.txt` for verified and outstanding work.
 

@@ -2,8 +2,9 @@
 const fs=require('node:fs');
 const path=require('node:path');
 const root=path.join(__dirname,'..'),out=path.join(root,'dist');
+fs.rmSync(out,{recursive:true,force:true});
 fs.mkdirSync(out,{recursive:true});
-const names=['index.html','styles.css','ambience.js','thin-ice.webp','app.js','store.js','sample.csv','manifest.webmanifest','icon.svg','sw.js'];
+const names=['index.html','styles.css','ambience.js','thin-ice.webp','app.js','sync.js','journeys.js','store.js','sample.csv','manifest.webmanifest','icon.svg','sw.js'];
 for(const name of names)fs.copyFileSync(path.join(root,'web/public',name),path.join(out,name));
 fs.copyFileSync(path.join(root,'src/journal.js'),path.join(out,'journal.js'));
 // Bundle only our four dependency-free CommonJS modules. No eval or remote code.
@@ -20,4 +21,8 @@ fs.writeFileSync(path.join(out,'_headers'),`/*
   Cache-Control: no-cache
 `);
 fs.writeFileSync(path.join(out,'404.html'),'<!doctype html><html lang="en"><meta charset="utf-8"><title>Page not found</title><h1>Page not found</h1><a href="/">Return to Addiction Breaker</a></html>');
-console.log('Built static Cloudflare Pages site in dist/ (no Functions or server bindings).');
+const routes=['dashboard','check-in','pause','journal','mirror','support','account','journeys','journeys/gambling','journeys/alcohol','journeys/smoking','journeys/drugs','journeys/behaviours'];
+const shell=fs.readFileSync(path.join(out,'index.html'),'utf8');
+for(const route of routes){const folder=path.join(out,route);fs.mkdirSync(folder,{recursive:true});const title=route.split('/').at(-1).replaceAll('-',' ');fs.writeFileSync(path.join(folder,'index.html'),shell.replace(/<title>.*?<\/title>/,`<title>${title[0].toUpperCase()+title.slice(1)} — Addiction Breaker</title>`));}
+fs.writeFileSync(path.join(out,'_routes.json'),JSON.stringify({version:1,include:['/api/*'],exclude:[]},null,2));
+console.log('Built multi-page Cloudflare Pages site in dist/. Accounts use Pages Functions and D1 when configured.');

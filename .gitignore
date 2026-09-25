@@ -23,3 +23,9 @@ venv/
 
 # Static deployment output
 dist/
+
+# Cloudflare local state and credentials
+.wrangler/
+.dev.vars
+.dev.vars.*
+dist-functions/
