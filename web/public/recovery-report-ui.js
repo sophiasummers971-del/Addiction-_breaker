@@ -41,6 +41,7 @@
  }
  review.addEventListener('click',generate);
  const reset=()=>{valid=null;print.disabled=true;download.disabled=true;preview.replaceChildren(el('p','Your selection changed. Review again before sharing.'));};
+ document.addEventListener('journal:changed',reset);
  date.addEventListener('change',reset);boxes.forEach(c=>c.addEventListener('change',reset));
  print.addEventListener('click',()=>{
   if(!valid)return;
