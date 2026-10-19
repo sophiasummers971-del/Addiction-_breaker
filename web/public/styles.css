@@ -40,3 +40,8 @@ html[data-theme=light] :focus-visible{outline-color:#856019}html[data-theme=ligh
 
 #recovery-print{display:none}
 @media print{body>*:not(#recovery-print){display:none!important}#recovery-print{display:block!important;color:#111;background:white;font:11pt Arial,sans-serif;padding:12mm}#recovery-print table{width:100%;border-collapse:collapse;font-size:9pt}#recovery-print th,#recovery-print td{border:1px solid #777;padding:5px;text-align:left}#recovery-print tr{break-inside:avoid}}
+
+#recovery-report-panel .report-preview-scroll{max-width:100%;overflow-x:auto;-webkit-overflow-scrolling:touch}
+#recovery-report-panel .report-preview-scroll table{min-width:610px;width:100%;border-collapse:collapse}
+#recovery-report-panel .report-preview-scroll th,#recovery-report-panel .report-preview-scroll td{white-space:nowrap;padding:9px 7px;text-align:left;border-bottom:1px solid #62737a50;font-size:.85rem}
+#private-diary-text{min-height:140px}

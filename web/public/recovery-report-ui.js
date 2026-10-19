@@ -34,7 +34,8 @@
    const state=window.AddictionApp?.getState?.();
    if(!state)throw new Error('Your current journal is not available.');
    const report=window.RecoveryReport.build(state.entries,date.value,selected);
-   preview.append(el('h3','Preview: '+report.start+' to '+report.end),el('p','Patient-generated, self-reported data. Not proof of abstinence, clinical verification or compliance.'),makeTable(report));
+   const scroll=el('div');scroll.className='report-preview-scroll';scroll.append(makeTable(report));
+   preview.append(el('h3','Preview: '+report.start+' to '+report.end),el('p','The downloadable PDF contains a professional overview plus separate Drugs and Gambling pages. Additional Open Road details are not yet collected.'),scroll);
    valid=report;print.disabled=false;download.disabled=false;
   }catch(e){preview.append(el('p','Unable to prepare report: '+e.message));}
  }
@@ -53,7 +54,7 @@
   window.addEventListener('afterprint',cleanup,{once:true});
   window.print();
  });
- download.addEventListener('click',()=>{if(!valid)return;const pdf=window.RecoveryPDF?.generate(valid);if(!pdf){preview.append(el('p','PDF generation unavailable.'));return;}const blob=new Blob([pdf],{type:'application/pdf'});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download='addiction-breaker-weekly-'+valid.start+'.pdf';document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),5000);});
+ download.addEventListener('click',()=>{if(!valid)return;let pdf;try{pdf=window.RecoveryPDF?.generate(valid);}catch(e){preview.append(el('p','PDF preparation failed: '+e.message));return;}if(!pdf){preview.append(el('p','PDF generation unavailable.'));return;}const blob=new Blob([pdf],{type:'application/pdf'});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download='addiction-breaker-weekly-'+valid.start+'.pdf';document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),5000);});
  panel.append(h,explain,label,topics,review,document.createTextNode(' '),download,document.createTextNode(' '),print,preview);
  area.querySelector('.reading-width')?.append(panel);
 })();
