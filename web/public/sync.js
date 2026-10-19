@@ -32,8 +32,8 @@
   node('p',enabled?'Cloud sync is enabled for this account.':'Cloud sync is off. Enable it only if you want your journal, support choices and plan stored on our server.');
   node('p','Cloud journal limit: 1 MB. Device backups can be larger. Raw gambling-history exports stay on your device.');
   if(conflict){const box=node('div');box.className='inset';node('h3','Two different versions need your choice',box);node('p','Another device may have changed your cloud journal. Nothing has been overwritten. Export your device journal from Support before replacing it if you want to keep both.',box);
-   button('Use cloud version',()=>resolve(false),box);button('Keep this device version',()=>resolve(true),box);
-  }else if(!enabled){button('Enable cloud sync',enable);}else{button(pending?'Retry pending sync':'Check cloud now',()=>reconcile());button('Turn off cloud sync',()=>{enabled=false;reconciled=false;epoch++;clearTimeout(timer);metadata();status('Cloud sync is off. Existing cloud records remain in your account.');draw();});}
+   button('Use records saved in my account',()=>resolve(false),box);button('Keep records on this device',()=>resolve(true),box);
+  }else if(!enabled){button('Save recovery records to my account',enable);}else{button(pending?'Retry saving recovery records':'Sync recovery records now',()=>reconcile());button('Stop syncing records',()=>{enabled=false;reconciled=false;epoch++;clearTimeout(timer);metadata();status('Cloud sync is off. Existing cloud records remain in your account.');draw();});}
   const guest=app.guestData();if(guest.entries.length||guest.plan)button('Import guest journal into this account',()=>{
    if(!confirm('Replace this account’s current journal and plan with the guest journal? Your original guest copy stays on this device. If sync is enabled, this also updates the cloud copy.'))return;
    try{app.replaceState({...guest,remember:app.getState().remember});markChanged();}catch(error){status(error.message);}
