@@ -30,7 +30,8 @@
   valid=null;print.disabled=true;preview.replaceChildren();
   try{
    const selected=boxes.filter(c=>c.checked).map(c=>c.value);
-   const state=window.JournalStore.load(window.localStorage);
+   const state=window.AddictionApp?.getState?.();
+   if(!state)throw new Error('Your current journal is not available.');
    const report=window.RecoveryReport.build(state.entries,date.value,selected);
    preview.append(el('h3','Preview: '+report.start+' to '+report.end),el('p','Patient-generated, self-reported data. Not proof of abstinence, clinical verification or compliance.'),makeTable(report));
    valid=report;print.disabled=false;
