@@ -34,7 +34,7 @@
     "data:sample": "node scripts/make_sample_data.js",
     "web:start": "node web/app.js",
     "start": "node web/app.js",
-    "test:core": "node test/run_tests.js && node --test test/standalone.test.js && node --test test/static.test.js test/recovery-report.test.js test/recovery-privacy.test.js test/recovery-pdf.test.js test/appointments.test.js test/recovery-fields.test.js",
+    "test:core": "node test/run_tests.js && node --test test/standalone.test.js && node --test test/static.test.js test/recovery-report.test.js test/recovery-privacy.test.js test/recovery-pdf.test.js test/appointments.test.js test/recovery-fields.test.js test/private-diary-migration.test.js",
     "test:ui": "node --test test/ui.test.js test/preferences.test.js",
     "build": "node scripts/build-static.js",
     "prestart": "npm run build",
