@@ -3,6 +3,7 @@
    projected structured fields are used. No notes, Echoes, diary, or plan. */
 (function(root){
 const enc=new TextEncoder();
+let totalPages=5;
 const clean=x=>String(x??'').replace(/[^\x20-\x7e]/g,'?').replace(/[\\()]/g,m=>'\\'+m);
 function page(){
  const lines=[];
@@ -20,7 +21,7 @@ function header(p,title,index,period){
  p.line(43,742,552,742);
  p.line(43,55,552,55);
  p.t(43,39,8,'PRIVATE RECOVERY INFORMATION - SHARE ONLY WITH CONSENT');
- p.t(522,39,8,index+'/5');
+ p.t(515,39,8,index+'/'+totalPages);
 }
 function summary(p,report){
  header(p,'Weekly recovery report',1,report.start+' to '+report.end);
@@ -142,28 +143,52 @@ function rights(p,report,index){
  let y=711;for(const [s,b] of lines){p.t(43,y,b?11:9,s,b);y-=b?33:19;}
  p.t(43,106,8,'Guidance reference, not legal advice or a certification statement.');
 }
-function generate(report){
- if(!report||!/^\d{4}-\d{2}-\d{2}$/.test(report.start)||!/^\d{4}-\d{2}-\d{2}$/.test(report.end)||!Array.isArray(report.rows)||report.rows.length>28)throw Error('Invalid report');
- const pages=[page(),page(),page(),page(),page()];
- summary(pages[0],report);
- detail(pages[1],report,'drugs',2);detail(pages[2],report,'gambling',3);
- governance(pages[3],report,4);rights(pages[4],report,5);
- const objects=['<< /Type /Catalog /Pages 2 0 R >>','<< /Type /Pages /Kids [3 0 R 6 0 R 8 0 R 11 0 R 13 0 R] /Count 5 >>'];
- const pids=[[3,5],[6,7],[8,9],[11,12],[13,14]];
- for(let i=0;i<5;i++){
-  const [pid,cid]=pids[i],stream=pages[i].lines.join('\n')+'\n';
-  while(objects.length<pid-1)objects.push('');
-  objects[pid-1]='<< /Type /Page /Parent 2 0 R /MediaBox [0 0 595 842] /Resources << /Font << /R 4 0 R /B 10 0 R >> >> /Contents '+cid+' 0 R >>';
-  objects[cid-1]='<< /Length '+enc.encode(stream).length+' >>\nstream\n'+stream+'endstream';
+function disclosure(p,report,row,index){
+ header(p,'Structured recovery details',index,report.start+' to '+report.end);
+ p.t(43,711,11,'Date: '+row.date+'    Area: '+row.topic.toUpperCase(),true);
+ p.t(43,687,9,'Reported status: '+row.status);
+ p.t(43,665,9,'Data below is user-entered. Estimates have not been verified.');
+ let y=630;
+ for(const [key,value] of Object.entries(row.recovery)){
+  p.fill(43,y-4,509,26);
+  p.t(52,y+6,10,key.toUpperCase(),true);
+  y-=29;
+  const words=String(value).match(/.{1,80}/g)||[];
+  for(const part of words){p.t(52,y,9,part);y-=17;}
+  y-=18;
  }
- objects[3]='<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>';
- objects[9]='<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold >>';
- let out='%PDF-1.4\n',offsets=[0];
- for(let i=0;i<objects.length;i++){offsets.push(enc.encode(out).length);out+=(i+1)+' 0 obj\n'+objects[i]+'\nendobj\n';}
+ p.t(43,108,9,'Private diary, free-writing and personal notes are excluded.');
+}
+function generate(report){
+ if(!report||!/^\\d{4}-\\d{2}-\\d{2}$/.test(report.start)||!/^\\d{4}-\\d{2}-\\d{2}$/.test(report.end)||!Array.isArray(report.rows)||report.rows.length>28)throw Error('Invalid report');
+ const detailRows=report.rows.filter(r=>r.recovery&&Object.keys(r.recovery).length);
+ const pages=[page(),page(),page(),...detailRows.map(()=>page()),page(),page()];
+ totalPages=pages.length;
+ summary(pages[0],report);
+ detail(pages[1],report,'drugs',2);
+ detail(pages[2],report,'gambling',3);
+ for(let i=0;i<detailRows.length;i++)disclosure(pages[3+i],report,detailRows[i],4+i);
+ governance(pages[pages.length-2],report,pages.length-1);
+ rights(pages[pages.length-1],report,pages.length);
+ const fontNormal=3,fontBold=4;
+ const firstPage=5;
+ const ids=pages.map((_,i)=>firstPage+i*2);
+ const objects=new Array(4+pages.length*2);
+ objects[0]='<< /Type /Catalog /Pages 2 0 R >>';
+ objects[1]='<< /Type /Pages /Kids ['+ids.map(i=>i+' 0 R').join(' ') +'] /Count '+pages.length+' >>';
+ objects[2]='<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>';
+ objects[3]='<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold >>';
+ for(let i=0;i<pages.length;i++){
+  const pid=ids[i],cid=pid+1,stream=pages[i].lines.join('\\n')+'\\n';
+  objects[pid-1]='<< /Type /Page /Parent 2 0 R /MediaBox [0 0 595 842] /Resources << /Font << /R '+fontNormal+' 0 R /B '+fontBold+' 0 R >> >> /Contents '+cid+' 0 R >>';
+  objects[cid-1]='<< /Length '+enc.encode(stream).length+' >>\\nstream\\n'+stream+'endstream';
+ }
+ let out='%PDF-1.4\\n',offsets=[0];
+ for(let i=0;i<objects.length;i++){offsets.push(enc.encode(out).length);out+=(i+1)+' 0 obj\\n'+objects[i]+'\\nendobj\\n';}
  const start=enc.encode(out).length;
- out+='xref\n0 '+(objects.length+1)+'\n0000000000 65535 f \n';
- for(let i=1;i<offsets.length;i++)out+=String(offsets[i]).padStart(10,'0')+' 00000 n \n';
- out+='trailer\n<< /Size '+(objects.length+1)+' /Root 1 0 R >>\nstartxref\n'+start+'\n%%EOF\n';
+ out+='xref\\n0 '+(objects.length+1)+'\\n0000000000 65535 f \\n';
+ for(let i=1;i<offsets.length;i++)out+=String(offsets[i]).padStart(10,'0')+' 00000 n \\n';
+ out+='trailer\\n<< /Size '+(objects.length+1)+' /Root 1 0 R >>\\nstartxref\\n'+start+'\\n%%EOF\\n';
  return enc.encode(out);
 }
 const api={generate};
