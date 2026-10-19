@@ -158,7 +158,7 @@ function disclosure(p,report,row,index){
  p.t(43,108,9,'Private diary, free-writing and personal notes are excluded.');
 }
 function generate(report){
- if(!report||!/^\\d{4}-\\d{2}-\\d{2}$/.test(report.start)||!/^\\d{4}-\\d{2}-\\d{2}$/.test(report.end)||!Array.isArray(report.rows)||report.rows.length>28)throw Error('Invalid report');
+ if(!report||!/^\d{4}-\d{2}-\d{2}$/.test(report.start)||!/^\d{4}-\d{2}-\d{2}$/.test(report.end)||!Array.isArray(report.rows)||report.rows.length>28)throw Error('Invalid report');
  const detailRows=report.rows.filter(r=>r.recovery&&Object.keys(r.recovery).length);
  const pages=[page(),page(),page(),...detailRows.map(()=>page()),page(),page()];
  totalPages=pages.length;
@@ -177,16 +177,16 @@ function generate(report){
  objects[2]='<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>';
  objects[3]='<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold >>';
  for(let i=0;i<pages.length;i++){
-  const pid=ids[i],cid=pid+1,stream=pages[i].lines.join('\\n')+'\\n';
+  const pid=ids[i],cid=pid+1,stream=pages[i].lines.join('\n')+'\n';
   objects[pid-1]='<< /Type /Page /Parent 2 0 R /MediaBox [0 0 595 842] /Resources << /Font << /R '+fontNormal+' 0 R /B '+fontBold+' 0 R >> >> /Contents '+cid+' 0 R >>';
-  objects[cid-1]='<< /Length '+enc.encode(stream).length+' >>\\nstream\\n'+stream+'endstream';
+  objects[cid-1]='<< /Length '+enc.encode(stream).length+' >>\nstream\n'+stream+'endstream';
  }
- let out='%PDF-1.4\\n',offsets=[0];
- for(let i=0;i<objects.length;i++){offsets.push(enc.encode(out).length);out+=(i+1)+' 0 obj\\n'+objects[i]+'\\nendobj\\n';}
+ let out='%PDF-1.4\n',offsets=[0];
+ for(let i=0;i<objects.length;i++){offsets.push(enc.encode(out).length);out+=(i+1)+' 0 obj\n'+objects[i]+'\nendobj\n';}
  const start=enc.encode(out).length;
- out+='xref\\n0 '+(objects.length+1)+'\\n0000000000 65535 f \\n';
- for(let i=1;i<offsets.length;i++)out+=String(offsets[i]).padStart(10,'0')+' 00000 n \\n';
- out+='trailer\\n<< /Size '+(objects.length+1)+' /Root 1 0 R >>\\nstartxref\\n'+start+'\\n%%EOF\\n';
+ out+='xref\n0 '+(objects.length+1)+'\n0000000000 65535 f \n';
+ for(let i=1;i<offsets.length;i++)out+=String(offsets[i]).padStart(10,'0')+' 00000 n \n';
+ out+='trailer\n<< /Size '+(objects.length+1)+' /Root 1 0 R >>\nstartxref\n'+start+'\n%%EOF\n';
  return enc.encode(out);
 }
 const api={generate};
