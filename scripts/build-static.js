@@ -4,7 +4,7 @@ const path=require('node:path');
 const root=path.join(__dirname,'..'),out=path.join(root,'dist');
 fs.rmSync(out,{recursive:true,force:true});
 fs.mkdirSync(out,{recursive:true});
-const names=['index.html','styles.css','ambience.js','thin-ice.webp','app.js','preferences.js','coping.js','sync.js','journeys.js','store.js','sample.csv','manifest.webmanifest','icon.svg','sw.js','recovery-report.js','recovery-report-ui.js','recovery-pdf.js','private-diary.js','appointments.js'];
+const names=['index.html','styles.css','ambience.js','thin-ice.webp','app.js','preferences.js','coping.js','sync.js','journeys.js','store.js','sample.csv','manifest.webmanifest','icon.svg','sw.js','recovery-report.js','recovery-report-ui.js','recovery-fields.js','recovery-pdf.js','private-diary.js','appointments.js'];
 for(const name of names)fs.copyFileSync(path.join(root,'web/public',name),path.join(out,name));
 fs.copyFileSync(path.join(root,'src/journal.js'),path.join(out,'journal.js'));
 // Bundle only our four dependency-free CommonJS modules. No eval or remote code.
