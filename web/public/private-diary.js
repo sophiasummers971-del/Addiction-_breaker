@@ -38,7 +38,7 @@
  const status=document.createElement('p');status.id='private-diary-status';status.setAttribute('role','status');
  container.append(title,p,label,hide,rememberLabel,save,clear,status);
  mount.append(container);
- field.addEventListener('input',()=>{sessionText=field.value;});
+ field.addEventListener('input',()=>{sessionText=field.value;if(!visible){visible=true;draw();}});
  hide.addEventListener('click',()=>{visible=!visible;draw();field.focus();});
  save.addEventListener('click',()=>{
   sessionText=field.value;
