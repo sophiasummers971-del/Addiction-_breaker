@@ -19,3 +19,6 @@ This feature branch introduces a **weekly structured report preview** in Support
 
 ## Verification
 Run `npm ci && npm test && npm run functions:build`, plus browser tests and manual QA. The new pure unit test is included in `test:core`.
+
+## Separate personal writing space (experimental)
+A new Journal-screen personal writing area is stored outside normal JournalStore entries and never included in standard backup, sync or recovery reports. It supports reveal/conceal and opt-in unencrypted device storage. This DOES NOT migrate or isolate old check-in notes; those remain in existing exports/cloud sync. Device storage is not end-to-end encrypted and there is no cross-device diary sync. Do not describe the current product as having complete confidential diary isolation. Test on Android and account context transitions before merge.
