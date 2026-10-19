@@ -21,10 +21,10 @@
  let valid=null;
  function makeTable(report){
   const table=el('table'),head=el('tr');
-  for(const text of ['Date','Area','Status','Activity','Urge /10','Money pressure /10'])head.append(el('th',text));
+  for(const text of ['Date','Area','Status','Activity','Urge /10','Money pressure /10','Structured detail'])head.append(el('th',text));
   const thead=el('thead');thead.append(head);table.append(thead);
   const tbody=el('tbody');
-  for(const r of report.rows){const tr=el('tr');for(const v of [r.date,r.topic,r.status,r.activity,r.urge??'Not recorded',r.moneyPressure??'Not recorded'])tr.append(el('td',String(v)));tbody.append(tr);}table.append(tbody);
+  for(const r of report.rows){const tr=el('tr');for(const v of [r.date,r.topic,r.status,r.activity,r.urge??'Not recorded',r.moneyPressure??'Not recorded',Object.entries(r.recovery||{}).map(([k,v])=>k+': '+v).join('; ')||'Not supplied'])tr.append(el('td',String(v)));tbody.append(tr);}table.append(tbody);
   return table;
  }
  function generate(){
@@ -35,12 +35,13 @@
    if(!state)throw new Error('Your current journal is not available.');
    const report=window.RecoveryReport.build(state.entries,date.value,selected);
    const scroll=el('div');scroll.className='report-preview-scroll';scroll.append(makeTable(report));
-   preview.append(el('h3','Preview: '+report.start+' to '+report.end),el('p','The downloadable PDF contains a professional overview plus separate Drugs and Gambling pages. Additional Open Road details are not yet collected.'),scroll);
+   preview.append(el('h3','Preview: '+report.start+' to '+report.end),el('p','The downloadable PDF contains a professional overview plus separate Drugs and Gambling pages. Only separately entered structured recovery details are included. Older private notes remain excluded.'),scroll);
    valid=report;print.disabled=false;download.disabled=false;
   }catch(e){preview.append(el('p','Unable to prepare report: '+e.message));}
  }
  review.addEventListener('click',generate);
  const reset=()=>{valid=null;print.disabled=true;download.disabled=true;preview.replaceChildren(el('p','Your selection changed. Review again before sharing.'));};
+ document.addEventListener('journal:changed',reset);
  date.addEventListener('change',reset);boxes.forEach(c=>c.addEventListener('change',reset));
  print.addEventListener('click',()=>{
   if(!valid)return;

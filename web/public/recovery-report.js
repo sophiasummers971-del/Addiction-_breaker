@@ -23,7 +23,8 @@
     status: !e?'NOT RECORDED':active===true?'REPORTED ACTIVITY':active===false?'REPORTED NO ACTIVITY':'INCOMPLETE',
     activity:typeof active==='boolean'?(active?'Yes':'No'):'Not recorded',
     urge:Number.isInteger(e?.urge)&&e.urge>=0&&e.urge<=10?e.urge:null,
-    moneyPressure:Number.isInteger(e?.financialStress)&&e.financialStress>=0&&e.financialStress<=10?e.financialStress:null
+    moneyPressure:Number.isInteger(e?.financialStress)&&e.financialStress>=0&&e.financialStress<=10?e.financialStress:null,
+    recovery:Object.fromEntries(['activity','route','quantity','context','feelings','cost','consequences','prescribed','frequency','stake','net','support'].filter(k=>typeof e?.recovery?.[k]==='string').map(k=>[k,e.recovery[k].slice(0,180)]))
    });
   }
   return {start:days[0],end:days[6],topics:selected,rows};

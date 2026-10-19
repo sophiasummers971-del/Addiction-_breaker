@@ -7,7 +7,7 @@ test('generates a PDF with only safe structured report fields',()=>{
  assert.equal(Buffer.from(buffer).subarray(0,8).toString(),'%PDF-1.4');
  const pdf=Buffer.from(buffer).toString();
  assert.match(pdf,/NOT RECORDED/);
- assert.match(pdf,/\/Count 3/);
+ assert.match(pdf,/\/Count 5/);
  assert.match(pdf,/Weekly recovery report/);
  assert.match(pdf,/Drugs \\| Daily records/);
  assert.match(pdf,/Gambling \\| Daily records/);
@@ -20,4 +20,13 @@ test('report screen is on check-in and audio stays user initiated',()=>{
  assert.match(code,/Download PDF/);
  assert.match(music,/radioButton\.addEventListener\('click'/);
  assert.match(music,/stopRadio\(\)/);
+});
+
+test('additional structured details create a separate disclosure before legal pages',()=>{
+ const report={start:'2026-10-19',end:'2026-10-25',rows:[{date:'2026-10-19',topic:'drugs',status:'REPORTED ACTIVITY',activity:'Yes',urge:7,moneyPressure:4,recovery:{activity:'Sample substance',cost:'25'}}]};
+ const pdf=Buffer.from(generate(report)).toString();
+ assert.match(pdf,/\/Count 6/);
+ assert.match(pdf,/Sample substance/);
+ assert.match(pdf,/Information governance/);
+ assert.match(pdf,/Use, rights and safeguards/);
 });
