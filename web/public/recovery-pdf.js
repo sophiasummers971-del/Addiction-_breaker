@@ -76,14 +76,8 @@ function detail(p,report,topic,index){
   p.t(43,234,9,'Consequences | support used | feelings before gambling');
  }
  const recorded=rows.filter(r=>r.recovery&&Object.keys(r.recovery).length);
- if(!recorded.length){p.t(43,205,9,'No structured details recorded yet. Existing private notes are excluded.');}
- else{
-  let y=209;for(const r of recorded.slice(0,2)){
-   const v=Object.entries(r.recovery).map(([k,val])=>k+': '+val).join(' | ');
-   p.t(43,y,8,r.date+' '+v.slice(0,92));y-=20;
-  }
-  if(recorded.length>2)p.t(43,162,8,'More detail entries exist; review structured records in app.');
- }
+ if(!recorded.length)p.t(43,205,9,'No structured detail recorded for this area.');
+ else p.t(43,205,9,recorded.length+' structured record(s); full entries appear at the start of this PDF.');
  p.t(43,144,10,'Participant review:  [ ] Reviewed   [ ] Corrections needed   [ ] Approved to share');
  p.t(43,117,9,'This is a personal recovery record, not proof of attendance or compliance.');
 }
@@ -160,14 +154,16 @@ function disclosure(p,report,row,index){
 function generate(report){
  if(!report||!/^\d{4}-\d{2}-\d{2}$/.test(report.start)||!/^\d{4}-\d{2}-\d{2}$/.test(report.end)||!Array.isArray(report.rows)||report.rows.length>28)throw Error('Invalid report');
  const detailRows=report.rows.filter(r=>r.recovery&&Object.keys(r.recovery).length);
- const pages=[page(),page(),page(),...detailRows.map(()=>page()),page(),page()];
+ // Put recorded evidence first. Keep the interpretation and legal notes after it.
+ const pages=[...detailRows.map(()=>page()),page(),page(),page(),page(),page()];
  totalPages=pages.length;
- summary(pages[0],report);
- detail(pages[1],report,'drugs',2);
- detail(pages[2],report,'gambling',3);
- for(let i=0;i<detailRows.length;i++)disclosure(pages[3+i],report,detailRows[i],4+i);
- governance(pages[pages.length-2],report,pages.length-1);
- rights(pages[pages.length-1],report,pages.length);
+ for(let i=0;i<detailRows.length;i++)disclosure(pages[i],report,detailRows[i],i+1);
+ const section=detailRows.length;
+ detail(pages[section],report,'drugs',section+1);
+ detail(pages[section+1],report,'gambling',section+2);
+ summary(pages[section+2],report);
+ governance(pages[section+3],report,section+4);
+ rights(pages[section+4],report,section+5);
  const fontNormal=3,fontBold=4;
  const firstPage=5;
  const ids=pages.map((_,i)=>firstPage+i*2);
