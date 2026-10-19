@@ -30,3 +30,12 @@ test('additional structured details create a separate disclosure before legal pa
  assert.match(pdf,/Information governance/);
  assert.match(pdf,/Use, rights and safeguards/);
 });
+
+test('evidence pages precede tables and summary, with legal appendix last',()=>{
+ const report={start:'2026-10-19',end:'2026-10-25',rows:[{date:'2026-10-19',topic:'drugs',status:'REPORTED ACTIVITY',activity:'Yes',urge:7,moneyPressure:4,recovery:{activity:'Example entry'}}]};
+ const pdf=Buffer.from(generate(report)).toString();
+ assert.ok(pdf.indexOf('Structured recovery details')<pdf.indexOf('Drugs | Daily records'));
+ assert.ok(pdf.indexOf('Drugs | Daily records')<pdf.indexOf('Weekly recovery report'));
+ assert.ok(pdf.indexOf('Weekly recovery report')<pdf.indexOf('Information governance'));
+ assert.ok(pdf.indexOf('Information governance')<pdf.indexOf('Use, rights and safeguards'));
+});
