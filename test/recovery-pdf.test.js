@@ -7,7 +7,7 @@ test('generates a PDF with only safe structured report fields',()=>{
  assert.equal(Buffer.from(buffer).subarray(0,8).toString(),'%PDF-1.4');
  const pdf=Buffer.from(buffer).toString();
  assert.match(pdf,/NOT RECORDED/);
- assert.match(pdf,/\/Count 3/);
+ assert.match(pdf,/\/Count 5/);
  assert.match(pdf,/Weekly recovery report/);
  assert.match(pdf,/Drugs \\| Daily records/);
  assert.match(pdf,/Gambling \\| Daily records/);
