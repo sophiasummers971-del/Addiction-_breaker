@@ -7,15 +7,18 @@
  if(!mount||!window.JournalStore)return;
  const $=id=>document.getElementById(id);
  const key=()=>window.JournalStore.KEY+':private-diary:v1';
- let sessionText='',saved=false,visible=false;
- function read(){saved=false;sessionText='';visible=false;
+ let sessionText='',saved=false,visible=true;
+ function read(){saved=false;sessionText='';visible=true;
   try{const raw=localStorage.getItem(key());if(raw!==null){sessionText=raw;saved=true;}}catch{}
   draw();
  }
  function draw(){
   $('private-diary-text').value=sessionText;
-  $('private-diary-text').type='text';
-  $('private-diary-text').style.webkitTextSecurity=visible?'none':'disc';
+  // Keep a normal multiline textarea; type=text is not valid for textarea.
+  $('private-diary-text').style.webkitTextSecurity='none';
+  $('private-diary-text').style.color=visible?'':'transparent';
+  $('private-diary-text').style.caretColor=visible?'':'currentColor';
+  $('private-diary-text').style.textShadow=visible?'':'0 0 9px currentColor';
   $('private-diary-text').setAttribute('aria-label','Personal thoughts, '+(visible?'visible':'concealed'));
   $('private-diary-toggle').textContent=visible?'Hide writing':'Reveal writing';
   $('private-diary-remember').checked=saved;
@@ -47,9 +50,9 @@
  clear.addEventListener('click',()=>{
   if(!confirm('Clear this private writing on this device? This cannot be undone.'))return;
   try{localStorage.removeItem(key());}catch{}
-  sessionText='';visible=false;saved=false;draw();status.textContent='Private writing cleared from this space.';
+  sessionText='';visible=true;saved=false;draw();status.textContent='Private writing cleared from this space.';
  });
- function conceal(){visible=false;field.style.webkitTextSecurity='disc';hide.textContent='Reveal writing';}
+ function conceal(){visible=false;draw();}
  window.addEventListener('pagehide',conceal);document.addEventListener('visibilitychange',()=>{if(document.hidden)conceal();});
  document.addEventListener('journal:context',read);
  document.addEventListener('journal:erased',()=>{try{localStorage.removeItem(key());}catch{}read();});
