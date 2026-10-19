@@ -9,12 +9,14 @@ function page(){
  const t=(x,y,s,v,bold=false)=>lines.push('BT /'+(bold?'B':'R')+' '+s+' Tf '+x+' '+y+' Td ('+clean(v)+') Tj ET');
  const line=(x1,y1,x2,y2)=>lines.push('0.82 0.85 0.86 RG 0.6 w '+x1+' '+y1+' m '+x2+' '+y2+' l S');
  const fill=(x,y,w,h)=>lines.push('0.94 0.96 0.97 rg '+x+' '+y+' '+w+' '+h+' re f 0 0 0 rg');
- return {lines,t,line,fill};
+ const accent=(x,y,w,h)=>lines.push('0.06 0.18 0.22 rg '+x+' '+y+' '+w+' '+h+' re f 0 0 0 rg');
+ return {lines,t,line,fill,accent};
 }
 function header(p,title,index,period){
- p.fill(0,805,595,37);p.t(43,817,12,'ADDICTION BREAKER',true);
+ p.accent(0,804,595,38);p.lines.push('1 1 1 rg');p.t(43,818,12,'ADDICTION BREAKER',true);p.lines.push('0 0 0 rg');
  p.t(43,778,20,title,true);
  p.t(43,753,10,'Reporting period: '+period);
+ p.t(448,753,8,'PATIENT-GENERATED');
  p.line(43,742,552,742);
  p.line(43,55,552,55);
  p.t(43,39,8,'PRIVATE RECOVERY INFORMATION - SHARE ONLY WITH CONSENT');
