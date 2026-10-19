@@ -148,14 +148,12 @@ function disclosure(p,report,row,index){
  p.t(43,711,11,'Date: '+row.date+'    Area: '+row.topic.toUpperCase(),true);
  p.t(43,687,9,'Reported status: '+row.status);
  p.t(43,665,9,'Data below is user-entered. Estimates have not been verified.');
- let y=630;
- for(const [key,value] of Object.entries(row.recovery)){
-  p.fill(43,y-4,509,26);
-  p.t(52,y+6,10,key.toUpperCase(),true);
-  y-=29;
-  const words=String(value).match(/.{1,80}/g)||[];
-  for(const part of words){p.t(52,y,9,part);y-=17;}
-  y-=18;
+ const fields=Object.entries(row.recovery);
+ for(let i=0;i<fields.length;i++){
+  const pair=fields[i],x=i>=6?310:43,slot=i>=6?i-6:i,y=626-slot*87;
+  p.fill(x,y-2,240,24);p.t(x+8,y+7,9,pair[0].toUpperCase(),true);
+  const chunks=String(pair[1]).match(/.{1,45}/g)||[];
+  for(let j=0;j<chunks.length&&j<4;j++)p.t(x+8,y-21-j*14,8,chunks[j]);
  }
  p.t(43,108,9,'Private diary, free-writing and personal notes are excluded.');
 }
