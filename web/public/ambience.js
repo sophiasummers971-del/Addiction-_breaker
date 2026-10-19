@@ -5,6 +5,7 @@
  const button=document.getElementById('sound-toggle');
  const choice=document.getElementById('music-choice');
  const audiomack=document.getElementById('audiomack-open');
+ const follow=document.getElementById('audiomack-follow');
  const volume=document.getElementById('sound-volume');
  const status=document.getElementById('sound-status');
  let context=null,master=null,interval=null,playing=false,starting=false,generation=0;
@@ -61,7 +62,7 @@
    step++;nextTime+=halfBeat;
   }
  }
- if(choice){choice.addEventListener('change',()=>{stop();audiomack.hidden=choice.value!=='audiomack';button.hidden=choice.value!=='piano';volume.parentElement.hidden=choice.value!=='piano';status.textContent=choice.value==='audiomack'?'Audiomack opens separately only when you choose the link.':choice.value==='piano'?'Piano ready, tap Play.':'Sound off · optional';});choice.dispatchEvent(new Event('change'));}
+ if(choice){choice.addEventListener('change',()=>{stop();audiomack.hidden=choice.value!=='audiomack';if(follow)follow.hidden=choice.value!=='audiomack';button.hidden=choice.value!=='piano';volume.parentElement.hidden=choice.value!=='piano';status.textContent=choice.value==='audiomack'?'Ash & Signal opens on Audiomack only when you choose the link.':choice.value==='piano'?'Piano ready, tap Play.':'Sound off · optional';});choice.dispatchEvent(new Event('change'));}
  button.addEventListener('click',async()=>{
   if(playing||starting){stop();return;}
   const AudioContext=window.AudioContext||window.webkitAudioContext;
