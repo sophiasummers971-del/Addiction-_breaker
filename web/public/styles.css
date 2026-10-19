@@ -45,3 +45,16 @@ html[data-theme=light] :focus-visible{outline-color:#856019}html[data-theme=ligh
 #recovery-report-panel .report-preview-scroll table{min-width:610px;width:100%;border-collapse:collapse}
 #recovery-report-panel .report-preview-scroll th,#recovery-report-panel .report-preview-scroll td{white-space:nowrap;padding:9px 7px;text-align:left;border-bottom:1px solid #62737a50;font-size:.85rem}
 #private-diary-text{min-height:140px}
+
+/* Private writing controls: comfortable touch targets and clear separation. */
+#private-diary-card #private-diary-text{display:block;width:100%;margin-bottom:22px}
+#private-diary-card #private-diary-toggle{margin:0 14px 14px 0;min-height:42px}
+#private-diary-card label.inline{display:inline-flex;align-items:center;gap:9px;margin:0 18px 14px 0;line-height:1.55}
+#private-diary-card #private-diary-save{margin:0 14px 14px 0;min-height:42px}
+#private-diary-card #private-diary-save + button{margin:0 14px 14px 0;min-height:42px}
+#private-diary-card #private-diary-status{margin-top:16px;line-height:1.6}
+@media(max-width:760px){
+ #private-diary-card #private-diary-text{margin-bottom:24px}
+ #private-diary-card label.inline{display:flex;width:100%;margin-bottom:18px}
+ #private-diary-card #private-diary-status{margin-top:18px}
+}
