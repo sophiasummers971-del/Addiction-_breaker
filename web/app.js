@@ -5,7 +5,7 @@ const path = require('node:path');
 const {analyzeText} = require('../src/analysis');
 const MAX_BYTES = 2 * 1024 * 1024;
 const assets = {
-  '/recovery-report.js':['public/recovery-report.js','text/javascript'], '/private-diary.js':['public/private-diary.js','text/javascript'], '/recovery-pdf.js':['public/recovery-pdf.js','text/javascript'], '/recovery-report-ui.js':['public/recovery-report-ui.js','text/javascript'], '/ambience.js':['public/ambience.js','text/javascript'], '/thin-ice.webp':['public/thin-ice.webp','image/webp'],
+  '/recovery-report.js':['public/recovery-report.js','text/javascript'], '/appointments.js':['public/appointments.js','text/javascript'], '/private-diary.js':['public/private-diary.js','text/javascript'], '/recovery-pdf.js':['public/recovery-pdf.js','text/javascript'], '/recovery-report-ui.js':['public/recovery-report-ui.js','text/javascript'], '/ambience.js':['public/ambience.js','text/javascript'], '/thin-ice.webp':['public/thin-ice.webp','image/webp'],
   '/':['public/index.html','text/html'], '/index.html':['public/index.html','text/html'],
   '/analysis-worker.js':['../dist/analysis-worker.js','text/javascript'],
   '/preferences.js':['public/preferences.js','text/javascript'], '/coping.js':['public/coping.js','text/javascript'], '/journeys.js':['public/journeys.js','text/javascript'], '/sync.js':['public/sync.js','text/javascript'], '/app.js':['public/app.js','text/javascript'], '/styles.css':['public/styles.css','text/css'],
