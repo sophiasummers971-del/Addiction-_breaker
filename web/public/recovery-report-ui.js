@@ -2,7 +2,7 @@
 (()=> {
  const $=id=>document.getElementById(id);
  function el(tag,text){const n=document.createElement(tag);if(text!==undefined)n.textContent=text;return n;}
- const area=$('check-in');if(!area||!window.RecoveryReport||!window.JournalStore)return;
+ const area=$('reports');if(!area||!window.RecoveryReport||!window.JournalStore)return;
  const panel=el('article');panel.className='card';panel.id='recovery-report-panel';
  const h=el('h2','Prepare a weekly recovery report');
  const explain=el('p','A self-reported summary for your review. No private diary writing, notes, Echoes or plan text is included. Missing dates mean not recorded, not abstinent.');
@@ -57,5 +57,5 @@
  });
  download.addEventListener('click',()=>{if(!valid)return;let pdf;try{pdf=window.RecoveryPDF?.generate(valid);}catch(e){preview.append(el('p','PDF preparation failed: '+e.message));return;}if(!pdf){preview.append(el('p','PDF generation unavailable.'));return;}const blob=new Blob([pdf],{type:'application/pdf'});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download='addiction-breaker-weekly-'+valid.start+'.pdf';document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),5000);});
  panel.append(h,explain,label,topics,review,document.createTextNode(' '),download,document.createTextNode(' '),print,preview);
- area.querySelector('.reading-width')?.append(panel);
+ $('recovery-report-root')?.append(panel);
 })();

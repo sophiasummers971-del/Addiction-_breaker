@@ -13,10 +13,10 @@ test('generates a PDF with only safe structured report fields',()=>{
  assert.match(pdf,/Gambling \\| Daily records/);
  assert.doesNotMatch(pdf,/PRIVATE SECRET/);
 });
-test('report screen is on check-in and audio stays user initiated',()=>{
+test('report screen is on reports page and audio stays user initiated',()=>{
  const code=fs.readFileSync('web/public/recovery-report-ui.js','utf8');
  const music=fs.readFileSync('web/public/ambience.js','utf8');
- assert.match(code,/\$\('check-in'\)/);
+ assert.match(code,/\$\('reports'\)/);
  assert.match(code,/Download PDF/);
  assert.match(music,/radioButton\.addEventListener\('click'/);
  assert.match(music,/stopRadio\(\)/);
