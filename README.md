@@ -4,7 +4,7 @@
 
 Addiction Breaker is a web-based, personal reflection and support tool. It offers check-ins, a private journal, a ten-minute pause, optional support journeys, and a way to explore your own gambling-history export. It is **not** a clinical treatment service, diagnosis, recovery predictor, or emergency monitoring system.
 
-**[Open the web app](https://addiction-breaker.pages.dev/)** · **[Get started](docs/GETTING_STARTED.md)** · **[Privacy and saving](#saving-and-privacy)** · **[FAQs](https://addiction-breaker.pages.dev/faq/)** · **[Roadmap](docs/ROADMAP.md)**
+**[Open the web app](https://addiction-breaker.pages.dev/)** · **[Support development ☕](https://ko-fi.com/sj_inside)** · **[Get started](docs/GETTING_STARTED.md)** · **[Privacy and saving](#saving-and-privacy)** · **[FAQs](https://addiction-breaker.pages.dev/faq/)** · **[Roadmap](docs/ROADMAP.md)**
 
 ### What you can do
 
