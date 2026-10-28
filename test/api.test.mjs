@@ -21,3 +21,20 @@ test('journey profile sync and same-day different categories survive; duplicate 
 test('legacy database reads/export normalize v2 without persisting or increasing revision',async()=>{const {env,sqlite}=fixture();const a=await login(env);const legacy={version:1,entries:[],plan:'old plan'};sqlite.prepare('UPDATE snapshots SET data=?,revision=7 WHERE user_id=?').run(JSON.stringify(legacy),a.session.user.id);const read=await (await handleApi(req('/api/snapshot','GET',null,a.headers),env)).json();assert.equal(read.revision,7);assert.equal(read.data.version,2);assert.deepEqual(read.data.profile.categories,['gambling']);const exported=await (await handleApi(req('/api/export','GET',null,a.headers),env)).json();assert.equal(exported.version,2);const stored=sqlite.prepare('SELECT revision,data FROM snapshots WHERE user_id=?').get(a.session.user.id);assert.equal(stored.revision,7);assert.equal(JSON.parse(stored.data).version,1);sqlite.close();});
 
 test('active profile journey must belong to nonempty selection',()=>{assert.throws(()=>validateSnapshot({...doc(''),profile:{categories:['drugs'],active:'alcohol'}}),/profile/);assert.doesNotThrow(()=>validateSnapshot({...doc(''),profile:{categories:[],active:'general'}}));});
+
+test('cloud snapshot keeps structured recovery details across save, reload and export',async()=>{
+ const {env,sqlite}=fixture();
+ try{
+  const user=await login(env,'structured');
+  const entry={date:'2026-10-19',category:'drugs',engaged:true,urge:10,loneliness:7,social:5,sleep:1,financialStress:10,note:'PRIVATE UNEXPORTED NOTE',tags:[],recovery:{activity:'Example',route:'Smoking',quantity:'2 units',cost:'40',feelings:'Tired',prescribed:'No'}};
+  const data={...doc(''),entries:[entry],profile:{categories:['drugs'],active:'drugs'}};
+  const saved=await handleApi(req('/api/snapshot','PUT',{baseRevision:0,data},user.headers),env);
+  assert.equal(saved.status,200);
+  const read=await (await handleApi(req('/api/snapshot','GET',null,user.headers),env)).json();
+  assert.deepEqual(read.data.entries[0].recovery,entry.recovery);
+  const exported=await (await handleApi(req('/api/export','GET',null,user.headers),env)).json();
+  assert.deepEqual(exported.entries[0].recovery,entry.recovery);
+  const invalid={...data,entries:[{...entry,recovery:{...entry.recovery,unexpected:'not allowed'}}]};
+  assert.equal((await handleApi(req('/api/snapshot','PUT',{baseRevision:1,data:invalid},user.headers),env)).status,400);
+ }finally{sqlite.close();}
+});

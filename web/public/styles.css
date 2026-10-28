@@ -37,3 +37,24 @@ html[data-theme=light] .journey-choice{background:#f7faf7}html[data-theme=light]
 html[data-theme=light] #more-menu:not([hidden]){background:#f5f8f2;border-color:#78958b}html[data-theme=light] .skip{background:#fff;color:#203338}html[data-theme=light] .brand-icon{background:#d4e4db;color:#365d4c}
 html[data-theme=light] :focus-visible{outline-color:#856019}html[data-theme=light] .hero{--ink:#edf1ee;--muted:#d0dbdd;--green:#e6b982;color:#edf1ee;background:#101b23}html[data-theme=light] .hero h1{color:#edf1ee}html[data-theme=light] .hero .eyebrow{color:#e6b982}html[data-theme=light] .hero .primary{background:#e6b982;color:#172029;border-color:#e6b982}html[data-theme=light] .hero .secondary{background:#111f29e8;color:#edf1ee;border-color:#7d979f}
 @media(max-width:760px){.header-links{order:1;width:100%;justify-content:space-between;gap:10px}.sound-controls{order:2}.header-links .urge-link{flex:1;max-width:300px}.header-links .account-link{padding:10px}.faq-list{padding:10px 22px}}
+
+#recovery-print{display:none}
+@media print{body>*:not(#recovery-print){display:none!important}#recovery-print{display:block!important;color:#111;background:white;font:11pt Arial,sans-serif;padding:12mm}#recovery-print table{width:100%;border-collapse:collapse;font-size:9pt}#recovery-print th,#recovery-print td{border:1px solid #777;padding:5px;text-align:left}#recovery-print tr{break-inside:avoid}}
+
+#recovery-report-panel .report-preview-scroll{max-width:100%;overflow-x:auto;-webkit-overflow-scrolling:touch}
+#recovery-report-panel .report-preview-scroll table{min-width:610px;width:100%;border-collapse:collapse}
+#recovery-report-panel .report-preview-scroll th,#recovery-report-panel .report-preview-scroll td{white-space:nowrap;padding:9px 7px;text-align:left;border-bottom:1px solid #62737a50;font-size:.85rem}
+#private-diary-text{min-height:140px}
+
+/* Private writing controls: comfortable touch targets and clear separation. */
+#private-diary-card #private-diary-text{display:block;width:100%;margin-bottom:22px}
+#private-diary-card #private-diary-toggle{margin:0 14px 14px 0;min-height:42px}
+#private-diary-card label.inline{display:inline-flex;align-items:center;gap:9px;margin:0 18px 14px 0;line-height:1.55}
+#private-diary-card #private-diary-save{margin:0 14px 14px 0;min-height:42px}
+#private-diary-card #private-diary-save + button{margin:0 14px 14px 0;min-height:42px}
+#private-diary-card #private-diary-status{margin-top:16px;line-height:1.6}
+@media(max-width:760px){
+ #private-diary-card #private-diary-text{margin-bottom:24px}
+ #private-diary-card label.inline{display:flex;width:100%;margin-bottom:18px}
+ #private-diary-card #private-diary-status{margin-top:18px}
+}

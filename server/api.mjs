@@ -31,7 +31,20 @@ export function validateSnapshot(d){
   for(const k of ['urge','loneliness','social','sleep','financialStress']){if(!Number.isInteger(e[k])||e[k]<0||e[k]>10)throw new Error('rating');v[k]=e[k];}
   const behavior=category==='gambling'?'played':'engaged',tags=e.tags===undefined?[]:e.tags;
   if(typeof e[behavior]!=='boolean'||typeof e.note!=='string'||e.note.length>4000||!Array.isArray(tags)||tags.length>20||tags.some(t=>typeof t!=='string'||t.length>80))throw new Error('entry');
-  return {...v,[behavior]:e[behavior],note:e.note,tags:[...tags]};
+  const result={...v,[behavior]:e[behavior],note:e.note,tags:[...tags]};
+  if(e.recovery!==undefined){
+   if(!e.recovery||typeof e.recovery!=='object'||Array.isArray(e.recovery))throw new Error('recovery');
+   const allowed=['activity','route','quantity','context','feelings','cost','consequences','prescribed','frequency','stake','net','support'];
+   if(Object.keys(e.recovery).some(k=>!allowed.includes(k)))throw new Error('recovery');
+   const detail={};
+   for(const k of allowed){
+    if(e.recovery[k]===undefined||e.recovery[k]==='')continue;
+    if(typeof e.recovery[k]!=='string'||e.recovery[k].length>180)throw new Error('recovery');
+    detail[k]=e.recovery[k];
+   }
+   result.recovery=detail;
+  }
+  return result;
  });
  let profile;
  if(d.version===1)profile={categories:(entries.length||d.plan)?['gambling']:[],active:'gambling'};

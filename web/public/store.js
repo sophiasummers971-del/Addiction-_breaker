@@ -23,7 +23,20 @@ function validateEntry(e,legacy=false){
  if(typeof e.note!=='string'||e.note.length>4000)throw new Error('Notes must be at most 4,000 characters.');result.note=e.note;
  const tags=e.tags===undefined?[]:e.tags;
  if(!Array.isArray(tags)||tags.length>20||tags.some(t=>typeof t!=='string'||t.length>80))throw new Error('Use at most 20 short text tags.');
- result.tags=[...tags];return result;
+ result.tags=[...tags];
+ const detail=e.recovery;
+ if(detail!==undefined){
+  if(!detail||typeof detail!=='object'||Array.isArray(detail))throw new Error('Invalid recovery detail.');
+  const allowed=['activity','route','quantity','context','feelings','cost','consequences','prescribed','frequency','stake','net','support'];
+  const clean={};
+  for(const k of allowed){
+   const val=detail[k];if(val===undefined||val==='')continue;
+   if(typeof val!=='string'||val.length>180)throw new Error('Recovery detail must be short text.');
+   clean[k]=val;
+  }
+  result.recovery=clean;
+ }
+ return result;
 }
 function empty(){return {version:2,entries:[],plan:'',profile:{categories:[],active:'gambling'},remember:false};}
 function validate(data){

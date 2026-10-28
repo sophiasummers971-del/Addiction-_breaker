@@ -3,6 +3,10 @@
 // subliminal layer, binaural beat, or therapeutic claim.
 (()=>{
  const button=document.getElementById('sound-toggle');
+ const choice=document.getElementById('music-choice');
+ const radioButton=document.getElementById('radio-toggle');
+ const radio=new Audio();radio.preload='none';radio.src='https://media-ssl.musicradio.com/CapitalUK';
+ let radioPlaying=false;
  const volume=document.getElementById('sound-volume');
  const status=document.getElementById('sound-status');
  let context=null,master=null,interval=null,playing=false,starting=false,generation=0;
@@ -59,7 +63,22 @@
    step++;nextTime+=halfBeat;
   }
  }
- button.addEventListener('click',async()=>{
+ function stopRadio(){radio.pause();radioPlaying=false;radioButton.textContent='Play UK radio';}
+ radioButton.addEventListener('click',async()=>{
+  if(radioPlaying){stopRadio();status.textContent='Radio stopped';return;}
+  stop();
+  try{await radio.play();radioPlaying=true;radioButton.textContent='Stop UK radio';status.textContent='UK radio playing · live stream';}
+  catch{stopRadio();status.textContent='Radio unavailable. You can still use the app silently.';}
+ });
+ radio.addEventListener('error',()=>{stopRadio();status.textContent='Radio stream unavailable right now.';});
+ if(choice){choice.addEventListener('change',()=>{
+  stop();stopRadio();
+  radioButton.hidden=choice.value!=='radio';
+  button.hidden=choice.value!=='piano';
+  volume.parentElement.hidden=choice.value!=='piano';
+  status.textContent=choice.value==='radio'?'UK radio ready. Tap Play to begin.':choice.value==='piano'?'Piano ready. Tap Play to begin.':'Sound off · optional';
+ });choice.dispatchEvent(new Event('change'));}
+  button.addEventListener('click',async()=>{
   if(playing||starting){stop();return;}
   const AudioContext=window.AudioContext||window.webkitAudioContext;
   if(!AudioContext){show('Piano unavailable in this browser.');return;}
@@ -79,6 +98,6 @@
   if(master&&context)master.gain.setTargetAtTime(Number(volume.value)/100*.5,context.currentTime,.05);
  });
  // Never restart automatically after switching apps, receiving a call, or reload.
- document.addEventListener('visibilitychange',()=>{if(document.hidden&&(playing||starting))stop('Piano paused · tap Play to resume');});
- window.addEventListener('pagehide',()=>stop());
+ document.addEventListener('visibilitychange',()=>{if(document.hidden){if(playing||starting)stop('Piano paused · tap Play to resume');stopRadio();}});
+ window.addEventListener('pagehide',()=>{stop();stopRadio();});
 })();

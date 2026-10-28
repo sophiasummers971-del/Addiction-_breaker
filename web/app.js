@@ -5,7 +5,7 @@ const path = require('node:path');
 const {analyzeText} = require('../src/analysis');
 const MAX_BYTES = 2 * 1024 * 1024;
 const assets = {
-  '/ambience.js':['public/ambience.js','text/javascript'], '/thin-ice.webp':['public/thin-ice.webp','image/webp'],
+  '/recovery-report.js':['public/recovery-report.js','text/javascript'], '/appointments.js':['public/appointments.js','text/javascript'], '/private-diary-crypto.js':['public/private-diary-crypto.js','text/javascript'], '/private-diary.js':['public/private-diary.js','text/javascript'], '/recovery-fields.js':['public/recovery-fields.js','text/javascript'], '/recovery-pdf.js':['public/recovery-pdf.js','text/javascript'], '/recovery-report-ui.js':['public/recovery-report-ui.js','text/javascript'], '/ambience.js':['public/ambience.js','text/javascript'], '/thin-ice.webp':['public/thin-ice.webp','image/webp'],
   '/':['public/index.html','text/html'], '/index.html':['public/index.html','text/html'],
   '/analysis-worker.js':['../dist/analysis-worker.js','text/javascript'],
   '/preferences.js':['public/preferences.js','text/javascript'], '/coping.js':['public/coping.js','text/javascript'], '/journeys.js':['public/journeys.js','text/javascript'], '/sync.js':['public/sync.js','text/javascript'], '/app.js':['public/app.js','text/javascript'], '/styles.css':['public/styles.css','text/css'],
@@ -16,7 +16,7 @@ const assets = {
 for(const route of ['settings','faq','roadmap','start','dashboard','check-in','pause','journal','mirror','support','account','journeys','journeys/gambling','journeys/alcohol','journeys/smoking','journeys/drugs','journeys/behaviours'])assets['/'+route+'/']=['../dist/'+route+'/index.html','text/html'];
 function createServer() {
   return http.createServer(async(req,res)=>{
-    res.setHeader('Content-Security-Policy', "default-src 'self'; script-src 'self'; worker-src 'self'; style-src 'self'; img-src 'self' data:; connect-src 'self'; object-src 'none'; base-uri 'none'; frame-ancestors 'none'; form-action 'self'");
+    res.setHeader('Content-Security-Policy', "default-src 'self'; script-src 'self'; worker-src 'self'; style-src 'self'; img-src 'self' data:; media-src 'self' https://media-ssl.musicradio.com; connect-src 'self'; object-src 'none'; base-uri 'none'; frame-ancestors 'none'; form-action 'self'");
     res.setHeader('X-Content-Type-Options','nosniff'); res.setHeader('X-Frame-Options','DENY');
     res.setHeader('Referrer-Policy','no-referrer'); res.setHeader('Permissions-Policy','camera=(), microphone=(), geolocation=()');
     res.setHeader('Cache-Control','no-store');

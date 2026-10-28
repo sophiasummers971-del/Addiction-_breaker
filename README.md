@@ -1,6 +1,29 @@
 # Addiction Breaker
 
-Version 0.8 adds settings, system/light/dark appearance, FAQs, optional trigger/coping reflections and a plan-writing helper alongside a multi-page personal dashboard, five addiction-support journeys, and optional Google accounts with Cloudflare D1 journal sync. Guest use, local analysis and backups still work without an account. The isolated Cloudflare preview has been exercised by the owner for Google login and initial sync. That confirms the preview flow, not every account, offline or recovery scenario. See [handoff.txt](handoff.txt) for the latest release evidence and [docs/DEPLOYMENT.md](docs/DEPLOYMENT.md) for production setup.
+**A quieter place to reflect, pause, and choose your next step.**
+
+Addiction Breaker is a web-based, personal reflection and support tool. It offers check-ins, a private journal, a ten-minute pause, optional support journeys, and a way to explore your own gambling-history export. It is **not** a clinical treatment service, diagnosis, recovery predictor, or emergency monitoring system.
+
+**[Open the web app](https://addiction-breaker.pages.dev/)** · **[Support development ☕](https://ko-fi.com/sj_inside)** · **[Get started](docs/GETTING_STARTED.md)** · **[Privacy and saving](#saving-and-privacy)** · **[FAQs](https://addiction-breaker.pages.dev/faq/)** · **[Roadmap](docs/ROADMAP.md)**
+
+### What you can do
+
+| Explore | Reflect | Keep control |
+| --- | --- | --- |
+| Choose a journey for gambling, alcohol, smoking, drugs/medication concerns, compulsive behaviours, or general support. | Make a daily check-in, write a personal plan, use the ten-minute pause, and revisit journal entries. | Start as a guest; decide whether to remember entries on this device; export your own notes; optionally sign in and choose cloud sync. |
+| For gambling, analyse a compatible history export locally in your browser. | Browse practical support resources relevant to your selected journey. | Review saving, syncing, account deletion, and the limitations of unencrypted local backups. |
+
+### Before sharing personal information
+
+- **Guest mode is available.** Notes begin in page memory and can be lost on refresh unless you explicitly enable device saving.
+- **Device storage and exported backups are not encrypted.** Avoid saving sensitive entries on a shared device unless you understand the risks.
+- **Google sign-in does not automatically upload guest notes.** Account sync and guest import require separate choices. Synced information is **not end-to-end encrypted**.
+- **Gambling-history imports are analysed locally.** The experimental Hook Score is not a clinical measure.
+- **If you need immediate or urgent support, use appropriate local professional or emergency services.** This app does not dispatch help.
+
+### Project status
+
+The codebase currently identifies as **v0.8.0**. Some features have been verified in automated tests and selected owner-operated browser flows, but Android installation/offline behaviour, full accessibility and all account recovery scenarios are not certified. This is a developing tool, not a medically validated product. See [verification and outstanding checks](handoff.txt) and [deployment guidance](docs/DEPLOYMENT.md).
 
 ## Run the application
 
