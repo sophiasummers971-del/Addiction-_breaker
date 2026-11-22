@@ -1,0 +1,31 @@
+name: Publish verified Android beta APK
+on:
+  push:
+    tags:
+      - 'android-v*'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Download and verify signed Expo APK
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p release
+          curl --fail --location --retry 3 --silent --show-error 'https://expo.dev/artifacts/eas/Odq4TSH1pnJtURPBOTOKLghtHFKw5pdv1gAPyNR7GcI.apk' --output 'release/Addiction-Breaker-v1.0.0-beta.apk'
+          echo '9c74b67ba5dc6667ea8835204162c700e03dbc3b16675034077e1512508501e1  release/Addiction-Breaker-v1.0.0-beta.apk' | sha256sum --check --status
+          test "$(stat -c%s 'release/Addiction-Breaker-v1.0.0-beta.apk')" -gt 1000000
+          echo 'APK downloaded and SHA256 verified'
+      - name: Publish GitHub public prerelease
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          gh release create "${GITHUB_REF_NAME}" 'release/Addiction-Breaker-v1.0.0-beta.apk' --title 'Addiction Breaker 1.0.0 beta' --notes-file '.github/release-notes/android-beta.md' --prerelease --verify-tag
